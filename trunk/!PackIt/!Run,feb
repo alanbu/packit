@@ -1,0 +1,30 @@
+RMEnsure UtilityModule 3.10 Error ListTest needs RISC OS 3.10 or a later version
+Set PackIt$Dir <Obey$Dir>
+If "<System$Path>"="" Then Error System resources cannot be found; open a window containing the System application and try again
+WimpSlot -min 140k -max 140k
+RMEnsure Toolbox 1.36 /System:Modules.Toolbox.Toolbox
+RMEnsure Toolbox 1.36 Error ListTest needs version 1.36 or later of the Toolbox module
+RMEnsure Window 1.31 /System:Modules.Toolbox.Window
+RMEnsure Window 1.31 Error ListTest needs version 1.31 or later of the Window module
+RMEnsure Menu 0.24 /System:Modules.Toolbox.Menu
+RMEnsure Menu 0.24 Error ListTest needs version 0.24 or later of the Menu module
+RMEnsure Iconbar 1.12 /System:Modules.Toolbox.Iconbar
+RMEnsure Iconbar 1.12 Error ListTest needs version 1.12 or later of the Iconbar module
+RMEnsure ProgInfo 0.09 /System:Modules.Toolbox.ProgInfo
+RMEnsure ProgInfo 0.09 Error ListTest needs version 0.09 or later of the ProgInfo module
+
+RMENSURE SaveAs  0.00  RMLOAD System:modules.toolbox.SaveAs
+RMENSURE SaveAs  0.00  ERROR You need SaveAs
+
+RMENSURE DCS 0.00 RMLOAD System:modules.toolbox.DCS_Quit
+RMENSURE DCS 0.00 ERROR You need DCS
+
+RMENSURE TextGadgets 0.19 RMLOAD System:modules.toolbox.TextGadget
+RMENSURE TextGadgets 0.19 ERROR You need TextGadgets 0.19 or later
+
+If "<Tabs$Dir>" = "" Then ERROR Tabs application must have been seen by the filer
+RMENSURE Tabs 0.05 RMLOAD Tabs:Tabs
+RMENSURE Tabs 0.05 ERROR You need Rik Griffins Tabs version 0.05 or later
+
+WimpSlot -min 2048k -max 2048k
+/<PackIt$Dir>.!RunImage %*0 ><PackIt$Dir>.stdout 2><PackIt$Dir>.stderr
