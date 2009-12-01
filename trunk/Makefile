@@ -1,17 +1,22 @@
 # Makefile for Packit
 
 include FixDeps:Rules/make
-CXXFLAGS = -O2 -Wall -mpoke-function-name -mthrowback -ITBX:
+CXXFLAGS = -O2 -Wall -mpoke-function-name -mthrowback -ITBX: -IZipArchive:
 
 LD = g++
-LDFLAGS = -LTBX: -ltbx -lstdc++ -static
+LDFLAGS = -LTBX: -ltbx -LZipArchive: -lziparch -lstdc++ -static
 
+TARGET=!PackIt/!RunImage
 
-OBJECTS = main.o
+CCSRC = $(wildcard src/*.cc)
+OBJECTS = $(CCSRC:.cc=.o)
 
-^.!RunImage:	!RunImage
-	elf2aif !RunImage ^.!RunImage
-!RunImage:	$(OBJECTS)
-	$(LD) $(LDFLAGS) -o !RunImage,e1f $(OBJECTS)
+all:	$(TARGET)
 
-#include $(OBJECTS:.o=.d)
+$(TARGET): packit
+	elf2aif packit $(TARGET)
+
+packit:	$(OBJECTS)
+	$(LD) $(LDFLAGS) -o packit $(OBJECTS)
+
+#include $(CCSRC:.cc=.d)
