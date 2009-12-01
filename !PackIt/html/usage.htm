@@ -1,0 +1,27 @@
+<HTML>
+<HEAD>
+<TITLE>PackIt - How to use it</TITLE>
+</HEAD>
+<BODY>
+<H2>How to use PackIt</H2>
+<H3>Overview</H3>
+<P>To create a new package, just drag the application, directory or file to the PackIt iconbar icon.</P>
+<P>To edit an existing package, drag the existing package file to the PackIt icon bar icon.</P>
+<P><I>Note: Although PackIt can always open packages it creates itself, it may not be able to open a binary package created in another way as it does not cover all aspects of binary packages. e.g. It would fail if the package contained multiple install locations</I><P>
+<P>When all the necessary fields have been filled in for the package, use the Save option from the menu to create the binary package.</P>
+<P>The package can be tested on your own machine, by dragging the created package to a recent version of the !RiscPkg application</P>
+<P>Once the package is ready it will need to be uploaded to the package repositry. The instructions on how to do this can be found on the RiscPKg site at <A HREF="http://www.riscpkg.org">http://www.riscpkg.org</A>. To summarise you will need to contact Graham Shaw at his email address on this page to get yourself and the package name registered. Then it is just a matter of uploading the package and upgrading the distribution (currently only Unstable) from the forms on the RiscPkg site.</P>
+</P>
+<H3>Filling in the fields</H3>
+<P>The application is made up of various windows presented in a main tabbed dialog.</P>
+<P>For a formal definition of what each of the fields are look in the RISC OS Packaging Project
+ Policy Manual which can be found at
+ <A HREF="http://www.riscpkg.org/policy.html">http://www.riscpkg.org/policy.html</A>.
+</P>
+<P>A more informal definition can be found in this help file under the tab description.</P>
+<P>PackIt helps as much as it can by preventing the entry of invalid characters into a field, giving a list of choices and validating the fields as they are entered. It will not catch all possible combinations of invalid data you can make, but it will make problems less likely. As PackIt does not cover all possible binary packages that can be created, it will sometimes be more restrictive in it's input than is specified in the Policy Manual.</P>
+<P>PackIt will not stop you from saving an Invalid package file except to prevent a file being created it can not reload. Instead at the bottom of the Window is shows the number of errors that need to be resolved in the package before it will be valid. Once the count gets to zero, you should have a valid package.</P>
+<P>A display area at the bottom of the Window allows you to see the errors in the package, clicking on the Next button allows you to cycle through all the errors. If a field that has an error in becomes valid the display area will show that the field has become valid.</P>
+
+</BODY>
+</HTML>
