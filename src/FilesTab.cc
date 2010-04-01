@@ -37,6 +37,9 @@ FilesTab::FilesTab(MainWindow *main,
    tbx::WriteableField item_name = window.gadget(1);
    tbx::StringSet install_to = window.gadget(3);
 
+   _file_drop = new SetNameToDroppedFile(_packager, item_name);
+   item_name.add_loader(_file_drop);
+
    // Set bindings
    main->set_binding(ITEM_TO_PACKAGE, item_name);
    main->set_binding(INSTALL_TO, install_to);
@@ -44,4 +47,18 @@ FilesTab::FilesTab(MainWindow *main,
 
 void FilesTab::package_loaded()
 {
+}
+
+/**
+ * Set name to name of file dropped from filer
+ */
+bool FilesTab::SetNameToDroppedFile::load_file(tbx::LoadEvent &event)
+{
+	if (event.from_filer())
+	{
+		_item_name.text(event.file_name());
+		_packager.item_to_package(event.file_name());
+	}
+
+	return false;
 }
