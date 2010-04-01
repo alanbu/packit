@@ -28,6 +28,7 @@
 
 #include "tbx/Window.h"
 #include "tbx/WriteableField.h"
+#include "tbx/loader.h"
 #include "ITab.h"
 #include "Packager.h"
 
@@ -38,9 +39,21 @@ class FilesTab : public ITab
     Packager &_packager;
     tbx::WriteableField _item_name;
 
+    class SetNameToDroppedFile : public tbx::Loader
+    {
+    private:
+    	Packager &_packager;
+    	tbx::WriteableField _item_name;
+
+    public:
+    	SetNameToDroppedFile(Packager &packager, tbx::WriteableField &name) :
+    		_packager(packager), _item_name(name) {};
+    	virtual bool load_file(tbx::LoadEvent &event);
+    } *_file_drop;
+
     public:
        FilesTab(MainWindow *main, tbx::Window window, Packager &packager);
-       virtual ~FilesTab() {}
+       virtual ~FilesTab() {delete _file_drop;}
 
        virtual void package_loaded();
 
