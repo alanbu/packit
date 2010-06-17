@@ -695,6 +695,8 @@ bool Packager::load(std::string filename)
 std::cout << "Load package " << std::endl;
 	// Temporary test for a zip file as GCCSDK4 rel 1 exception handling is
 	// broken. Any other exceptions will still cause a crash
+
+/*
 	std::fstream test(filename.c_str(), std::ios_base::in | std::ios_base::out);
 	if (!test) return false;
 	char temp[2];
@@ -703,6 +705,7 @@ std::cout << "Load package " << std::endl;
 	test.close();
 
 std::cout << "Zip file text succeeded" << std::endl;
+*/
 
 	try
 	{
@@ -813,10 +816,9 @@ std::cout << "Zip file text succeeded" << std::endl;
 
 					} else if (itemname == "RiscPkg/Copyright")
 					{
-						if (!read_zip_item(zip, item, _copyright) || _copyright.empty())
-						{
-							copyright(""); // Will log error
-						}
+						std::string copytext;
+						if (!read_zip_item(zip, item, copytext)) copytext = "";
+						copyright(copytext);
 					} else
 					{
 						std::string msg("Unsupported control file '");
@@ -1206,11 +1208,28 @@ bool Packager::save(std::string filename)
 			_base_dir_size = files.parent().name().length() + 1;
 			std::vector<std::pair<tbx::Path, tbx::PathInfo> > file_list;
 
-			get_file_list(files, file_list);
+			tbx::PathInfo root_info;
+			if (!files.path_info(root_info))
+			{
+				std::string msg("Unable to read file/directory ");
+				msg += _item_to_package;
+				throw PackageCreateException(msg);
+			}
+
+			if (root_info.directory())
+			{
+				get_file_list(files, file_list);
+			} else
+			{
+				file_list.push_back(std::pair<tbx::Path, tbx::PathInfo>(files, root_info));
+			}
 
 			hg.percentage(2);
 			unsigned int last_percent = 2;
 			unsigned int total_files = file_list.size();
+
+			printf("Copying files %d\n", total_files);
+
 			for (unsigned int i = 0; i != total_files; i++)
 			{
 				copy_file(zip, file_list[i].first, file_list[i].second);
