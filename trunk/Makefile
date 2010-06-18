@@ -6,7 +6,7 @@ CXXFLAGS = -O2 -Wall -mpoke-function-name -mthrowback -ITBX: -IZipArchive:
 LD = g++
 LDFLAGS = -LTBX: -ltbx -LZipArchive: -lziparch -lstdc++ -static
 
-TARGET=!PackIt/!RunImage
+TARGET=!PackIt.!RunImage
 
 CCSRC = $(wildcard src/*.cc)
 OBJECTS = $(CCSRC:.cc=.o)
