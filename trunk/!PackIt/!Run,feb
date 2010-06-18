@@ -22,8 +22,7 @@ RMENSURE DCS 0.00 ERROR You need DCS
 RMENSURE TextGadgets 0.19 RMLOAD System:modules.toolbox.TextGadget
 RMENSURE TextGadgets 0.19 ERROR You need TextGadgets 0.19 or later
 
-If "<Tabs$Dir>" = "" Then ERROR Tabs application must have been seen by the filer
-RMENSURE Tabs 0.05 RMLOAD Tabs:Tabs
+RMENSURE Tabs 0.05 RMLOAD System:Modules.Toolbox.Tabs
 RMENSURE Tabs 0.05 ERROR You need Rik Griffins Tabs version 0.05 or later
 
 WimpSlot -min 2048k -max 2048k
