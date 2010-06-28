@@ -24,6 +24,7 @@
 #include "Binding.h"
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 #include "tbx/reporterror.h"
 #include "tbx/path.h"
@@ -740,7 +741,9 @@ std::cout << "Zip file text succeeded" << std::endl;
 
 		_install_to = ""; // Clear new item default
 
-		std::vector<std::string> installdirs;
+		// Variable to find item to install
+		std::string install_item;
+		bool can_grow = true;
 
 		int num_items = zip.GetCount();
 
@@ -774,22 +777,10 @@ std::cout << "Zip file text succeeded" << std::endl;
 			switch(baseDirId)
 			{
 			case SD_APPS:
-				{
-					// APPS installs to a subdirectory
-                    std::string subdir;
-                    pos = itemname.find('/',pos+1);
-                    if (pos == std::string::npos) subdir = itemname;
-                    else subdir = itemname.substr(0, pos);
-					set_unique_install_to(subdir);
-					set_unique_item_to_package(itemname, 3);
-				}
-				break;
-
 			case SD_MANUALS:
 			case SD_RESOURCES:
 			case SD_SYSTEM:
-				set_unique_install_to(base_dir);
-				set_unique_item_to_package(itemname, 2);
+				set_install_item(install_item, itemname, can_grow);
 				break;
 
 			case SD_NONE:
@@ -852,6 +843,7 @@ std::cout << "Zip file text succeeded" << std::endl;
 			}
 		}
 
+		set_payload(install_item);
 		item_to_package("extract " + filename + " " + _item_to_package);
 
 		if (!_sysvars.empty()) sysvars_package_to_obey();
@@ -1029,63 +1021,98 @@ void Packager::set_control_field(std::string name, std::string value)
 }
 
 /**
- * Set the install to location. Throwing an exception
- * if it is already set to something else.
+ * Compare the passed path with the item name and update it to be the
+ * item that is being installed.
+ *
+ * @param install_item item name to update
+ * @param item_name name of item to compare with current install_item
+ * @param can_grow starts as true and is changed to false when the install_item
+ *        is stopped from getting any larger.
  */
-void Packager::set_unique_install_to(const std::string &name)
+void Packager::set_install_item(std::string &install_item, const std::string &item_name, bool &can_grow)
 {
-	std::string roname = zip_to_riscos_name(name);
-	if (_install_to.empty()) install_to(roname);
-	else if (roname != _install_to)
+	std::string::size_type install_item_size = install_item.size();
+	std::string::size_type item_size = item_name.size();
+	std::string::size_type match_pos;
+
+	match_pos = std::string::npos;
+	if (install_item_size == 0)
 	{
-		std::string msg;
-		msg = "Only one install location supported. Found '";
-		msg += _install_to;
-		msg += "' and '" + roname + "'";
-		throw PackageFormatException(msg);
+		install_item = item_name;
+	}
+	else if (item_size <= install_item_size)
+	{
+		if (item_name == install_item.substr(0, item_size))
+		{
+			if (item_size != install_item.size()
+				&& install_item[item_size] != '/')
+			{
+				can_grow = false;
+				std::string::size_type pos = item_name.rfind('/');
+				install_item = item_name.substr(0, pos);
+			}
+		} else
+		{
+			match_pos = item_name.rfind('/');
+		}
+	} else if (can_grow)
+	{
+		if (item_name.substr(0, install_item_size) == install_item)
+		{
+			if (item_name[install_item_size] == '/')
+			{
+				install_item = item_name;
+			} else
+			{
+				match_pos = install_item.rfind('/');
+			}
+		} else
+		{
+			match_pos = install_item.rfind('/');
+		}
+	}
+
+	if (match_pos != std::string::npos)
+	{
+		while (match_pos != std::string::npos
+				&& item_name.substr(0, match_pos) != install_item.substr(0, match_pos)
+			   )
+		{
+			match_pos = item_name.rfind('/',match_pos-1);
+		}
+
+		// Should at least match at base dir level
+		if (match_pos == std::string::npos)
+		{
+			std::string msg;
+			msg = "Only Install of one item (file or folder) supported. Found '";
+			msg += install_item;
+			msg += "' and '" + item_name + "'";
+			throw PackageFormatException(msg);
+		} else
+		{
+			install_item = item_name.substr(0, match_pos);
+			can_grow = false;
+		}
 	}
 }
 
 /**
- * Set the item to package name from the first
- * components of the given string.
- * Throws an exception of the item to package
- * is already set to a different value.
+ * Set the install to and install package from an item name from
+ * the zip file.
  */
-void Packager::set_unique_item_to_package(const std::string &name, int level)
+void Packager::set_payload(const std::string &name)
 {
-	std::string::size_type slash_pos, last_slash_pos = 0;
-	while ((slash_pos = name.find('/', last_slash_pos+1)) != std::string::npos
-		&& --level)
+	std::string roname = zip_to_riscos_name(name);
+	std::string::size_type leaf_pos = roname.rfind('.');
+	item_to_package(roname);
+
+	if (leaf_pos == std::string::npos)
 	{
-		last_slash_pos = slash_pos;
-	}
-
-	std::cout << "uip " << name << " " << level
-		<< " " << last_slash_pos << " " << slash_pos << std::endl;
-
-	// Return if we don't have a long enough path
-	if (level > 0) return;
-
-	std::string item;
-	if (slash_pos == std::string::npos)
-	{
-		if (last_slash_pos == name.size()-1) return;
-		item = name;
+		install_to("");
 	} else
-		item = name.substr(0, slash_pos);
-
-	item = zip_to_riscos_name(item);
-	std::cout << "item to package " << item << std::endl;
-
-	if (_item_to_package.empty()) item_to_package(item);
-	else if (item != _item_to_package)
 	{
-		std::string msg;
-		msg = "Only Install of one item (file or folder) supported. Found '";
-		msg += _item_to_package;
-		msg += "' and '" + item + "'";
-		throw PackageFormatException(msg);
+		install_to(roname.substr(0, leaf_pos));
 	}
 }
 
