@@ -239,8 +239,8 @@ public:
        std::string check_one_dependency(std::string dep) const;
 
        // Load package helpers
-       void set_unique_install_to(const std::string &name);
-       void set_unique_item_to_package(const std::string &name, int level);
+       void set_install_item(std::string &install_item, const std::string &item_name, bool &can_grow);
+       void set_payload(const std::string &name);
        std::string zip_to_riscos_name(const std::string &zipname) const;
        std::string riscos_to_zip_name(const std::string &riscosname) const;
 
