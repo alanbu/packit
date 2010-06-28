@@ -112,6 +112,7 @@ bool MainWindow::load_file(std::string file_name, int file_type)
 		{
 			printf("loading package\n");
 			_title = file_name;
+			_window.title(file_name);
 		} else
 		{
 			tbx::Path fn(file_name);
