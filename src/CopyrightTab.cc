@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009 Alan Buckley
+* Copyright 2010 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -46,9 +46,14 @@ CopyrightTab::CopyrightTab(MainWindow *main, tbx::Window window, Packager &packa
 
 	_copyright_empty = true;
 
-	printf("copyright window %x\n", window.handle());
 	window.add_gain_caret_listener(this);
 	window.add_lose_caret_listener(this);
+}
+
+CopyrightTab::~CopyrightTab()
+{
+	// Ensure idle command is always removed
+	tbx::app()->remove_idle_command(this);
 }
 
 void CopyrightTab::package_loaded()

@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009 Alan Buckley
+* Copyright 2010 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -46,7 +46,7 @@ class CopyrightTab : public ITab,
 
     public:
        CopyrightTab(MainWindow *main, tbx::Window window, Packager &packager);
-       virtual ~CopyrightTab() {}
+       virtual ~CopyrightTab();
 
        virtual void package_loaded();
        virtual void pre_save();
