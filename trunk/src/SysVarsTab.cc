@@ -87,9 +87,7 @@ void SysVarsTab::add_var()
 {
 	if (_edit_var_dlg == 0) _edit_var_dlg = new EditVarDlg(this);
 	_edit_var_dlg->adding();
-	printf("pre show\n");
 	_edit_var_dlg->show(_window);
-	printf("post show\n");
 }
 
 /**

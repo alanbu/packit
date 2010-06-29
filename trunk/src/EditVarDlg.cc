@@ -83,15 +83,11 @@ void EditVarDlg::adding()
 {
 	_name.text("");
 	_value.text("");
-	printf("text set\n");
 	_ok.fade(true);
-	printf("button faded\n");
 
 	_name_error = "Please enter a name and value";
 	_value_error = "Please enter a value";
-	printf("Error handle %d %d\n", _error.handle(), _error.id());
 	_error.text(_name_error);
-	printf("error text set\n");
 	_edit_index = -1;
 }
 

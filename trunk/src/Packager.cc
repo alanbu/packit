@@ -1255,8 +1255,6 @@ bool Packager::save(std::string filename)
 			unsigned int last_percent = 2;
 			unsigned int total_files = file_list.size();
 
-			printf("Copying files %d\n", total_files);
-
 			for (unsigned int i = 0; i != total_files; i++)
 			{
 				copy_file(zip, file_list[i].first, file_list[i].second);
