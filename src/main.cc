@@ -46,15 +46,12 @@ class PackItLoader : public tbx::Loader
    {
        if (event.from_filer())
        {
-    	   printf("from filer\n");
           MainWindow *main = new MainWindow();
           main->show();
-          printf("after show\n");
           if (!main->load_file(event.file_name(), event.file_type()))
           {
         	  delete main;
           }
-          printf("after load file\n");
           return true;
        }
 

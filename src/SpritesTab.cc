@@ -87,9 +87,7 @@ void SpritesTab::add_sprite()
 {
 	if (_edit_sprite_dlg == 0) _edit_sprite_dlg = new EditSpriteDlg(this);
 	_edit_sprite_dlg->adding();
-	printf("pre show\n");
 	_edit_sprite_dlg->show(_window);
-	printf("post show\n");
 }
 
 /**
@@ -196,7 +194,6 @@ void SpritesTab::scan_sprites(std::istream &is)
 		is.read((char *)&offset, 4); // Read offset to next sprite
 		is.read(name, 12); // Read name
 		name[12] = 0;
-		printf("Found sprite %s\n", name);
 		is.seekg(offset-16, std::ios_base::cur); // Move to next sprite
 		set_sprite(name, location);
 	}
