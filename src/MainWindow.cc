@@ -110,7 +110,6 @@ bool MainWindow::load_file(std::string file_name, int file_type)
 	{
 		if (_packager.load(file_name))
 		{
-			printf("loading package\n");
 			_title = file_name;
 			_window.title(file_name);
 		} else
@@ -129,45 +128,35 @@ bool MainWindow::load_file(std::string file_name, int file_type)
 		return false;
 	}
 
-    printf("in load file\n");
-
     // Load all bound fields
     for (int j = 0; j < NUM_ITEMS; j++)
     {
     	if (_binding[j] != 0) _binding[j]->update_source();
     }
 
-    printf("after update source\n");
-
     for (int tab = 0 ; tab < num_tabs; tab++)
     {
        _tabs[tab]->package_loaded();
     }
 
-    printf("after tab pl\n");
 
+    if (_packager.error_count())
+    {
+       std::ostringstream ss;
+       ss << _packager.error_count();
+       _error_count.text(ss.str());
+       // Show first error
+       _current_error = _packager.first_error();
 
-   if (_packager.error_count())
-   {
-	   printf("updating error count\n");
-      std::ostringstream ss;
-      ss << _packager.error_count();
-      _error_count.text(ss.str());
-      // Show first error
-      printf("getting first error\n");
-      _current_error = _packager.first_error();
-
-      printf("putting text on dialog\n");
-
-      _error_message.text(_packager.item_name(_current_error)
+       _error_message.text(_packager.item_name(_current_error)
                + " " + _packager.error_text(_current_error));
-   }
-   printf("about to leave\n");
-   _tabs[0]->switched_to();
+    }
 
-   _packager.modified(false);
+    _tabs[0]->switched_to();
 
-   return true;
+    _packager.modified(false);
+
+    return true;
 }
 
 /**
@@ -257,16 +246,13 @@ void MainWindow::on_item_error(PackageItem item)
  */
 void MainWindow::on_item_valid(PackageItem item)
 {
-	printf("in on it v %d\n", item);
-
     std::ostringstream ss;
     ss << _packager.error_count();
     _error_count.text(ss.str());
    _current_error = item;
-   printf("item name %s\n", _packager.item_name(_current_error).c_str());
+
    _error_message.text(_packager.item_name(_current_error)
               + " is now valid");
-printf("at end\n");
 }
 
 /**
