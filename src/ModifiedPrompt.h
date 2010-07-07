@@ -46,8 +46,8 @@ private:
 	ModifiedPrompt();
 	virtual ~ModifiedPrompt();
 
-	virtual void dcs_discard();
-	virtual void dcs_save();
+	virtual void dcs_discard(const tbx::EventInfo &info);
+	virtual void dcs_save(const tbx::EventInfo &info);
 
 public:
 	static void show(MainWindow *main);

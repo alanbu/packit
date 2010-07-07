@@ -55,7 +55,7 @@ void ModifiedPrompt::show(MainWindow *main)
 /**
  * Discard document
  */
-void ModifiedPrompt::dcs_discard()
+void ModifiedPrompt::dcs_discard(const tbx::EventInfo &info)
 {
 	delete _main;
 }
@@ -63,7 +63,7 @@ void ModifiedPrompt::dcs_discard()
 /**
  * Save document
  */
-void ModifiedPrompt::dcs_save()
+void ModifiedPrompt::dcs_save(const tbx::EventInfo &info)
 {
 	_main->show_save();
 }
