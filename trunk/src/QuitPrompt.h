@@ -52,7 +52,7 @@ public:
 
 	virtual void pre_quit(tbx::PreQuitEvent &event);
 	virtual void execute();
-	virtual void quit_quit();
+	virtual void quit_quit(const tbx::EventInfo &info);
 
 	unsigned int modified_count() const;
 

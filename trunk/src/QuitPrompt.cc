@@ -82,7 +82,7 @@ void QuitPrompt::execute()
  *
  * Restart the cancelled quit if this happens
  */
-void QuitPrompt::quit_quit()
+void QuitPrompt::quit_quit(const tbx::EventInfo &info)
 {
 	_restart.restart_quit();
 }
