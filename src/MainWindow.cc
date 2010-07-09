@@ -297,7 +297,7 @@ void MainWindow::show_save()
 /**
  * Close window request from window
  */
-void MainWindow::close_window(tbx::Window window)
+void MainWindow::close_window(const tbx::EventInfo &close_event)
 {
 	if (_packager.modified()) ModifiedPrompt::show(this);
 	else delete this;

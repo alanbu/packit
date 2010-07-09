@@ -85,7 +85,7 @@ class MainWindow :
        virtual void on_item_error(PackageItem item);
        virtual void on_item_valid(PackageItem item);
 
-       virtual void close_window(tbx::Window window);
+       virtual void close_window(const tbx::EventInfo &close_event);
 
        virtual void tab_selected(int old_index, int new_index);
 
