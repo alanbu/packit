@@ -26,4 +26,4 @@ RMENSURE Tabs 0.05 RMLOAD System:Modules.Toolbox.Tabs
 RMENSURE Tabs 0.05 ERROR You need Rik Griffins Tabs version 0.05 or later
 
 WimpSlot -min 2048k -max 2048k
-/<PackIt$Dir>.!RunImage %*0 ><PackIt$Dir>.stdout 2><PackIt$Dir>.stderr
+/<PackIt$Dir>.!RunImage %*0
