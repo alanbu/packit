@@ -1,5 +1,5 @@
 Source: PackIt
-Version: 0.1-1
+Version: 0.1-3
 Section: Development
 Priority: Optional
 Maintainer: Alan Buckley <alan_baa@hotmail.com>
@@ -10,3 +10,4 @@ Description: Utility to help create Packages
  Binary packages are anything where the package is not built from source code or where the source code is not made available.
 
 Package: PackIt
+Depends: SharedUnixLibrary (>= 1.11), Tabs
