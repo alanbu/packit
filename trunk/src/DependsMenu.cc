@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009 Alan Buckley
+* Copyright 2009,2010 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -30,6 +30,7 @@
 #include "tbx/Application.h"
 #include "tbx/window.h"
 #include "tbx/writeablefield.h"
+#include "tbx/res/resmenu.h"
 #include <fstream>
 #include <vector>
 #include <algorithm>
@@ -98,14 +99,13 @@ void DependsMenu::about_to_be_shown(tbx::AboutToBeShownEvent &event)
  		   std::sort(names.begin(), names.end());
 		   _menu.item(0).text(names[0]);
 
-		   tbx::ResHandle resMenu = tbx::app()->resource("DependsMenu");
-		   tbx::ResMenuItem newItem;
-		   tbx::Menu::resource_item(newItem, resMenu, 0);
+		   tbx::res::ResMenu resMenu = tbx::app()->resource("DependsMenu");
+		   tbx::res::ResMenuItem newItem = resMenu.item(0);
 
-		   for (unsigned int i = 1; i < _item_count; ++i)
+		   for (unsigned int i = 10; i < _item_count; ++i)
 		   {
 			   newItem.text(names[i]);
-			   newItem.id(i);
+			   newItem.component_id(i);
 			   _menu.add(newItem);
 		   }
  	   }
