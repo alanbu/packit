@@ -26,8 +26,8 @@
 #ifndef FILESTAB_H
 #define FILESTAB_H
 
-#include "tbx/Window.h"
-#include "tbx/WriteableField.h"
+#include "tbx/window.h"
+#include "tbx/writableField.h"
 #include "tbx/loader.h"
 #include "ITab.h"
 #include "Packager.h"
@@ -37,16 +37,16 @@ class MainWindow;
 class FilesTab : public ITab
 {
     Packager &_packager;
-    tbx::WriteableField _item_name;
+    tbx::WritableField _item_name;
 
     class SetNameToDroppedFile : public tbx::Loader
     {
     private:
     	Packager &_packager;
-    	tbx::WriteableField _item_name;
+    	tbx::WritableField _item_name;
 
     public:
-    	SetNameToDroppedFile(Packager &packager, tbx::WriteableField &name) :
+    	SetNameToDroppedFile(Packager &packager, tbx::WritableField &name) :
     		_packager(packager), _item_name(name) {};
     	virtual bool load_file(tbx::LoadEvent &event);
     } *_file_drop;

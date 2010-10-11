@@ -29,7 +29,7 @@
 #define EDITVARDLG_H_
 
 #include "tbx/window.h"
-#include "tbx/writeablefield.h"
+#include "tbx/writablefield.h"
 #include "tbx/actionbutton.h"
 #include "tbx/textchangedlistener.h"
 #include "tbx/displayfield.h"
@@ -70,8 +70,8 @@ class EditVarDlg : public tbx::Command
 {
 	tbx::Window _window;
 	SysVarsTab *_sys_vars_tab;
-	tbx::WriteableField _name;
-	tbx::WriteableField _value;
+	tbx::WritableField _name;
+	tbx::WritableField _value;
 	tbx::DisplayField _error;
 	tbx::ActionButton _ok;
 	ValidateSysVarName _validate_name;

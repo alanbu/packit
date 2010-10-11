@@ -177,9 +177,9 @@ bool MainWindow::save_file(std::string filename)
 /**
  * Set binding between writable field and an item
  */
-void MainWindow::set_binding(PackageItem item, WriteableField writeable)
+void MainWindow::set_binding(PackageItem item, WritableField writeable)
 {
-    _binding[item] = new TextBinding(new WriteableTextEndPoint(writeable),
+    _binding[item] = new TextBinding(new WritableTextEndPoint(writeable),
          _packager.get_binding(item)
     );
 }

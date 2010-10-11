@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009 Alan Buckley
+* Copyright 2009-2010 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -21,7 +21,7 @@
 
 #include "tbx/window.h"
 #include "tbx/displayfield.h"
-#include "tbx/writeablefield.h"
+#include "tbx/writablefield.h"
 #include "tbx/numberrange.h"
 #include "tbx/StringSet.h"
 #include "tbx/command.h"
@@ -68,7 +68,7 @@ class MainWindow :
 
        void show() {_window.show();}
 
-       void set_binding(PackageItem item, tbx::WriteableField writeable);
+       void set_binding(PackageItem item, tbx::WritableField writeable);
        void set_binding(PackageItem item, tbx::NumberRange nr);
        void set_binding(PackageItem item, tbx::StringSet ss);
 

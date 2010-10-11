@@ -26,15 +26,14 @@
 #include "MainWindow.h"
 #include "FilesTab.h"
 #include "Packager.h"
-#include "tbx/WriteableField.h"
-#include "tbx/StringSet.h"
+#include "tbx/stringSet.h"
 
 
 FilesTab::FilesTab(MainWindow *main,
  tbx::Window window, Packager &packager) : _packager(packager)
 {
    // Fields from dialog
-   tbx::WriteableField item_name = window.gadget(1);
+   tbx::WritableField item_name = window.gadget(1);
    tbx::StringSet install_to = window.gadget(3);
 
    _file_drop = new SetNameToDroppedFile(_packager, item_name);

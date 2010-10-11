@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009 Alan Buckley
+* Copyright 2009-2010 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -23,7 +23,7 @@
 #define binding_h
 
 #include "Packager.h"
-#include "tbx/writeablefield.h"
+#include "tbx/writablefield.h"
 #include "tbx/textchangedlistener.h"
 #include "tbx/numberrange.h"
 #include "tbx/valuechangedlistener.h"
@@ -75,12 +75,12 @@ class PackagerTextEndPoint : public TextEndPoint
 };
 
 /**
- * Updater to update a target from a writeable field
+ * Updater to update a target from a writable field
  */
-class WriteableBindingUpdater : public BindingUpdater, public tbx::TextChangedListener
+class WritableBindingUpdater : public BindingUpdater, public tbx::TextChangedListener
 {
     public:
-       WriteableBindingUpdater(TextEndPoint *target) : BindingUpdater(target)
+       WritableBindingUpdater(TextEndPoint *target) : BindingUpdater(target)
        {
        };
 
@@ -92,22 +92,22 @@ class WriteableBindingUpdater : public BindingUpdater, public tbx::TextChangedLi
 };
 
 /**
- * WriteableField end point
+ * WritableField end point
  */
-class WriteableTextEndPoint : public TextEndPoint
+class WritableTextEndPoint : public TextEndPoint
 {
-    tbx::WriteableField _writeable;
+    tbx::WritableField _writable;
 
 public:
-     WriteableTextEndPoint(tbx::WriteableField w) : _writeable(w) {}
+     WritableTextEndPoint(tbx::WritableField w) : _writable(w) {}
 
-     std::string get() const {return _writeable.text();}
-     void set(std::string value) {_writeable.text(value);}
+     std::string get() const {return _writable.text();}
+     void set(std::string value) {_writable.text(value);}
 
      virtual BindingUpdater *get_updater(TextEndPoint *target)
      {
-    	 WriteableBindingUpdater *updater = new WriteableBindingUpdater(target);
-    	 _writeable.add_text_changed_listener(updater);
+    	 WritableBindingUpdater *updater = new WritableBindingUpdater(target);
+    	 _writable.add_text_changed_listener(updater);
     	 return updater;
      }
 
@@ -166,8 +166,8 @@ public:
 
      virtual BindingUpdater *get_updater(TextEndPoint *target)
      {
-    	 // Can use Writeable binding as it uses the same text changed event
-    	 WriteableBindingUpdater *updater = new WriteableBindingUpdater(target);
+    	 // Can use Writable binding as it uses the same text changed event
+    	 WritableBindingUpdater *updater = new WritableBindingUpdater(target);
     	 _stringset.add_text_changed_listener(updater);
     	 return updater;
      }
