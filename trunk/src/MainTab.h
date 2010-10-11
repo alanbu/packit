@@ -28,7 +28,7 @@
 #define MAINTAB_H
 
 #include "tbx/window.h"
-#include "tbx/writeablefield.h"
+#include "tbx/writablefield.h"
 #include "tbx/stringset.h"
 #include "tbx/numberrange.h"
 #include "tbx/textchangedlistener.h"
@@ -41,7 +41,7 @@ class MainWindow;
 class MainTab : public ITab
 {
     Packager &_packager;
-    tbx::WriteableField _initial_focus;
+    tbx::WritableField _initial_focus;
 
     /**
      * Class to keep main windows title name part in line

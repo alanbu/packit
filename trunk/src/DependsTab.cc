@@ -27,16 +27,16 @@
 
 #include "DependsTab.h"
 #include "MainWindow.h"
-#include "tbx/writeablefield.h"
+#include "tbx/writablefield.h"
 
 DependsTab::DependsTab(MainWindow *main, tbx::Window window, Packager &packager) :
    _packager(packager)
 {
    // Get fields
-   tbx::WriteableField depends = window.gadget(2);
-   tbx::WriteableField recommends = window.gadget(4);
-   tbx::WriteableField suggests = window.gadget(6);
-   tbx::WriteableField conflicts = window.gadget(8);
+   tbx::WritableField depends = window.gadget(2);
+   tbx::WritableField recommends = window.gadget(4);
+   tbx::WritableField suggests = window.gadget(6);
+   tbx::WritableField conflicts = window.gadget(8);
 
    // Set bindings
    main->set_binding(DEPENDS, depends);

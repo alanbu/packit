@@ -27,9 +27,6 @@
 
 #include "MainTab.h"
 #include "MainWindow.h"
-#include "tbx/writeablefield.h"
-#include "tbx/stringset.h"
-#include "tbx/numberrange.h"
 
 MainTab::MainTab(MainWindow *main, tbx::Window window, Packager &packager) :
 	_packager(packager),
@@ -38,14 +35,14 @@ MainTab::MainTab(MainWindow *main, tbx::Window window, Packager &packager) :
 	_rpversion_changed(main)
 {
    // Get fields
-   tbx::WriteableField package = window.gadget(3);
-   tbx::WriteableField version = window.gadget(5);
+   tbx::WritableField package = window.gadget(3);
+   tbx::WritableField version = window.gadget(5);
    tbx::NumberRange package_version = window.gadget(7);
 
    tbx::StringSet section = window.gadget(9);
    tbx::StringSet priority = window.gadget(11);
-   tbx::WriteableField maintainer = window.gadget(15);
-   tbx::WriteableField standards_version = window.gadget(17);
+   tbx::WritableField maintainer = window.gadget(15);
+   tbx::WritableField standards_version = window.gadget(17);
 
    // Set bindings
    main->set_binding(PACKAGE_NAME, package);

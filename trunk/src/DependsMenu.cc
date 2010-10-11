@@ -29,7 +29,7 @@
 #include "eventids.h"
 #include "tbx/Application.h"
 #include "tbx/window.h"
-#include "tbx/writeablefield.h"
+#include "tbx/writablefield.h"
 #include "tbx/res/resmenu.h"
 #include <fstream>
 #include <vector>
@@ -127,7 +127,7 @@ void DependsMenu::user_event(tbx::UserEvent &event)
 	tbx::Window window(event.id_block().parent_object());
 	// Parent gadgets id is arrange so subtracting 16 gives corresponding
 	// write able field id.
-	tbx::WriteableField fld_to_add_to(window.gadget(event.id_block().parent_component().id() - 16));
+	tbx::WritableField fld_to_add_to(window.gadget(event.id_block().parent_component().id() - 16));
 
 	std::string text = fld_to_add_to.text();
 	if (text.empty())

@@ -29,7 +29,7 @@
 #define EDITSPRITEDLG_H_
 
 #include "tbx/window.h"
-#include "tbx/writeablefield.h"
+#include "tbx/writablefield.h"
 #include "tbx/actionbutton.h"
 #include "tbx/textchangedlistener.h"
 #include "tbx/displayfield.h"
@@ -70,8 +70,8 @@ class EditSpriteDlg : public tbx::Command
 {
 	tbx::Window _window;
 	SpritesTab *_sprites_tab;
-	tbx::WriteableField _name;
-	tbx::WriteableField _location;
+	tbx::WritableField _name;
+	tbx::WritableField _location;
 	tbx::DisplayField _error;
 	tbx::ActionButton _ok;
 	ValidateSpriteName _validate_name;

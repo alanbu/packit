@@ -27,7 +27,7 @@
 
 #include "tbx/Window.h"
 #include "tbx/textarea.h"
-#include "tbx/writeablefield.h"
+#include "tbx/writablefield.h"
 #include "tbx/caretlistener.h"
 #include "tbx/command.h"
 
@@ -45,7 +45,7 @@ class DescTab : public ITab,
 	public tbx::Command
 {
     Packager &_packager;
-    tbx::WriteableField _summary;
+    tbx::WritableField _summary;
     tbx::TextArea _description;
 
     public:
