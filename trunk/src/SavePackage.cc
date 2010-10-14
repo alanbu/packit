@@ -69,9 +69,9 @@ void SavePackage::about_to_be_shown(tbx::AboutToBeShownEvent &event)
 	_main = MainWindow::from_window(event.id_block().ancestor_object());
 
 	// Set save as properties
-	saveas.filesize(16384); // No - idea so just give it anything
-	saveas.filetype(0xFFF); // Saved as text
-	saveas.filename(_main->title());
+	saveas.file_size(16384); // No - idea so just give it anything
+	saveas.file_type(0xFFF); // Saved as text
+	saveas.file_name(_main->title());
 }
 
 void SavePackage::saveas_save_to_file(tbx::SaveAs saveas, bool selection, std::string filename)
@@ -84,7 +84,7 @@ void SavePackage::saveas_save_completed(tbx::SaveAsSaveCompletedEvent &event)
 {
 	if (event.safe())
 	{
-		_main->title(event.filename());
+		_main->title(event.file_name());
 		_main->packager().modified(false);
 	}
 }

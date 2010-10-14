@@ -115,7 +115,7 @@ bool MainWindow::load_file(std::string file_name, int file_type)
 		} else
 		{
 			tbx::Path fn(file_name);
-			std::string name(fn.leafname());
+			std::string name(fn.leaf_name());
 			if (name[0] == '!') name.erase(0,1);
 
 			_title = name + "_-1";
