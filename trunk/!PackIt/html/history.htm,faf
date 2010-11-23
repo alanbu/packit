@@ -10,6 +10,10 @@
 <LI><B>0.2 Second Beta Release - ????</B>
 <UL>
 <LI>Added missing IconSprites line to !Run file</LI>
+<LI>Set file types for HTML help files</LI>
+<LI>Fixed typo in sysvars documentation</LI>
+<LI>Maximum length of sprite name in edit sprite dialogue increased from
+11 to 12 characters</LI>
 </UL>
 </LI>
 </UL>
