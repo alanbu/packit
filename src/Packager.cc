@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009 Alan Buckley
+* Copyright 2009-2011 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -693,7 +693,6 @@ bool Packager::load(std::string filename)
 	CZipArchive zip;
 	int controlIndex = -1;
 
-std::cout << "Load package " << std::endl;
 	// Temporary test for a zip file as GCCSDK4 rel 1 exception handling is
 	// broken. Any other exceptions will still cause a crash
 
@@ -716,7 +715,7 @@ std::cout << "Zip file text succeeded" << std::endl;
 
 	} catch(CZipException &e)
 	{
-		std::cout << "Not a valid zip file " << e.GetErrorDescription() << std::endl;
+		// std::cout << "Not a valid zip file " << e.GetErrorDescription() << std::endl;
 		// Not a valid zip file so assume its a file
 		// to be packaged
 		return false;
@@ -729,7 +728,7 @@ std::cout << "Zip file text succeeded" << std::endl;
 		// to be packaged.
 		zip.Close();
 
-		std::cout << "No Control record in zip file" << std::endl;
+		// std::cout << "No Control record in zip file" << std::endl;
 		return false;
 	}
 
@@ -747,8 +746,6 @@ std::cout << "Zip file text succeeded" << std::endl;
 
 		int num_items = zip.GetCount();
 
-		std::cout << "Num items " << num_items << std::endl;
-
 		for (int item = 0; item < num_items; item++)
 		{
 			CZipFileHeader fhead;
@@ -757,8 +754,6 @@ std::cout << "Zip file text succeeded" << std::endl;
 			std::string itemname = fhead.GetFileName();
 			std::string base_dir;
 			std::string::size_type pos;
-
-			std::cout << "item " << item << " " << itemname << std::endl;
 
 			pos = itemname.find('/');
 			if (pos == std::string::npos) base_dir = itemname;
@@ -770,7 +765,6 @@ std::cout << "Zip file text succeeded" << std::endl;
 				if (base_dir == SpecialDirs[j]) baseDirId = (SpecialDirId)j;
 			}
 
-			std::cout << "Dir id " << baseDirId << std::endl;
 			// Don't always get directory entries so check directories
 			// for every file.
 
@@ -795,7 +789,6 @@ std::cout << "Zip file text succeeded" << std::endl;
 			case SD_RISCPKG:
 				if (!fhead.IsDirectory())
 				{
-					std::cout << "processing package control file " << itemname << std::endl;
 					if (itemname == "RiscPkg/Control")
 					{
 						std::string buf;
@@ -893,7 +886,6 @@ void Packager::read_control(std::istream &in)
 		std::string::const_iterator first=line.begin();
 		std::string::const_iterator last=line.end();
 
-std::cout << "line " << line << std::endl;
 		// Strip trailing spaces.
 		while ((last!=first)&&isspace(*(last-1))) --last;
 
@@ -964,7 +956,6 @@ std::cout << "line " << line << std::endl;
  */
 void Packager::set_control_field(std::string name, std::string value)
 {
-	std::cout << "set control field " << name << " = " << value << std::endl;
 	if (name.compare("Package") == 0)
 	{
 		package_name(value);
@@ -1371,7 +1362,6 @@ void Packager::write_sysvars(CZipArchive &zip) const
 		std::string::size_type pos = 0;
 		while ((pos = tbx::find_ignore_case(value, "<obey$dir>", pos)) != std::string::npos)
 		{
-			std::cout << " obey found at " << pos << std::endl;
 			value.replace(pos, 10, obey_dir);
 			pos++;
 		}
@@ -1445,6 +1435,7 @@ void Packager::get_file_list(const tbx::Path &dirname, std::vector<std::pair<tbx
 	        i != tbx::PathInfo::end(); ++i)
 	{
 		tbx::PathInfo entry(*i);
+
 		if (entry.directory())
 		{
 			// Go down directories after processing all files
@@ -1525,10 +1516,10 @@ void Packager::copy_file(CZipArchive &zip, const tbx::Path &filename, tbx::PathI
 		time_t secs_since_1970 = (time_t)(csecs_since_1900/100 - secs_between);
 
 		fhead.SetTime(secs_since_1970);
-
-//		std::cout << "copying " << filename << " file type " << entry.file_type() << std::endl;
 	} else
+	{
 	    fhead.SetTime(time(NULL));
+	}
 
 	RISCOSZipExtra extra(entry);
 
@@ -1642,7 +1633,7 @@ bool Packager::read_zip_item(const std::string &zipfile, const std::string &zipn
 
 	} catch(CZipException &e)
 	{
-		std::cout << "Not a valid zip file " << e.GetErrorDescription() << std::endl;
+		// std::cout << "Not a valid zip file " << e.GetErrorDescription() << std::endl;
 		// Not a valid zip file so assume its a file
 		// to be packaged
 		return false;
@@ -1703,15 +1694,12 @@ bool Packager::copying_from_zip(const std::string &filename, std::string &oldzip
  */
 void Packager::copy_zip_files(CZipArchive &zip, const std::string &zipfilename, const std::string &zipitem)
 {
-   std::cout << "copy files from zip named " << zipfilename << std::endl;
-
    CZipArchive oldzip;
    tbx::Hourglass hg;
 
    hg.percentage(1);
 
    oldzip.Open(zipfilename.c_str(), CZipArchive::zipOpenReadOnly);
-   std::cout << "opened" << std::endl;
 
    CZipWordArray indices;
    std::string pattern(zipitem);
@@ -1724,14 +1712,11 @@ void Packager::copy_zip_files(CZipArchive &zip, const std::string &zipfilename, 
    if (*zipitem.rbegin() != '/') pattern += "/";
    pattern += "*";
 
-   std::cout << "Pattern used " << pattern << std::endl;
-
    oldzip.FindMatches(pattern.c_str(), indices, true);
 
    hg.percentage(2);
 
    unsigned int total_files = indices.GetSize();
-   std::cout << "Number of items found " << total_files << std::endl;
 
    if (total_files == 0)
    {
