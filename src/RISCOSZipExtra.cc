@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009 Alan Buckley
+* Copyright 2009-2011 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -70,7 +70,10 @@ RISCOSZipExtra::RISCOSZipExtra(const tbx::PathInfo &entry)
   {
 	  // Ensure file type is in top of the load address
 	  loadaddress = 0xFFF00000
-		   | (entry.file_type() << 8)
+//		   | (entry.file_type() << 8)
+// Use raw file type as we copy Image FS entries as they are
+// and don't go into them.
+		   | (entry.raw_file_type() << 8)
 		   | (loadaddress & 0xFF);
   }
 }
