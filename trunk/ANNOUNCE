@@ -1,6 +1,9 @@
-PackIt Package creation helper released
+PackIt Package creation helper new version released
 
-PackIt version 0.1 first beta has now been released.
+PackIt version 0.2 has now been released.
+
+This release contains various minor bug fixes.
+
 
 PackIt is a tool to help create RISC OS Packaging Project packages.
 
