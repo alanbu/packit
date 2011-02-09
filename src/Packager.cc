@@ -842,18 +842,23 @@ std::cout << "Zip file text succeeded" << std::endl;
 		if (!_sysvars.empty()) sysvars_package_to_obey();
 		if (!_sprites.empty()) sprites_package_to_obey();
 
-		// Install to must alway be given a value otherwise a save
+		// Install to must always be given a value otherwise a save
 		// will not work.
 		if (_install_to.empty()) install_to("Apps.Misc");
 
+		zip.Close();
+
 	} catch(PackageFormatException)
 	{
+		zip.Close(CZipArchive::afAfterException);
 		throw;
 	} catch(std::bad_alloc)
 	{
+		zip.Close(CZipArchive::afAfterException);
 		throw PackageFormatException("Unable to allocate enough memory to load package");
 	} catch(...)
 	{
+		zip.Close(CZipArchive::afAfterException);
 		throw PackageFormatException("Unexpected exception thrown during load package");
 	}
 
@@ -1663,6 +1668,7 @@ bool Packager::copying_from_zip(const std::string &filename, std::string &oldzip
     {
        throw PackageCreateException("'extract' install item does not include a filename and/or item within it");
     }
+
     if (tbx::equals_ignore_case(oldzipname, filename))
     {
         int check_no = 0;
@@ -1683,6 +1689,7 @@ bool Packager::copying_from_zip(const std::string &filename, std::string &oldzip
         }
 
         oldzipname = tempfilename;
+
         delete_old_zip = true;
     }
 
@@ -1720,6 +1727,7 @@ void Packager::copy_zip_files(CZipArchive &zip, const std::string &zipfilename, 
 
    if (total_files == 0)
    {
+	  oldzip.Close();
       throw PackageCreateException("Failed to find files in old zip file");
    }
 
@@ -1727,6 +1735,7 @@ void Packager::copy_zip_files(CZipArchive &zip, const std::string &zipfilename, 
    std::string::size_type spos = zipitem.rfind('/');
    if (spos == std::string::npos)
    {
+	  oldzip.Close();
       throw PackageCreateException("Unable to determine location of old zip file");
    }
    std::string oldloc = zipitem.substr(0, spos);
@@ -1742,7 +1751,10 @@ void Packager::copy_zip_files(CZipArchive &zip, const std::string &zipfilename, 
 	   for (unsigned int i = 0; i < total_files;i++)
 	   {
 		   if (!zip.GetFromArchive(oldzip, indices[i]))
-			   throw PackageCreateException("Failed to copy file from old archive");
+		   {
+			  oldzip.Close();
+			  throw PackageCreateException("Failed to copy file from old archive");
+		   }
 		   pc = 100 * i / total_files;
 		   if (pc > last_percent)
 		   {
@@ -1761,7 +1773,10 @@ void Packager::copy_zip_files(CZipArchive &zip, const std::string &zipfilename, 
 	      std::string name = fhead.GetFileName();
 	      name = newloc + name.substr(oldloc.size());
 		  if (!zip.GetFromArchive(oldzip, indices[i], name.c_str()))
-			   throw PackageCreateException("Failed to copy file from old archive");
+		  {
+			  oldzip.Close();
+			  throw PackageCreateException("Failed to copy file from old archive");
+		  }
 
 		   pc = 100 * i / total_files;
 		   if (pc > last_percent)
