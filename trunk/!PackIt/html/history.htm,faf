@@ -7,14 +7,15 @@
 
 <UL>
 <LI><B>0.1 First Beta Release - July 2010</B></LI>
-<LI><B>0.2 Second Beta Release - January 2011<B></LI>
+<LI><B>0.2 Second Beta Release - February 2011<B></LI>
 <UL>
 <LI>Added missing IconSprites line to !Run file</LI>
 <LI>Set file types for HTML help files</LI>
 <LI>Fixed typo in sysvars documentation</LI>
 <LI>Maximum length of sprite name in edit sprite dialogue increased from
 11 to 12 characters</LI>
-<LI>Fixed bug where file type was 000 for Image Filing System files</LI>
+<LI>Bugfix: File type was packaged as 000 for Image Filing System files</LI>
+<LI>Bugfix: After reloading, modifying and changing a package it could fail to save and would corrupt the package file</LI>
 </UL>
 </LI>
 </UL>
