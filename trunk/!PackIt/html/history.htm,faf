@@ -16,6 +16,8 @@
 11 to 12 characters</LI>
 <LI>Bugfix: File type was packaged as 000 for Image Filing System files</LI>
 <LI>Bugfix: After reloading, modifying and changing a package it could fail to save and would corrupt the package file</LI>
+<LI>Show nicer dialogue when the package load fails.<LI>
+<LI>Stop extra (harmless) error messages being shown when a load fails<LI>
 </UL>
 </LI>
 </UL>
