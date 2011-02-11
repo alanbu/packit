@@ -66,7 +66,7 @@ class MainWindow :
        const std::string &title() const {return _title;}
        void title(std::string title);
 
-       void show() {_window.show();}
+       void show();
 
        void set_binding(PackageItem item, tbx::WritableField writeable);
        void set_binding(PackageItem item, tbx::NumberRange nr);

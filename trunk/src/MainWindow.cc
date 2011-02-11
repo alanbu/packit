@@ -35,6 +35,8 @@
 
 #include "tbx/path.h"
 #include "tbx/reporterror.h"
+#include "tbx/deleteonhidden.h"
+#include "tbx/hourglass.h"
 
 #include <sstream>
 
@@ -104,8 +106,21 @@ MainWindow *MainWindow::from_window(tbx::Window window)
 	return reinterpret_cast<MainWindow *>(window.client_handle());
 }
 
+/**
+ * Load the file
+ *
+ * Detects if it's a package or a file to be packaged.
+ *
+ * Note: Also fails if the file is a package containing fields
+ * packit does not understand.
+ *
+ * @param file_name name of file to load
+ * @param file_type file type
+ * @returns true if file could be loaded/used.
+ */
 bool MainWindow::load_file(std::string file_name, int file_type)
 {
+	tbx::Hourglass hg;
 	try
 	{
 		if (_packager.load(file_name))
@@ -124,7 +139,13 @@ bool MainWindow::load_file(std::string file_name, int file_type)
 		}
 	} catch(PackageFormatException e)
 	{
-		tbx::report_error(e.message().c_str());
+		tbx::Window load_failed("LoadFailed");
+		tbx::DisplayField fn = load_failed.gadget(1);
+		tbx::DisplayField em = load_failed.gadget(3);
+		fn.text(file_name);
+		em.text(e.message());
+		load_failed.add_has_been_hidden_listener(new DeleteObjectOnHidden());
+		load_failed.show();
 		return false;
 	}
 
@@ -152,12 +173,20 @@ bool MainWindow::load_file(std::string file_name, int file_type)
                + " " + _packager.error_text(_current_error));
     }
 
-    _tabs[0]->switched_to();
-
     _packager.modified(false);
 
     return true;
 }
+
+/**
+ * Show the main window a set focus to first tab
+ */
+void MainWindow::show()
+{
+	_window.show();
+    _tabs[0]->switched_to();
+}
+
 
 /**
  * Save packages
