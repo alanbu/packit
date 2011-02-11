@@ -31,6 +31,7 @@
 #include "tbx/loader.h"
 #include "tbx/autocreate.h"
 #include "tbx/showhelp.h"
+#include "tbx/deferdelete.h"
 #include "MainWindow.h"
 #include "SavePackage.h"
 #include "QuitPrompt.h"
@@ -47,10 +48,12 @@ class PackItLoader : public tbx::Loader
        if (event.from_filer())
        {
           MainWindow *main = new MainWindow();
-          main->show();
-          if (!main->load_file(event.file_name(), event.file_type()))
+          if (main->load_file(event.file_name(), event.file_type()))
           {
-        	  delete main;
+              main->show();
+          } else
+          {
+        	  tbx::defer_delete<MainWindow>(main);
           }
           return true;
        }
@@ -74,11 +77,13 @@ int main(int argc, char *argv[])
 	iconbar.add_command(EID_QUIT, &quit_prompt);
 
 	packit_app.set_autocreate_listener("SaveAs", new tbx::AutoCreateClass<SavePackage>());
+    // Menu for list of dependencies
     packit_app.set_autocreate_listener("DependsMenu", new DependsMenu());
 
 	iconbar.add_loader(new PackItLoader());
 
-    // Menu for list of dependencies
+	// Uncomment following line to debug uncaught exceptions
+	// packit_app.catch_poll_exceptions(false);
 
 	iconbar.show();
 	packit_app.run();
