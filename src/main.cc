@@ -38,6 +38,11 @@
 #include "DependsMenu.h"
 #include "eventids.h"
 
+#include "unixlib/local.h"
+// Treat image filesystems as files
+// Stops problems with things like StrongHelp files
+// int __feature_imagefs_is_file = 1;
+
 /**
  * Class to load files and show main window
  */

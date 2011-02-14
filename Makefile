@@ -19,4 +19,7 @@ $(TARGET): packit
 packit:	$(OBJECTS)
 	$(LD) $(LDFLAGS) -o packit $(OBJECTS)
 
+clean:
+	rm $(OBJECTS) packit
+
 #include $(CCSRC:.cc=.d)
