@@ -1,0 +1,31 @@
+PackIt Package creation helper new version released
+
+PackIt version 0.2 has now been released.
+
+This release contains various minor bug fixes.
+
+
+PackIt is a tool to help create RISC OS Packaging Project packages.
+
+It is designed to create the most common types of Binary Package.
+If more advanced features of the packaging system are required it
+can still be used to make a start on the package which would then
+be finished off by hand.
+
+A Binary Package is a package that does not need to be built from
+source code. e.g. A program created in an interpreted language
+like BASIC or a Strong Help manual.
+
+It can also be used to create a package for a project where the source
+code is not provided. Though normally you would have options to create
+the package as part of your source in this case.
+
+PackIt will help you create the control records required for the
+package and create the final package file as well.
+
+PackIt is provided as a RISC OS Packaging Project package in the main
+distribution. It can be installed using either:
+
+!RiscPkg available from http://www.riscpkg.org
+or
+!PackMan available from http://alanb.drobe.co.uk/packman.htm

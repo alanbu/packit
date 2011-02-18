@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<TITLE>PackIt - Copyright Tab</TITLE>
+<link rel="stylesheet" type="text/css" href="packit.css">
+</HEAD>
+<BODY>
+<H2>Copyright Tab</H2>
+<P>This screen contains the licence field from the control record and the text of the copyright record.</P>
+<TABLE>
+  <TR>
+    <TH>Field</TH><TH>Description</TH>
+  </TR>
+  <TR>
+    <TD>Licence</TD>
+    <TD>This is the licence the package is released under. It can be Free or Non Free. Free is defined as a package that meets the Open Source definition available at
+       <A HREF="http://www.opensource.org/docs/osd">http://www.opensource.org/docs/osd</A>.
+       <BR>Common licences that are classified as free include:
+       <UL>
+         <LI>Apache License, 2.0</LI>
+         <LI>New and Simplified BSD licenses</LI>
+         <LI>Boost Software License (BSL1.0)</LI>
+         <LI>European Union Public License</LI>
+         <LI>GNU General Public License (GPL)</LI>
+         <LI>GNU General Public License version 3.0 (GPLv3)</LI>
+         <LI>GNU Library or "Lesser" General Public License (LGPL)</LI>
+         <LI>GNU Library or "Lesser" General Public License version 3.0 (LGPLv3)</LI>
+         <LI>MIT license</LI>
+         <LI>Mozilla Public License 1.1 (MPL)</LI>
+         <LI>zlib/libpng license</LI>
+       </UL>
+       A Full list of currently approved free licences can be found at
+       <A HREF="http://www.opensource.org/licenses">http://www.opensource.org/licenses</A>.
+    </TD>
+  <TR>
+    <TD>Copyright</TD>
+    <TD>The copyright text for the package. This is required. It must  contain the following information:
+      <UL>
+        <LI>the name of the upstream author(s)</LI>
+        <LI>the names of current and past package maintainers</LI>
+	<LI>the provenance of the upstream sources</LI>
+	<LI>a verbatim copy of the copyright notice and distribution licence</LI>
+      </UL>
+    </TD>
+  </TR>
+</TABLE>
+
+<P>
+<hr>
+<TABLE class = "pagelinks">
+  <TR>
+    <TD class="pagelinks"><A HREF = "index.htm">Contents</A></TD>
+    <TD class="pagelinks"><A HREF = "main.htm">Main</A></TD>
+    <TD class="pagelinks"><A HREF = "description.htm">Description</A></TD>
+    <TD class="pagelinks"><A HREF = "files.htm">Files</A></TD>
+    <TD class="pagelinks"><B>Copyright</B></TD>
+    <TD class="pagelinks"><A HREF = "depends.htm">Dependencies</A></TD>
+    <TD class="pagelinks"><A HREF = "sysvars.htm">System variables</A></TD>
+    <TD class="pagelinks"><A HREF = "sprites.htm">Sprites</A></TD>
+  <TR>
+</TABLE>  
+</P>
+
+</BODY>
+</HTML>

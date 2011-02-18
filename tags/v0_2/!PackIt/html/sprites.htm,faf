@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>PackIt - Sprites</TITLE>
+<link rel="stylesheet" type="text/css" href="packit.css">
+</HEAD>
+<BODY>
+<H2>Sprites Tab</H2>
+<P>This tab is used to specify the sprites you want the package manager to load into the Wimp Sprite pool at boot time or when the package is first installed.</P>
+
+<P>The defined sprites are shown in a scrolling list showing the name of the sprite followed by the location of the sprite file that contains this sprite. The following buttons allow you to maintain this list.</P>
+<TABLE>
+  <TR>
+    <TH>Button</TH>
+    <TH>Action</TH>
+  </TR>
+  <TR>
+    <TD>Add</TD>
+    <TD>Add a new sprite.</TD>
+  </TR>
+    <TD>Edit</TD>
+    <TD>Edit an existing sprite. Select the sprite to edit in the list first.</TD>
+  <TR>
+    <TD>Remove</TD>
+    <TD>Remove a sprite. Select the sprite to edit in the list first.</TD>
+  </TR>
+  <TR>
+    <TD>Clear</TD>
+    <TD>Removes all of the sprites from the list</TD>
+  </TR>
+  <TR>
+    <TD>Scan !Sprites</TD>
+    <TD>This will scan the !Sprites file for theapplication being packaged and add all the sprites it finds in the list. If a sprite with the same name as one found is already in the list it will be replaced.</TD>
+  </TR>
+  <TR>
+</TABLE>
+
+<P>The Add/Edit buttons both show a further dialog displaying the name and location of the sprite. This has the following fields/buttons
+</P>
+<TABLE>
+  <TR>
+    <TH>Field/Button</TH>
+    <TH>Description</TH>
+  <TR>
+  <TR>
+    <TD>Name</TD>
+    <TD>The name of the sprite. This is required and can not enter a name that is already in the list (except for the original sprite name when editing).</TD>
+  </TR>
+  <TR>
+    <TD>Location</TD>
+    <TD>The location of the file the sprite is stored in. This is required and a few syntax checks will be applied to it to help ensure it is OK.</TD>
+  </TR>
+  <TR>
+    <TD>Cancel</TD>
+    <TD>This button will close the dialog box without updateing the sprite</TD>
+  </TR>
+    <TD>OK</TD>
+    <TD>This button will update the sprite. It will be disabled if the sprite name or location is invalid</TD>
+  <TR>
+     <TD>Display area</TD>
+     <TD>This display only section will display a message explaining any problems it sees with the sprite definition. If it is clear then the OK button will be enabled and the sprite can be updated</TD>
+  </TR>
+</TABLE>
+
+<H3>Notes</H3>
+<P>
+In the sprite list and add/edit dialogs the location where the application will be installed is shown as &lt;Obey$Dir&gt;.
+</P><P>In most circumstances the location of all the sprites will be the same (&lt;Obey$Dir&gt;.!Sprites).</P>
+<P>
+The sprite file identified by the pathname should be one that is suitable for use as an argument to the IconSprites command.</P>
+<P>If higher-resolution versions of this file are present then they will be recognised automatically by the package manager, provided that the conventional suffixes are used. For example, if a package provides sprite files called !Sprites, !Sprites22 and !Sprites11 then declarations should refer to the first of these only, but one of the others will be used if it is a better match to the screen mode.</P>
+
+<P>
+<hr>
+<TABLE class = "pagelinks">
+  <TR>
+    <TD class="pagelinks"><A HREF = "index.htm">Contents</A></TD>
+    <TD class="pagelinks"><A HREF = "main.htm">Main</A></TD>
+    <TD class="pagelinks"><A HREF = "description.htm">Description</A></TD>
+    <TD class="pagelinks"><A HREF = "files.htm">Files</A></TD>
+    <TD class="pagelinks"><A HREF = "copytab.htm">Copyright</A></TD>
+    <TD class="pagelinks"><A HREF = "depends.htm">Dependencies</A></TD>
+    <TD class="pagelinks"><A HREF = "sysvars.htm">System variables</A></TD>
+    <TD class="pagelinks"><B>Sprites</B></TD>
+  <TR>
+</TABLE>  
+</P>
+</BODY>
+</HTML>

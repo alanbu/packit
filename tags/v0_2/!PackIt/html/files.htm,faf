@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<TITLE>PackIt - Files</TITLE>
+<link rel="stylesheet" type="text/css" href="packit.css">
+</HEAD>
+<BODY>
+<H2>Files Tab</H2>
+<P>This tab is used to specify the item you want to install and where to install it to.</P>
+<P>PackIt can only install one item (file, directory and its children or application) to one location. 
+<I>Note: This is not a restriction with binary packages in general.<I></P>
+
+<TABLE>
+  <TR><TH>Field</TH><TH>Description</TH></TR>
+  <TR>
+     <TD>Item to install</TD>
+     <TD>This is the item that you want to install for the package. When the package is created the files are copied from this location into the package file. As well as a normal file name you can use "extract zipfile zipitem" where zipfile is the name of the zipfile to get the files from and zipitem is the item/directory in the zipfile to extract. When modifying an existing package this format shows where the files are in the package.</TD>
+  </TR>
+  <TR>
+    <TD>Install to</TD>
+    <TD>This shows where the files will be installed to on the end users machine. The location should start with one of "Apps", "Manuals", "Resources" or "System" and then give the path to the folder for the item to be installed to. A drop down list by this field gives a list of common values for this field.
+      <TABLE class="subtable">
+         <TR><TH>Root folder</TH><TH>Description</TH><TR>
+         <TR>
+           <TD>Apps</TD>
+           <TD>The root of the hierarchy within which applications are stored. A package in a given section normally uses a subdirectory of Apps named after that section.</TD> 
+         </TR>
+         <TR>
+           <TD>Manuals</TD>
+           <TD>The root of the heirarchy within which manuals and other documentation are stored when no other location (such as an application directory) is more appropriate.</TD>
+         </TR>
+         <TR>
+           <TD>Resources</TD>
+           <TD>A directory which corresponds to the active Resources directory.</TD>
+         </TR>
+         <TR>
+           <TD>System</TD>
+           <TD>A directory which corresponds to the active !System directory.</TD>
+         </TR>
+      </TABLE>
+   </TR>
+</TABLE>
+
+<P>
+<hr>
+<TABLE class = "pagelinks">
+  <TR>
+    <TD class="pagelinks"><A HREF = "index.htm">Contents</A></TD>
+    <TD class="pagelinks"><A HREF = "main.htm">Main</A></TD>
+    <TD class="pagelinks"><A HREF = "description.htm">Description</A></TD>
+    <TD class="pagelinks"><B>Files</B></TD>    
+    <TD class="pagelinks"><A HREF = "copytab.htm">Copyright</A></TD>
+    <TD class="pagelinks"><A HREF = "depends.htm">Dependencies</A></TD>
+    <TD class="pagelinks"><A HREF = "sysvars.htm">System variables</A></TD>
+    <TD class="pagelinks"><A HREF = "sprites.htm">Sprites</A></TD>
+  <TR>
+</TABLE>  
+</P>
+</BODY>
+</HTML>
