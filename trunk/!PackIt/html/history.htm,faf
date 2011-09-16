@@ -7,7 +7,7 @@
 
 <UL>
 <LI><B>0.1 First Beta Release - July 2010</B></LI>
-<LI><B>0.2 Second Beta Release - February 2011<B></LI>
+<LI><B>0.2 Second Beta Release - February 2011</B></LI>
 <UL>
 <LI>Added missing IconSprites line to !Run file</LI>
 <LI>Set file types for HTML help files</LI>
@@ -20,8 +20,11 @@
 <LI>Stop extra (harmless) error messages being shown when a load fails<LI>
 </UL>
 </LI>
+<LI><B>0.3 Third Beta Release - September 2011</B></LI>
+<UL>
+<LI>Bugfix: Fields on the Depends tab were not being updated if they were selected from the menu</LI>
 </UL>
-
+</UL>
 
 </BODY>
 </HTML>

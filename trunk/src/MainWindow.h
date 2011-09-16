@@ -71,6 +71,7 @@ class MainWindow :
        void set_binding(PackageItem item, tbx::WritableField writeable);
        void set_binding(PackageItem item, tbx::NumberRange nr);
        void set_binding(PackageItem item, tbx::StringSet ss);
+       void update_binding(PackageItem item);
 
        bool load_file(std::string file_name, int file_type);
        bool save_file(std::string file_name);
