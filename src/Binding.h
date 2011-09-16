@@ -86,7 +86,6 @@ class WritableBindingUpdater : public BindingUpdater, public tbx::TextChangedLis
 
        virtual void text_changed(tbx::TextChangedEvent &event)
        {
-    	   printf("text changed to %s\n", event.text().c_str());
           _target->set(event.text());
        }
 };

@@ -41,6 +41,8 @@ class DependsTab : public ITab
 
        virtual void package_loaded();
 
+       static PackageItem item_from_gadget(tbx::ComponentId id);
+
        /**
         * Return leaf name of file with help for this tab
         */

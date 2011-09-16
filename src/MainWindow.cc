@@ -234,6 +234,17 @@ void MainWindow::set_binding(PackageItem item, tbx::StringSet ss)
 }
 
 /**
+ * Update binding for given item.
+ *
+ * This is sometime necessary when setting a field does not generate
+ * the changed event.
+ */
+void MainWindow::update_binding(PackageItem item)
+{
+	_binding[item]->update_target();
+}
+
+/**
  * Called when package modified flag has changed
  */
 void MainWindow::modified_changed(bool new_value)

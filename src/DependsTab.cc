@@ -28,6 +28,7 @@
 #include "DependsTab.h"
 #include "MainWindow.h"
 #include "tbx/writablefield.h"
+#include <stdexcept>
 
 DependsTab::DependsTab(MainWindow *main, tbx::Window window, Packager &packager) :
    _packager(packager)
@@ -44,6 +45,25 @@ DependsTab::DependsTab(MainWindow *main, tbx::Window window, Packager &packager)
    main->set_binding(SUGGESTS, suggests);
    main->set_binding(CONFLICTS, conflicts);
 }
+
+/**
+ * Get PackageItem number from gadget id
+ *
+ * Ensure this is kept in sync with contructor above
+ */
+PackageItem DependsTab::item_from_gadget(tbx::ComponentId id)
+{
+	switch(id)
+	{
+	case 2: return DEPENDS; break;
+	case 4: return RECOMMENDS; break;
+	case 6: return SUGGESTS; break;
+	case 8: return CONFLICTS; break;
+	}
+
+	throw std::runtime_error("Invalid gadget id passed to DependsTab::item_from_gadget");
+}
+
 
 void DependsTab::package_loaded()
 {
