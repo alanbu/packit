@@ -83,7 +83,8 @@ int main(int argc, char *argv[])
 
 	packit_app.set_autocreate_listener("SaveAs", new tbx::AutoCreateClass<SavePackage>());
     // Menu for list of dependencies
-    packit_app.set_autocreate_listener("DependsMenu", new DependsMenu());
+    DependsMenu depends_menu;
+    packit_app.set_autocreate_listener("DependsMenu", &depends_menu);
 
 	iconbar.add_loader(new PackItLoader());
 
