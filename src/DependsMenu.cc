@@ -51,6 +51,9 @@ DependsMenu::~DependsMenu()
  */
 void DependsMenu::auto_created(std::string template_name, tbx::Object object)
 {
+    // Reset item count every time the menu is recreated so it
+    // will be populated when it is reshown
+    _item_count = 0;
 	_menu = object;
 	_menu.add_about_to_be_shown_listener(this);
 	_menu.add_user_event_listener(EID_ADD_DEPENDENCY, this);
