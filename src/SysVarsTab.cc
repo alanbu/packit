@@ -66,7 +66,7 @@ void SysVarsTab::package_loaded()
 
 	for (i = _packager.sysvars().begin(); i != _packager.sysvars().end(); ++i)
 	{
-		set_var((*i).first.c_str(), (*i).second.c_str());
+		set_var((*i).first.c_str(), (*i).second.c_str(), false);
 	}
 }
 
@@ -235,9 +235,9 @@ void SysVarsTab::scan_boot(std::istream &is)
 /**
  * Set new value or add a variable to the scroll list
  */
-void SysVarsTab::set_var(const char *var_name, const char *value)
+void SysVarsTab::set_var(const char *var_name, const char *value, bool update_package /*= true*/)
 {
-	_packager.sysvar(var_name, value);
+	if (update_package) _packager.sysvar(var_name, value);
 
 	std::string name;
 	const char *p = var_name;

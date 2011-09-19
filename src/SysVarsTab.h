@@ -57,7 +57,7 @@ private:
 	void scan_boot();
 	void scan_boot(std::istream &is);
 
-	void set_var(const char *var_name, const char *value);
+	void set_var(const char *var_name, const char *value, bool update_package = true);
 
 
 public:
