@@ -23,6 +23,7 @@
 <LI><B>0.3 Third Beta Release - September 2011</B></LI>
 <UL>
 <LI>Bugfix: Fields on the Depends tab were not being updated if they were selected from the menu</LI>
+<LI>Bugfix: Dependencies menus were left empty after the first package processed was closed</LI>
 </UL>
 </UL>
 
