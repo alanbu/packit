@@ -184,6 +184,7 @@ void SysVarsTab::scan_boot(std::istream &is)
 	{
 		char *p = line;
 		while (*p == ' ') p++;
+		if (strnicmp(p, "if ",3) == 0) p = check_if(p);
 		if (strnicmp(p, "set ",4) == 0)
 		{
 			char *var_name;
@@ -198,6 +199,7 @@ void SysVarsTab::scan_boot(std::istream &is)
 			{
 				char *vp = value;
 				*p++ = 0;
+
 				while (*p == ' ') p++;
 
 				while (*p)
@@ -226,11 +228,109 @@ void SysVarsTab::scan_boot(std::istream &is)
 					else *vp++ = *p++;
 				}
 				*vp = 0;
-				set_var(var_name, value);
+				// Remove quotes as they are added by LibPkg
+				if (value[0] == '"')
+				{
+					vp--;
+					if (*vp == '"') *vp = 0;
+					set_var(var_name, value+1);
+				} else
+				{
+					set_var(var_name, value);
+				}
 			}
 		}
 	}
 }
+
+/**
+ * Check an if statement in the boot to see if we can get the set out of it
+ *
+ * This only matches an if line of the form
+ *   If "<var>" = "" Then Set var = ...
+ *
+ * This line format is often used to claim filetypes if they are not already
+ * claimed. Normally a package would want to initially claim these types
+ * when it is first loaded or the PC is rebooted.
+ *
+ * @param p line to check (must point to "If")
+ * @returns pointer to start of "set" command or start of line if line
+ * not in correct format
+ */
+char *SysVarsTab::check_if(char *p)
+{
+	char *start = p;
+	char *set_pos = 0;
+	bool ok = true;
+
+	p+=3;
+	while (*p == ' ') p++;
+	char *test_name;
+
+	// Find and extract If variable "<var>"
+	if (*p != '"') ok = false;
+	if (ok && *(++p) != '<') ok = false;
+	if (ok)
+	{
+		p++;
+		test_name = p;
+		while (*p && *p != '>') p++;
+		if (*p == '>')
+		{
+			*p++ = 0;
+			if (*p++ != '"') ok = false;
+		} else ok = false;
+		if (ok && !*test_name) ok = false;
+	}
+
+	// Check for "="
+	if (ok)
+	{
+		while (*p == ' ') p++;
+		if (*p++ != '=') ok = false;
+	}
+
+	// Check for null string ""
+	if (ok)
+	{
+		while (*p == ' ') p++;
+		if (*p++ != '"') ok = false;
+		if (ok && *p++ != '"') ok = false;
+	}
+
+	// Check for then
+	if (ok)
+	{
+		while (*p == ' ') p++;
+		if (strnicmp(p, "then ", 5) != 0) ok = false;
+		p+= 5;
+	}
+
+	// Check for set
+	if (ok)
+	{
+		while (*p == ' ') p++;
+		if (strnicmp(p,"set ", 4) != 0) ok = false;
+		set_pos = p;
+		p+= 4;
+	}
+	if (ok)
+	{
+		// Get Set variable name
+		char *var_name;
+
+		while (*p == ' ') p++;
+		var_name = p;
+
+		while (*p && *p != ' ') p++;
+		// Checks on the rest of the Set statement are left to
+		// the main scanning routine
+		if (strnicmp(var_name, test_name, (p - var_name)) != 0) ok = false;
+	}
+
+	return (ok) ? set_pos : start;
+}
+
 
 /**
  * Set new value or add a variable to the scroll list

@@ -26,6 +26,8 @@
 <LI>Bugfix: Dependencies menus were left empty after the first package processed was closed</LI>
 <LI>Bugfix: System variables were not always redisplayed correctly when a package we reloaded</LI>
 <LI>Bugfix: It was impossible to add a system variable that included a hyphen</LI>
+<LI>Bugfix: Scanning boot files for system variables did not remove quotes if the variable value was quoted which stopped them being set correctly by the package manager</LI>
+<LI>Boot file scanning for system variables will now pick out variables from If statements if the If variable and the Set variable are the same</LI>
 </UL>
 </UL>
 
