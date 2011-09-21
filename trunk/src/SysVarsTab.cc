@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009 Alan Buckley
+* Copyright 2009-2011 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -228,16 +228,17 @@ void SysVarsTab::scan_boot(std::istream &is)
 					else *vp++ = *p++;
 				}
 				*vp = 0;
+				std::string val(value);
 				// Remove quotes as they are added by LibPkg
 				if (value[0] == '"')
 				{
-					vp--;
-					if (*vp == '"') *vp = 0;
-					set_var(var_name, value+1);
-				} else
-				{
-					set_var(var_name, value);
+					val.erase(0,1);
+					if (!val.empty()) val.erase(val.size()-1,1);
 				}
+				// Remove double % from arg type arguments
+				std::string::size_type arg_sub = val.find("%%*0");
+				if (arg_sub != std::string::npos) val.erase(arg_sub,1);
+				set_var(var_name, val);
 			}
 		}
 	}
