@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009-2011 Alan Buckley
+* Copyright 2009-2012 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -121,6 +121,13 @@ void SysVarsTab::remove_var()
 	int index = _var_list.first_selected();
 	if (index >= 0)
 	{
+		std::string name = _var_list.item_text(index);
+		std::string::size_type space_pos = name.find(' ');
+		if (space_pos != std::string::npos)
+		{
+			name.erase(space_pos);
+		}
+
 		_var_list.delete_item(index);
 
 		std::map<std::string, int>::iterator i, found = _var_to_index.end();
@@ -132,7 +139,12 @@ void SysVarsTab::remove_var()
 				(*i).second -= 1;
 			}
 		}
-		if (found != _var_to_index.end()) _var_to_index.erase(found);
+		if (found != _var_to_index.end())
+		{
+			_var_to_index.erase(found);
+		}
+
+		_packager.remove_sysvar(name);
 	}
 }
 

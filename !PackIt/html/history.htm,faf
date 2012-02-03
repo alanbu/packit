@@ -30,6 +30,12 @@
 <LI>Boot file scanning for system variables will now pick out variables from If statements if the If variable and the Set variable are the same</LI>
 <LI>Boot file scanning now replaces the argument substitution "%%*0" from variables with "%*0" so the immediate set of the variable by the package manager will work</LI>
 </UL>
+
+<LI><B>0.4 Fourth Beta Release - February 2012</B></LI>
+<UL>
+<LI>Remove button on System variables tab did not update the package</LI>
+</UL>
+
 </UL>
 
 </BODY>
