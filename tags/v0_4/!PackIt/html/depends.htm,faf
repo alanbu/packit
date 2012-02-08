@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>PackIt - Depends</TITLE>
+<link rel="stylesheet" type="text/css" href="packit.css">
+</HEAD>
+<BODY>
+<H2>Depends Tab</H2>
+<P>This window show the packages this package has a relation ship with.</P>
+<P>Each field has the same format, The package name, '('op version').<BR>
+op is one of '=' equals,  '<<' less than, '>>' greater than, '<=' less than or equal, '>=' greater than or equal<BR>
+Multiple packages are seperated by a comma followed by a space.
+</P>
+<P>e.g. LibPkg, RTK (>=0.5.0), ZLib</P>
+<TABLE>
+  <TR>
+    <TH>Field</TH>
+    <TH>Description</TH>
+  </TR>
+  <TR>
+    <TD>Depends</TD>
+    <TD>Packages which must be present for this one to be installed</TD>
+  </TR>
+  <TR>
+    <TD>Recommends</TD>
+    <TD>Packages which would normally be wanted when this one is installed, but are not essential</TD>
+  </TR>
+  <TR>
+    <TD>Suggests</TD>
+    <TD>Packages which might be wanted because this one is installed, but don't have to be</TD>
+  </TR>
+  <TR>
+    <TD>Conflicts</TD>
+    <TD>Packages which can not be installed at the same time as this one</TD>
+  <TR>
+</TABLE>
+<P>
+Beside each of these fields is a popup menu button that will allow you to add a package from the current list of packages known to the Package manager. Selecting an option from this menu will add it to the relevant field or replace the existing version if it is already in the field. The menu will add an entry for the current version of the package. Edit the writeable field after adding the package if you want a different version dependency.
+</P>
+
+<P>
+<hr>
+<TABLE class = "pagelinks">
+  <TR>
+    <TD class="pagelinks"><A HREF = "index.htm">Contents</A></TD>
+    <TD class="pagelinks"><A HREF = "main.htm">Main</A></TD>
+    <TD class="pagelinks"><A HREF = "description.htm">Description</A></TD>
+    <TD class="pagelinks"><A HREF = "files.htm">Files</A></TD>
+    <TD class="pagelinks"><A HREF = "copytab.htm">Copyright</A></TD>
+    <TD class="pagelinks"><B>Dependencies</B></TD>
+    <TD class="pagelinks"><A HREF = "sysvars.htm">System variables</A></TD>
+    <TD class="pagelinks"><A HREF = "sprites.htm">Sprites</A></TD>
+  <TR>
+</TABLE>  
+</P>
+</BODY>
+</HTML>

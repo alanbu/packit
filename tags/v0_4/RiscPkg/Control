@@ -1,0 +1,15 @@
+Source: PackIt
+Version: 0.4-1
+Section: Development
+Priority: Optional
+Maintainer: Alan Buckley <alan_baa@hotmail.com>
+Standards-Version: 0.1.0
+Licence: Free
+Description: Utility to help create Packages
+ Creates most common types of binary packages for use with the RISC OS Packaging Project.
+ Binary packages are anything where the package is not built from source code or where the source code is not made available.
+ It can also be used as a starting point to create the control files for
+ more complicated binary packages or source code packages.
+
+Package: PackIt
+Depends: SharedUnixLibrary (>= 1.11), Tabs
