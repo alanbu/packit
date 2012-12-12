@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009-2011 Alan Buckley
+* Copyright 2009-2012 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -1271,7 +1271,7 @@ bool Packager::save(std::string filename)
 	} catch(CZipException &e)
 	{
 		std::string errmsg("Failed to create zip file: ");
-		errmsg += e.GetErrorDescription();
+		errmsg += (LPCTSTR)e.GetErrorDescription();
 		tbx::report_error(errmsg.c_str());
 	} catch(PackageCreateException &e)
 	{
@@ -1681,7 +1681,17 @@ bool Packager::copying_from_zip(const std::string &filename, std::string &oldzip
            tempfilename = filename + "bak" + tbx::to_string(check_no);
         } while (tbx::Path(tempfilename).exists() && check_no < 500);
 
-        if (check_no == 500 || !tbx::Path(filename).rename(tempfilename))
+        if (check_no == 500)
+		{
+			try
+			{
+					tbx::Path(filename).rename(tempfilename);
+			} catch(...)
+			{
+				check_no = 500; // * Force failure
+			}
+		}
+		if (check_no == 500)
         {
            std::string msg("Unable to backup old package/zip file ");
            msg += filename;
