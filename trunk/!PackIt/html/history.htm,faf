@@ -36,6 +36,11 @@
 <LI>Remove button on System variables tab did not update the package</LI>
 </UL>
 
+<LI><B>0.5 Beta Release - ????</B></LI>
+<UL>
+<LI>Bugfix: Show Help from iconbar did not work on the Raspberry Pi</LI>
+</UL>
+
 </UL>
 
 </BODY>
