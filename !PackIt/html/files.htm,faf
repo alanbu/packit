@@ -19,7 +19,7 @@
     <TD>Install to</TD>
     <TD>This shows where the files will be installed to on the end users machine. The location should start with one of "Apps", "Manuals", "Resources" or "System" and then give the path to the folder for the item to be installed to. A drop down list by this field gives a list of common values for this field.
       <TABLE class="subtable">
-         <TR><TH>Root folder</TH><TH>Description</TH><TR>
+         <TR><TH>Root folder</TH><TH>Description</TH></TR>
          <TR>
            <TD>Apps</TD>
            <TD>The root of the hierarchy within which applications are stored. A package in a given section normally uses a subdirectory of Apps named after that section.</TD> 
@@ -37,6 +37,17 @@
            <TD>A directory which corresponds to the active !System directory.</TD>
          </TR>
       </TABLE>
+   </TR>
+  <TR>
+    <TD>Component flags</TD>
+    <TD>This sets the component flags for the installed item. The choices are:
+        <TABLE class="subtable">
+           <TR><TH>Option</TH><TH>Description</TH></TR>
+           <TR><TD>None</TD><TD>The component is installed into a fixed place on the system</TD></TR>
+           <TR><TD>Movable</TD><TD>The install location for the component can be changed when the package is installed</TD></TR>
+           <TR><TD>Movable LookAt</TD><TD>As Movable, but the "look at" flag is also set in the installer so it will be added to the files looked at (Booted) when the package is installed or the RISC OS desktop is started. It is recommended to set this flag only if the application needs to be available before it is seen by the filer. e.g. It provides an editor or viewer for a RISC OS file type or is a command line utility.</TD></TR>
+        </TABLE>
+    </TD>
    </TR>
 </TABLE>
 

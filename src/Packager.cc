@@ -58,7 +58,8 @@ const char *Packager::_item_names[NUM_ITEMS] = {
   "Depends",
   "Recommends",
   "Suggests",
-  "Conflicts"
+  "Conflicts",
+  "Components"
 };
 
 /**
@@ -104,12 +105,13 @@ Packager::Packager() :
     section("");
     priority("Optional");
     maintainer("");
-    standards_version("0.1.0");
+    standards_version("0.4.0");
     summary("");
     licence("");
     copyright("");
     item_to_package("");
     install_to("Apps.Misc");
+    component_flags("None");
 
     // Reset modified flag as nothing has really changed yet
     _modified = false;
@@ -155,6 +157,8 @@ PackagerTextEndPoint *Packager::get_binding(PackageItem item)
        case RECOMMENDS: return new PackagerTextEndPoint(this, &Packager::recommends, &Packager::recommends);
        case SUGGESTS: return new PackagerTextEndPoint(this, &Packager::suggests, &Packager::suggests);
        case CONFLICTS: return new PackagerTextEndPoint(this, &Packager::conflicts, &Packager::conflicts);
+
+       case COMPONENT_FLAGS: return new PackagerTextEndPoint(this, &Packager::component_flags, &Packager::component_flags);
 
        case NUM_ITEMS: break; // Dummy value so ignore
     }
@@ -293,6 +297,8 @@ void Packager::standards_version(std::string value)
 		   set_error(STANDARDS_VERSION, "must contain at least 3 components separated by dots ('.')");
 	   else if (!format_ok)
 		   set_error(STANDARDS_VERSION, "must be up to 4 numbers separated by dots ('.')");
+	   else if (_component_flags != "None" && standards_version_lt("0.4.0"))
+		   set_error(STANDARDS_VERSION, "must be at least 0.4.0 if component flags are set");
 	   else
 		   clear_error(STANDARDS_VERSION);
    }
@@ -300,6 +306,48 @@ void Packager::standards_version(std::string value)
    modified(true);
 }
 
+/**
+ * Check it the standards version is less than the given value
+ *
+ * @param value version to check against
+ * @returns true if version is less than the given value
+ */
+bool Packager::standards_version_lt(std::string value)
+{
+	if (_standards_version.empty()) return true;
+	std::string::iterator svi = _standards_version.begin();
+	std::string::iterator vi = value.begin();
+	int check_val = 0;
+	while (svi != _standards_version.end())
+	{
+		if (*svi == '.')
+		{
+			svi++;
+			int value_part = 0;
+			while (vi != value.end() && *vi != '.') value_part = value_part * 10 + (*vi++ - '0');
+			if (vi != value.end()) ++vi;
+			if (check_val < value_part) return true;
+			else if (check_val > value_part) return false;
+			check_val = 0;
+		} else if (*svi >= '0' && *svi <= '9')
+		{
+			check_val = check_val * 10 + (*svi++ - '0');
+		} else
+		{
+			// All invalid entries are considered less than
+			return true;
+		}
+	}
+
+	int value_part = 0;
+	while (vi != value.end() && *vi != '.') value_part = value_part * 10 + (*vi++ - '0');
+	if (vi != value.end()) ++vi;
+
+	if (check_val < value_part) return true;
+
+	// Got to end so its equal
+	return false;
+}
 
 void Packager::summary(std::string value)
 {
@@ -416,6 +464,13 @@ void Packager::install_to(std::string where)
     		}
     	}
     }
+}
+
+void Packager::component_flags(std::string value)
+{
+	_component_flags = value;
+	 if (_component_flags != "None" && standards_version_lt("0.4.0"))
+	   set_error(STANDARDS_VERSION, "must be at least 0.4.0 if component flags are set");
 }
 
 void Packager::depends(std::string value)
@@ -774,6 +829,8 @@ std::cout << "Zip file text succeeded" << std::endl;
 			case SD_MANUALS:
 			case SD_RESOURCES:
 			case SD_SYSTEM:
+				// Directories may have a trailing backslash so erase it if thats the case
+				if (itemname[itemname.size()-1] == '/') itemname.erase(itemname.size()-1);
 				set_install_item(install_item, itemname, can_grow);
 				break;
 
@@ -1010,6 +1067,26 @@ void Packager::set_control_field(std::string name, std::string value)
 	} else if (name.compare("Conflicts") == 0)
 	{
 	   conflicts(value);
+	} else if (name.compare("Components") == 0)
+	{
+		if (value.empty()) component_flags("None");
+		else
+		{
+			// Ensure flags are in same order as needed in stringset
+			std::string::size_type bracket_pos = value.find('(');;
+			if (bracket_pos == std::string::npos) component_flags("None");
+			else
+			{
+				std::string ui_value;
+				if (value.find("Movable", bracket_pos) != std::string::npos) ui_value = "Movable";
+				if (value.find("LookAt", bracket_pos) != std::string::npos)
+				{
+					if (!ui_value.empty()) ui_value += " ";
+					ui_value += "LookAt";
+				}
+				component_flags(ui_value);
+			}
+		}
 	} else
 	{
 		throw PackageFormatException("Unable to process field '" + name + "' in RiscPkg/Control");
@@ -1209,6 +1286,9 @@ bool Packager::save(std::string filename)
 
 		zip.Open(filename.c_str(), CZipArchive::zipCreate);
 
+		// Must have an install to location
+		if (_install_to.empty()) install_to("Apps.Misc");
+
 		write_control(zip);
 		write_copyright(zip);
 		write_sysvars(zip);
@@ -1223,9 +1303,6 @@ bool Packager::save(std::string filename)
 		} else
 		{
 			tbx::Path files(_item_to_package);
-
-			// Must have an install to location
-			if (_install_to.empty()) install_to("Apps.Misc");
 
 			// Set size of base file name so it can be removed from zip filenames
 			_base_dir_size = files.parent().name().length() + 1;
@@ -1324,6 +1401,13 @@ void Packager::write_control(CZipArchive &zip) const
 		}
 		if (solpos < _description.size())
 			os << " "  << _description.substr(solpos) << std::endl;
+	}
+
+	if (_component_flags != "None")
+	{
+		std::string::size_type leaf_pos = _item_to_package.rfind('.');
+		std::string leaf_name = (leaf_pos == std::string::npos) ? _item_to_package : _item_to_package.substr(leaf_pos+1);
+		os << "Components: " << _install_to << "." << leaf_name << " (" << _component_flags << ")" << std::endl;
 	}
 
     if (!_depends.empty())

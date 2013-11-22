@@ -6,6 +6,7 @@
 <BODY>
 <H2>Sprites Tab</H2>
 <P>This tab is used to specify the sprites you want the package manager to load into the Wimp Sprite pool at boot time or when the package is first installed.</P>
+<P><i>As of package standards version 0.4 the use of the Sprites metadata is deprecated. Instead setting the "Movable LookAt" Component flags on the Files tab will cause the application to be Booted which should load the sprites.</i></P>
 
 <P>The defined sprites are shown in a scrolling list showing the name of the sprite followed by the location of the sprite file that contains this sprite. The following buttons allow you to maintain this list.</P>
 <TABLE>

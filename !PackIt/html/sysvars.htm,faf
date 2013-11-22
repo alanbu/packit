@@ -6,6 +6,8 @@
 <BODY>
 <H2>SysVars Tab</H2>
 <P>This tab allows the package to claim ownership of a system variable. The package manager will ensure these variables are set when the package is installed and also if the system is rebooted.</P>
+<P><i>As of package standards version 0.4 the use of the SysVars metadata is deprecated. Instead setting the "Movable LookAt" Component flags on the Files tab will cause the application to be Booted which should set any System variables required.</i></P>
+
 <P>A common use for this is to set aliases for commands or the run action for file types defined by the application.</P>
 <P>The defined system variables are shown in a scrolling list. The following buttons allow you to maintain this list.
 <TABLE>
