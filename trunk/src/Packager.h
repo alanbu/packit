@@ -45,6 +45,7 @@ enum PackageItem {
   RECOMMENDS,
   SUGGESTS,
   CONFLICTS,
+  COMPONENT_FLAGS,
   NUM_ITEMS // Dummy value to give number of items
   };
 
@@ -120,6 +121,7 @@ public:
        std::string _recommends;
        std::string _suggests;
        std::string _conflicts;
+       std::string _component_flags;
        std::string _copyright;
        SysVarsMap _sysvars;
        SpritesMap _sprites;
@@ -204,6 +206,8 @@ public:
        void suggests(std::string value);
        std::string conflicts() const {return _conflicts;}
        void conflicts(std::string value);
+       std::string component_flags() const {return _component_flags;}
+       void component_flags(std::string value);
 
        // Read only access to sys vars
        const SysVarsMap &sysvars() const {return _sysvars;}
@@ -234,6 +238,8 @@ public:
     private:
        void set_error(PackageItem where, std::string message);
        void clear_error(PackageItem where);
+
+       bool standards_version_lt(std::string value);
 
        void check_depends(PackageItem where, std::string depends);
        std::string check_one_dependency(std::string dep) const;

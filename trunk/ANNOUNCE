@@ -1,8 +1,9 @@
 PackIt Package creation helper new version released
 
-PackIt version 0.3 has now been released.
+PackIt version 0.5 has now been released.
 
-This release contains various minor bug fixes.
+This release adds support for the new components
+field added to version 0.4.0 of the package format.
 
 
 PackIt is a tool to help create RISC OS Packaging Project packages.
@@ -28,4 +29,4 @@ distribution. It can be installed using either:
 
 !RiscPkg available from http://www.riscpkg.org
 or
-!PackMan available from http://alanb.drobe.co.uk/packman.htm
+!PackMan available from https://sites.google.com/site/alansriscosstuff/packman

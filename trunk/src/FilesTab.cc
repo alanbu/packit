@@ -35,6 +35,7 @@ FilesTab::FilesTab(MainWindow *main,
    // Fields from dialog
    tbx::WritableField item_name = window.gadget(1);
    tbx::StringSet install_to = window.gadget(3);
+   tbx::StringSet component_flags = window.gadget(5);
 
    _file_drop = new SetNameToDroppedFile(_packager, item_name);
    item_name.add_loader(_file_drop);
@@ -42,6 +43,7 @@ FilesTab::FilesTab(MainWindow *main,
    // Set bindings
    main->set_binding(ITEM_TO_PACKAGE, item_name);
    main->set_binding(INSTALL_TO, install_to);
+   main->set_binding(COMPONENT_FLAGS, component_flags);
 }
 
 void FilesTab::package_loaded()

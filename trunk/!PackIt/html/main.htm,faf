@@ -62,7 +62,7 @@
 </TR>
 <TR> 
    <TD>Standards-Version</TD>
-   <TD>The version of this policy manual to which the package conforms. This is required. PackIt defaults to "0.1.0", but if you use "~" in the version to indicate pre-release you need to use "0.1.1".</TD>
+   <TD>The version of this policy manual to which the package conforms. This is required. PackIt defaults to "0.4.0" which is the minimum required if you set any component flags on the Files tab.</TD>
 </TR>
 </TABLE>
 
