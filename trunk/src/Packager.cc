@@ -65,9 +65,11 @@ const char *Packager::_item_names[NUM_ITEMS] = {
 /**
  * Special directories found in the package
  */
-const int NumSpecialDirs = 7;
+const int NumSpecialDirs = 9;
 enum SpecialDirId {SD_RISCPKG, SD_SYSVARS, SD_SPRITES,
-      SD_APPS, SD_MANUALS, SD_RESOURCES, SD_SYSTEM, SD_NONE=99};
+      SD_APPS, SD_MANUALS, SD_RESOURCES, SD_SYSTEM,
+      SD_TOBELOADED, SD_TOBETASKS,
+      SD_NONE=99};
 
 const char *SpecialDirs[NumSpecialDirs] =
 {
@@ -77,7 +79,9 @@ const char *SpecialDirs[NumSpecialDirs] =
 	"Apps",
 	"Manuals",
 	"Resources",
-	"System"
+	"System",
+	"ToBeLoaded",
+	"ToBeTasks"
 };
 
 /** Buffer for file copy **/
@@ -829,6 +833,8 @@ std::cout << "Zip file text succeeded" << std::endl;
 			case SD_MANUALS:
 			case SD_RESOURCES:
 			case SD_SYSTEM:
+			case SD_TOBELOADED:
+			case SD_TOBETASKS:
 				// Directories may have a trailing backslash so erase it if thats the case
 				if (itemname[itemname.size()-1] == '/') itemname.erase(itemname.size()-1);
 				set_install_item(install_item, itemname, can_grow);
@@ -1348,7 +1354,8 @@ bool Packager::save(std::string filename)
 	} catch(CZipException &e)
 	{
 		std::string errmsg("Failed to create zip file: ");
-		errmsg += (LPCTSTR)e.GetErrorDescription();
+		std::string desc =e.GetErrorDescription();
+		errmsg += desc;
 		tbx::report_error(errmsg.c_str());
 	} catch(PackageCreateException &e)
 	{
@@ -1765,17 +1772,17 @@ bool Packager::copying_from_zip(const std::string &filename, std::string &oldzip
            tempfilename = filename + "bak" + tbx::to_string(check_no);
         } while (tbx::Path(tempfilename).exists() && check_no < 500);
 
-        if (check_no == 500)
+        if (check_no < 500)
 		{
 			try
 			{
-					tbx::Path(filename).rename(tempfilename);
+			    tbx::Path(filename).rename(tempfilename);
 			} catch(...)
 			{
 				check_no = 500; // * Force failure
 			}
 		}
-		if (check_no == 500)
+        if (check_no == 500)
         {
            std::string msg("Unable to backup old package/zip file ");
            msg += filename;
