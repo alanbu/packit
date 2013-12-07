@@ -1,6 +1,6 @@
 # Makefile to package PackIt
 
-VERSION=0.4-1
+VERSION=0.5-1
 PACKAGES=PackIt_$(VERSION)
 INSTALL_TO=Temp/Apps/Development
 
@@ -11,8 +11,6 @@ pkg:
 	mkdir -p Temp/RiscPkg
 	mkdir -p $(INSTALL_TO)
 	cp RiscPkg/Copyright Temp/RiscPkg
-	svn export SysVars Temp/SysVars
-	svn export Sprites Temp/Sprites
 	svn export !PackIt $(INSTALL_TO)/!PackIt
 	cp !PackIt/!RunImage $(INSTALL_TO)/!PackIt
 	make -C Temp -f ../RiscPkg/Rules $(PACKAGES)

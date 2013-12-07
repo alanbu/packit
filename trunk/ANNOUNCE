@@ -5,6 +5,10 @@ PackIt version 0.5 has now been released.
 This release adds support for the new components
 field added to version 0.4.0 of the package format.
 
+It's package has also been updated to the new component format
+so you will need to upgrade PackMan to version 0.8 to install
+it.
+
 
 PackIt is a tool to help create RISC OS Packaging Project packages.
 
