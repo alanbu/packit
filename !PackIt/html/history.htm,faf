@@ -6,12 +6,13 @@
 <H2>History</H2>
 
 <UL>
-<LI><B>0.5 Beta Release - November 2013</B></LI>
+<LI><B>0.5 Beta Release - December 2013</B></LI>
 <UL>
 <LI>Added new Component field to Files tab with test for standards-version if a choice is made.
  Also marked Sprites and SysVars tabs as not to be used any more.</LI>
 <LI>Bugfix: Show Help from iconbar did not work on the Raspberry Pi</LI>
 <LI>Bugfix: Could fail to read install location from previous package file that contained entries for directories</LI>
+<LI>Added support for ToBeLoaded and ToBeTasks install locations</LI>
 </UL>
 
 <LI><B>0.4 Fourth Beta Release - February 2012</B></LI>

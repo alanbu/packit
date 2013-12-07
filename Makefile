@@ -1,7 +1,7 @@
 # Makefile for Packit
 
 include FixDeps:Rules/make
-CXXFLAGS = -O2 -Wall -mpoke-function-name -mthrowback -ITBX: -IZipArchive:
+CXXFLAGS = -O0 -Wall -mpoke-function-name -mthrowback -ITBX: -IZipArchive:
 
 LD = g++
 LDFLAGS = -LTBX: -ltbx -LZipArchive: -lziparch -lstdc++ -static
