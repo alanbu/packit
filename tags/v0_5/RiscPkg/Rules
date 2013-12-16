@@ -1,0 +1,27 @@
+# Makefile to package PackIt
+
+VERSION=0.5-1
+PACKAGES=PackIt_$(VERSION)
+INSTALL_TO=Temp/Apps/Development
+
+all: build pkg
+
+pkg:
+	rm -rf Temp
+	mkdir -p Temp/RiscPkg
+	mkdir -p $(INSTALL_TO)
+	cp RiscPkg/Copyright Temp/RiscPkg
+	svn export !PackIt $(INSTALL_TO)/!PackIt
+	cp !PackIt/!RunImage $(INSTALL_TO)/!PackIt
+	make -C Temp -f ../RiscPkg/Rules $(PACKAGES)
+	rm -rf Temp
+
+.PHONY: $(PACKAGES)
+$(PACKAGES): %:
+	riscpkg-gencontrol $(firstword $(subst _, ,$@)) < ../RiscPkg/Control > RiscPkg/Control
+	rm -f ../RiscPkg/$@
+	zip -r ../RiscPkg/$@ * -i@../RiscPkg/$(firstword $(subst _, ,$@)).inc
+
+
+build:
+	make

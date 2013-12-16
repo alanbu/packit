@@ -1,0 +1,11 @@
+<HTML>
+<HEAD>
+<TITLE>PackIt - Copyright</TITLE>
+</HEAD>
+<BODY>
+<H2>Copyright</H2>
+<P>PackIt is copyright Alan Buckley and is released under the GNU Public License version 3.</P>
+<P>For full details of the license see the text file <A HREF="COPYING">COPYING</A></P>
+<P>The source code for PackIt is in the svn source repositry on the RISC OS Packaging Project WebSite</P>
+</BODY>
+</HTML>

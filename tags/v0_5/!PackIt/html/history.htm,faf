@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>PackIt - History</TITLE>
+</HEAD>
+<BODY>
+<H2>History</H2>
+
+<UL>
+<LI><B>0.5 Beta Release - December 2013</B></LI>
+<UL>
+<LI>Added new Component field to Files tab with test for standards-version if a choice is made.
+ Also marked Sprites and SysVars tabs as not to be used any more.</LI>
+<LI>Bugfix: Show Help from iconbar did not work on the Raspberry Pi</LI>
+<LI>Bugfix: Could fail to read install location from previous package file that contained entries for directories</LI>
+<LI>Added support for ToBeLoaded and ToBeTasks install locations</LI>
+</UL>
+
+<LI><B>0.4 Fourth Beta Release - February 2012</B></LI>
+<UL>
+<LI>Remove button on System variables tab did not update the package</LI>
+</UL>
+
+<LI><B>0.3 Third Beta Release - September 2011</B></LI>
+<UL>
+<LI>Bugfix: Fields on the Depends tab were not being updated if they were selected from the menu</LI>
+<LI>Bugfix: Dependencies menus were left empty after the first package processed was closed</LI>
+<LI>Bugfix: System variables were not always redisplayed correctly when a package we reloaded</LI>
+<LI>Bugfix: It was impossible to add a system variable that included a hyphen</LI>
+<LI>Bugfix: Scanning boot files for system variables did not remove quotes if the variable value was quoted which stopped them being set correctly by the package manager</LI>
+<LI>Boot file scanning for system variables will now pick out variables from If statements if the If variable and the Set variable are the same</LI>
+<LI>Boot file scanning now replaces the argument substitution "%%*0" from variables with "%*0" so the immediate set of the variable by the package manager will work</LI>
+</UL>
+
+<LI><B>0.2 Second Beta Release - February 2011</B></LI>
+<UL>
+<LI>Added missing IconSprites line to !Run file</LI>
+<LI>Set file types for HTML help files</LI>
+<LI>Fixed typo in sysvars documentation</LI>
+<LI>Maximum length of sprite name in edit sprite dialogue increased from
+11 to 12 characters</LI>
+<LI>Bugfix: File type was packaged as 000 for Image Filing System files</LI>
+<LI>Bugfix: After reloading, modifying and changing a package it could fail to save and would corrupt the package file</LI>
+<LI>Show nicer dialogue when the package load fails.<LI>
+<LI>Stop extra (harmless) error messages being shown when a load fails<LI>
+</UL>
+</LI>
+
+<LI><B>0.1 First Beta Release - July 2010</B></LI>
+
+</UL>
+
+</BODY>
+</HTML>

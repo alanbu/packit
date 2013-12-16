@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<TITLE>PackIt - Main Tab</TITLE>
+<link rel="stylesheet" type="text/css" href="packit.css">
+</HEAD>
+<BODY>
+<H2>Main Tab</H2>
+
+<P>The fields on this tab update parts of the main Control record</P>
+<TABLE>
+ <TR>
+  <TH>Field</TH>
+  <TH>Description</TH>
+ <TR>
+<TR>
+ <TD>Package</TD>
+ <TD>The name of the binary package. This is required. The name, version and Package version are combined to make the file name for the package.</TD>
+</TR>
+<TR>
+   <TD>Version</TD>
+   <TD>The version of the item being packaged.  This is required.</TD>
+</TR>
+<TR>
+   <TD>Package version</TD>
+   <TD>An incrementing number to specify the package version for this version of the item being packaged. It should start at one for each new version of the item being packaged and increased if the package is changed, but the underlying item is not.</TD>
+</TR>
+<TR>
+   <TD>Section</TD>
+   <TD>A label for classifying the package. This is required. The menu button beside this control shows a list of all the sections currently specified at this time. Please try to use one of these entries. If you need to use your own then it is recommended you discuss it on the riscpkg list first</TD>
+</TR>
+<TR>
+   <TD>Priority</TD>
+   <TD>Classify the applications importance. This is required. Normally this would be "Optional".
+	<TABLE class = "subtable">
+          <TR>
+           <TD>Required</TD>
+           <TD>Packages which are needed for the system to function correctly.</TD>
+          </TR>
+          <TR>
+           <TD>Important</TD>
+           <TD>Packages which a user could reasonably expect to be present on any RISC OS system.</TD>
+          </TR>
+          <TR>
+           <TD>Standard</TD>
+           <TD>Default packages for a typical user to provide a reasonably small but not too limited RISC OS system.</TD>
+          </TR>
+          <TR>
+           <TD>Optional</TD>
+           <TD>Default packages for a user who wants to install almost everything, without regard for disc space or installation time.</TD>
+          </TR>
+          <TR>
+           <TD>Extra</TD>
+           <TD>Packages which have a very narrow audience, or which conflict with other packages of higher priority.</TD>
+          </TR>
+        </TABLE>
+	A consensus should be reached before choosing a priority higher than optional.
+   </TD>
+</TR>
+<TR>
+   <TD>Maintainer</TD>
+   <TD>The name and e-mail address of the maintainer. This is required and should be formatted as name '&lt;' email address '&gt;'. e.g. Alan Buckley &lt;alan_baa@hotmail.com&gt;</TD>
+</TR>
+<TR> 
+   <TD>Standards-Version</TD>
+   <TD>The version of this policy manual to which the package conforms. This is required. PackIt defaults to "0.4.0" which is the minimum required if you set any component flags on the Files tab.</TD>
+</TR>
+</TABLE>
+
+<P>
+<hr>
+<TABLE class = "pagelinks">
+  <TR>
+    <TD class="pagelinks"><A HREF = "index.htm">Contents</A></TD>
+    <TD class="pagelinks"><B>Main</B></TD>
+    <TD class="pagelinks"><A HREF = "description.htm">Description</A></TD>
+    <TD class="pagelinks"><A HREF = "files.htm">Files</A></TD>
+    <TD class="pagelinks"><A HREF = "copytab.htm">Copyright</A></TD>
+    <TD class="pagelinks"><A HREF = "depends.htm">Dependencies</A></TD>
+    <TD class="pagelinks"><A HREF = "sysvars.htm">System variables</A></TD>
+    <TD class="pagelinks"><A HREF = "sprites.htm">Sprites</A></TD>
+  <TR>
+</TABLE>  
+</P>
+
+</BODY>
+</HTML>

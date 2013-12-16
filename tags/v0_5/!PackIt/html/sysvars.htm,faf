@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>PackIt -SysVars Tab</TITLE>
+<link rel="stylesheet" type="text/css" href="packit.css">
+</HEAD>
+<BODY>
+<H2>SysVars Tab</H2>
+<P>This tab allows the package to claim ownership of a system variable. The package manager will ensure these variables are set when the package is installed and also if the system is rebooted.</P>
+<P><i>As of package standards version 0.4 the use of the SysVars metadata is deprecated. Instead setting the "Movable LookAt" Component flags on the Files tab will cause the application to be Booted which should set any System variables required.</i></P>
+
+<P>A common use for this is to set aliases for commands or the run action for file types defined by the application.</P>
+<P>The defined system variables are shown in a scrolling list. The following buttons allow you to maintain this list.
+<TABLE>
+  <TR>
+    <TH>Button</TH>
+    <TH>Action</TH>
+  </TR>
+  <TR>
+    <TD>Add</TD>
+    <TD>Add a new variable.</TD>
+  </TR>
+    <TD>Edit</TD>
+    <TD>Edit an existing variable. Select the variable to edit in the list first.</TD>
+  <TR>
+    <TD>Remove</TD>
+    <TD>Remove a variable. Select the variable to edit in the list first.</TD>
+  </TR>
+  <TR>
+    <TD>Clear</TD>
+    <TD>Removes all of the system variable from the list</TD>
+  </TR>
+  <TR>
+    <TD>Scan !Boot</TD>
+    <TD>This will scan the !Boot for an application being packaged and add all the variables it finds in the list. If a variable with the same name as one found is already in the list it will be replaced.</TD>
+  </TR>
+  <TR>
+</TABLE>
+<P>The Add/Edit buttons both show a further dialog displaying the name and value of the variable. This has the following fields/buttons
+</P>
+<TABLE>
+  <TR>
+    <TH>Field/Button</TH>
+    <TH>Description</TH>
+  <TR>
+  <TR>
+    <TD>Name</TD>
+    <TD>The name of the system variable. This is required and can not enter a name that is already in the list (except for the original variable name when editing).</TD>
+  </TR>
+  <TR>
+    <TD>Value</TD>
+    <TD>The value for the system variable. This is required and a few syntax checks will be applied to it to help ensure it is OK.</TD>
+  </TR>
+  <TR>
+    <TD>Cancel</TD>
+    <TD>This button will close the dialog box without updateing the variable</TD>
+  </TR>
+    <TD>OK</TD>
+    <TD>This button will update the variable. It will be disabled if the variable name or value is invalid</TD>
+  <TR>
+     <TD>Display area</TD>
+     <TD>This display only section will display a message explaining any problems it sees with the variable definition. If it is clear then the OK button will be enabled and the variable can be updated</TD>
+  </TR>
+</TABLE>
+
+<H3>Notes</H3>
+<P>
+In the variable list and add/edit dialogs the location where the application will be installed is shown as &lt;Obey$Dir&gt;.
+</P>
+
+
+<P>
+<hr>
+<TABLE class = "pagelinks">
+  <TR>
+    <TD class="pagelinks"><A HREF = "index.htm">Contents</A></TD>
+    <TD class="pagelinks"><A HREF = "main.htm">Main</A></TD>
+    <TD class="pagelinks"><A HREF = "description.htm">Description</A></TD>
+    <TD class="pagelinks"><A HREF = "files.htm">Files</A></TD>
+    <TD class="pagelinks"><A HREF = "copytab.htm">Copyright</A></TD>
+    <TD class="pagelinks"><A HREF = "depends.htm">Dependencies</A></TD>
+    <TD class="pagelinks"><B>System variables</B></TD>
+    <TD class="pagelinks"><A HREF = "sprites.htm">Sprites</A></TD>
+  <TR>
+</TABLE>  
+</P>
+
+</BODY>
+</HTML>
