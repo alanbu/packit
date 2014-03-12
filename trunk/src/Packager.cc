@@ -1327,6 +1327,12 @@ bool Packager::save(std::string filename)
 				get_file_list(files, file_list);
 			} else
 			{
+			    if (root_info.image_file())
+			    {
+			       // Image file systems don't by default give a file type
+			       // so re-read it and calculate
+			       files.raw_path_info(root_info, true);
+			    }
 				file_list.push_back(std::pair<tbx::Path, tbx::PathInfo>(files, root_info));
 			}
 
@@ -1825,6 +1831,14 @@ void Packager::copy_zip_files(CZipArchive &zip, const std::string &zipfilename, 
    hg.percentage(2);
 
    unsigned int total_files = indices.GetSize();
+
+   if (total_files == 0)
+   {
+       // May be a single file so try again without directory wildcard
+       pattern.erase(pattern.size()-2,2);
+       oldzip.FindMatches(pattern.c_str(), indices, true);
+       total_files = indices.GetSize();
+   }
 
    if (total_files == 0)
    {
