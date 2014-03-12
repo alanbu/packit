@@ -6,6 +6,11 @@
 <H2>History</H2>
 
 <UL>
+<LI><B>0.6 Beta Release - ???</B></LI>
+<UL>
+<LI>Fixed bug where it would fail to resave a package that contained only a single file.</LI>
+</UL>
+
 <LI><B>0.5 Beta Release - December 2013</B></LI>
 <UL>
 <LI>Added new Component field to Files tab with test for standards-version if a choice is made.
