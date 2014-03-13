@@ -9,6 +9,7 @@
 <LI><B>0.6 Beta Release - ???</B></LI>
 <UL>
 <LI>Fixed bug where it would fail to resave a package that contained only a single file.</LI>
+<LI>Added Apps.Text to list of install locations.</LI>
 </UL>
 
 <LI><B>0.5 Beta Release - December 2013</B></LI>
