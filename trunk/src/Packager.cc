@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009-2012 Alan Buckley
+* Copyright 2009-2014 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -474,7 +474,8 @@ void Packager::component_flags(std::string value)
 {
 	_component_flags = value;
 	 if (_component_flags != "None" && standards_version_lt("0.4.0"))
-	   set_error(STANDARDS_VERSION, "must be at least 0.4.0 if component flags are set");
+	 set_error(STANDARDS_VERSION, "must be at least 0.4.0 if component flags are set");
+	 modified(true);
 }
 
 void Packager::depends(std::string value)
