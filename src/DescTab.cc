@@ -30,7 +30,7 @@
 #include "tbx/application.h"
 
 DescTab::DescTab(MainWindow *main, tbx::Window window, Packager &packager) :
-	_packager(packager)
+	_packager(packager), _has_caret(false)
 {
 	_summary = window.gadget(1);
 	main->set_binding(SUMMARY, _summary);
@@ -65,6 +65,13 @@ void DescTab::package_loaded()
 void DescTab::pre_save()
 {
 	_packager.description(_description.text());
+
+	if (_has_caret && _packager.modified())
+	{
+		// Need to restart idle command to see if a modification
+		// comes in after a save
+		tbx::app()->add_idle_command(this);
+	}
 }
 
 /**
@@ -77,9 +84,10 @@ void DescTab::switched_to()
 
 void DescTab::gain_caret(tbx::CaretEvent &event)
 {
+	_has_caret = true;
 	// Only care about updating the modified flag
 	// so nothing to do it it's already set
-	if (_packager.modified())
+	if (!_packager.modified())
 	{
 		tbx::app()->add_idle_command(this);
 	}
@@ -88,6 +96,7 @@ void DescTab::gain_caret(tbx::CaretEvent &event)
 void DescTab::lose_caret(tbx::CaretEvent &event)
 {
 	tbx::app()->remove_idle_command(this);
+	_has_caret = false;
 }
 
 /**

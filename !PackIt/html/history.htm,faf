@@ -11,6 +11,7 @@
 <LI>Fixed bug where it would fail to resave a package that contained only a single file.</LI>
 <LI>Added Apps.Text to list of install locations.</LI>
 <LI>Fixed bug where changing the Components flag did not mark the package as modified.</LI>
+<LI>Fixed bug where changing description did not mark that package as modified</LI>
 </UL>
 
 <LI><B>0.5 Beta Release - December 2013</B></LI>
