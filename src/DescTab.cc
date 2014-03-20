@@ -51,6 +51,13 @@ DescTab::DescTab(MainWindow *main, tbx::Window window, Packager &packager) :
 	window.add_lose_caret_listener(this);
 }
 
+DescTab::~DescTab()
+{
+	// Ensure idle command is always removed
+	tbx::app()->remove_idle_command(this);
+}
+
+
 /**
  * Load description
  */
