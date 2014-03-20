@@ -51,7 +51,7 @@ class DescTab : public ITab,
 
     public:
        DescTab(MainWindow *main, tbx::Window window, Packager &packager);
-       virtual ~DescTab() {}
+       virtual ~DescTab();
 
        virtual void package_loaded();
        virtual void pre_save();
