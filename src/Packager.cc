@@ -1403,18 +1403,28 @@ void Packager::write_control(CZipArchive &zip) const
 		os << "Description: " << _summary << std::endl;
 	if (!_description.empty())
 	{
-	   if (_summary.empty()) os << "Description: ";
-  		std::string::size_type solpos = 0, eolpos;
+	    if (_summary.empty()) os << "Description: ";
+  		std::string::size_type solpos = 0, eolpos, wspos;
+  		int blank_line = 0;
 		while (solpos < _description.size()
 			&& (eolpos = _description.find('\n', solpos))!=std::string::npos
 			)
 		{
-			if (eolpos == solpos+1) os << " ." << std::endl;
-			else os << " " << _description.substr(solpos, eolpos - solpos) << std::endl;
+			wspos = solpos;
+			while (wspos < eolpos && _description[wspos] == ' ') wspos++;
+			if (eolpos == wspos) blank_line++;
+			else
+			{
+				while (blank_line > 0) { blank_line--; os << " ." << std::endl;}
+			    os << " " << _description.substr(solpos, eolpos - solpos) << std::endl;
+			}
 			solpos = eolpos+1;
 		}
 		if (solpos < _description.size())
+		{
+			while (blank_line > 0) { blank_line--; os << " ." << std::endl;}
 			os << " "  << _description.substr(solpos) << std::endl;
+		}
 	}
 
 	if (_component_flags != "None")
