@@ -47,6 +47,7 @@ class DescTab : public ITab,
     Packager &_packager;
     tbx::WritableField _summary;
     tbx::TextArea _description;
+    bool _has_caret;
 
     public:
        DescTab(MainWindow *main, tbx::Window window, Packager &packager);
