@@ -1,0 +1,45 @@
+PackIt - Files
+#fH2:Files Tab
+#Parent !Root
+
+This tab is used to specify the item you want to install and where to install it to.
+
+PackIt can only install one item (file, directory and its children or application) to one location. {/}Note: This is not a restriction with binary packages in general.{/}
+
+{fH4}Field{f}	{fH4}Description{f}
+#Line
+{*}Item to install{*}		This is the item that you want to install for the package. When the package is created the files are copied from this location into the package file. As well as a normal file name you can use "extract zipfile zipitem" where zipfile is the name of the zipfile to get the files from and zipitem is the item/directory in the zipfile to extract. When modifying an existing package this format shows where the files are in the package.
+
+{*}Install to{*}	This shows where the files will be installed to on the end users machine. The location should start with one of "Apps", "Manuals", "Resources" or "System" and then give the path to the folder for the item to be installed to. A drop down list by this field gives a list of common values for this field.
+
+	{*}{/}Root folder{/}{*}	{*}{/}Description{/}{*}
+#Indent 16; Line; Indent
+	{/}Apps{/}	The root of the hierarchy within which applications are stored. A package in a given section normally uses a subdirectory of Apps named after that section.
+
+	{/}Manuals{/}		The root of the heirarchy within which manuals and other documentation are stored when no other location (such as an application directory) is more appropriate.
+
+	{/}Resources{/}	A directory which corresponds to the active Resources directory.
+
+	{/}System{/}	A directory which corresponds to the active !System directory.
+	
+{*}Component flags{*}	This sets the component flags for the installed item. The choices are:
+
+	{*}{/}Option{/}{*}	{*}{/}Description{/}{*}
+#Indent 16; Line; Indent
+	{/}None{/}	The component is installed into a fixed place on the system.
+	
+	{/}Movable{/}	The install location for the component can be changed when the package is installed.
+	
+	{/}Movable LookAt{/}	As Movable, but the "look at" flag is also set in the installer so it will be added to the files looked at (Booted) when the package is installed or the RISC OS desktop is started. It is recommended to set this flag only if the application needs to be available before it is seen by the filer. e.g. It provides an editor or viewer for a RISC OS file type or is a command line utility.
+
+#Line; Wrap off
+#Table Lines 1
+<Contents=>!Root>
+<Main>
+<Description>
+{RGB 255,0,0; *}Files{*; RGB}
+<Copyright=>CopyTab>
+<Dependencies=>Depends>
+<System variables=>SysVars>
+<Sprites>
+#EndTable

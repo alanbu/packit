@@ -1,0 +1,48 @@
+PackIt - Copyright Tab
+#fH2:Copyright Tab
+#Parent !Root
+
+This screen contains the licence field from the control record and the text of the copyright record.
+
+{fH4}Field{f}	{fH4}Description{f}
+#Line
+{*}Licence{*}	This is the licence the package is released under. It can be Free or Non Free. Free is defined as a package that meets the Open Source definition available at <http://www.opensource.org/docs/osd=>#URL http://www.opensource.org/docs/osd>.
+
+	Common licences that are classified as free include:
+
+#Indent +1
+	è Apache License, 2.0
+	è New and Simplified BSD licenses
+	è Boost Software License (BSL1.0)
+	è European Union Public License
+	è GNU General Public License (GPL)
+	è GNU General Public License version 3.0 (GPLv3)
+	è GNU Library or "Lesser" General Public License (LGPL)
+	è GNU Library or "Lesser" General Public License version 3.0 (LGPLv3)
+	è MIT license
+	è Mozilla Public License 1.1 (MPL)
+	è zlib/libpng license
+#Indent
+
+	A Full list of currently approved free licences can be found at <http://www.opensource.org/licenses=>#URL http://www.opensource.org/licenses>.
+
+{*}Copyright{*}	The copyright text for the package. This is required. It must contain the following information:
+
+#Indent +1
+	è the name of the upstream author(s)
+	è the names of current and past package maintainers
+	è the provenance of the upstream sources
+	è a verbatim copy of the copyright notice and distribution licence
+#indent
+
+#Line; Wrap off
+#Table Lines 1
+<Contents=>!Root>
+<Main>
+<Description>
+<Files>
+{RGB 255,0,0; *}Copyright{*; RGB}
+<Dependencies=>Depends>
+<System variables=>SysVars>
+<Sprites>
+#EndTable

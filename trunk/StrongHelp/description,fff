@@ -1,0 +1,23 @@
+PackIt - Description Tab
+#Parent !Root
+#fH2:Description Tab
+
+This tab is used to enter the description into the control record.
+
+{fH4}Field{f}	{fH4}Description{f}
+#Line
+{*}Summary{*}		This is a summary of package and should be kept short as it is displayed in the main Package Managers window. PackIt forces a maximum of 80 characters.
+
+{*}Description{*}	This is the full description of the package.
+
+#Line; Wrap off
+#Table Lines 1
+<Contents=>!Root>
+<Main>
+{RGB 255,0,0; *}Description{*; RGB}
+<Files>
+<Copyright=>CopyTab>
+<Dependencies=>Depends>
+<System variables=>SysVars>
+<Sprites>
+#EndTable

@@ -1,0 +1,54 @@
+PackIt - SysVars Tab
+#Parent !Root
+#fH2:SysVars Tab
+
+This tab allows the package to claim ownership of a system variable. The package manager will ensure these variables are set when the package is installed and also if the system is rebooted.
+
+{/}As of package standards version 0.4 the use of the SysVars metadata is deprecated. Instead setting the "Movable LookAt" Component flags on the Files tab will cause the application to be Booted which should set any System variables required.{/}
+
+A common use for this is to set aliases for commands or the run action for file types defined by the application.
+
+The defined system variables are shown in a scrolling list. The following buttons allow you to maintain this list.
+
+{fH4}Button{f}	{fH4}Action{f}
+#Line
+{*}Add{*}	Add a new variable.
+
+{*}Edit{*}	Edit an existing variable. Select the variable to edit in the list first.
+
+{*}Remove{*}	Remove a variable. Select the variable to edit in the list first.
+
+{*}Clear{*}	Removes all of the system variable from the list
+
+{*}Scan !Boot{*}	This will scan the !Boot for an application being packaged and add all the variables it finds in the list. If a variable with the same name as one found is already in the list it will be replaced.
+
+
+The Add/Edit buttons both show a further dialog displaying the name and value of the variable. This has the following fields/buttons
+
+{fH4}Field\/Button{f}	{fH4}Description{f}
+#Line
+{*}Name{*}	The name of the system variable. This is required and can not enter a name that is already in the list (except for the original variable name when editing).
+
+{*}Value{*}	The value for the system variable. This is required and a few syntax checks will be applied to it to help ensure it is OK.
+
+{*}Cancel{*}	This button will close the dialog box without updateing the variable
+
+{*}OK{*}	This button will update the variable. It will be disabled if the variable name or value is invalid
+
+{*}Display area{*}	This display only section will display a message explaining any problems it sees with the variable definition. If it is clear then the OK button will be enabled and the variable can be updated
+
+{fh3}Notes{f}
+
+In the variable list and add/edit dialogs the location where the application will be installed is shown as \<Obey$Dir\>.
+
+#Line; Wrap off
+#Table Lines 1
+<Contents=>!Root>
+<Main>
+<Description>
+<Files>
+<Copyright=>CopyTab>
+<Dependencies=>Depends>
+{RGB 255,0,0; *}System variables{*; RGB}
+<Sprites>
+#EndTable
