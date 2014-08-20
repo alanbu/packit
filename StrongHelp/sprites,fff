@@ -1,0 +1,58 @@
+PackIt - Sprites
+#Parent !Root
+#fH2:Sprites Tab
+
+This tab is used to specify the sprites you want the package manager to load into the Wimp Sprite pool at boot time or when the package is first installed.
+
+{/}As of package standards version 0.4 the use of the Sprites metadata is deprecated. Instead setting the "Movable LookAt" Component flags on the Files tab will cause the application to be Booted which should load the sprites.{/}
+
+The defined sprites are shown in a scrolling list showing the name of the sprite followed by the location of the sprite file that contains this sprite. The following buttons allow you to maintain this list.
+
+{fH4}Button{f}	{fH4}Action{f}
+#Line
+{*}Add{*}	Add a new sprite.
+
+{*}Edit{*}	Edit an existing sprite. Select the sprite to edit in the list first.
+
+{*}Remove{*}	Remove a sprite. Select the sprite to edit in the list first.
+
+{*}Clear{*}	Removes all of the sprites from the list.
+
+{*}Scan !Sprites{*}	This will scan the !Sprites file for the application being packaged and add all the sprites it finds in the list. If a sprite with the same name as one found is already in the list it will be replaced.
+
+
+The Add/Edit buttons both show a further dialog displaying the name and location of the sprite. This has the following fields/buttons:
+
+{fH4}Field\/Button{f}	{fH4}Description{f}
+#Line
+{*}Name{*}	The name of the sprite. This is required and can not enter a name that is already in the list (except for the original sprite name when editing).
+
+{*}Location{*}	The location of the file the sprite is stored in. This is required and a few syntax checks will be applied to it to help ensure it is OK.
+
+{*}Cancel{*}	This button will close the dialog box without updating the sprite.
+
+{*}OK{*}	This button will update the sprite. It will be disabled if the sprite name or location is invalid.
+
+{*}Display area{*}	This display only section will display a message explaining any problems it sees with the sprite definition. If it is clear then the OK button will be enabled and the sprite can be updated.
+
+{fh3}Notes{f}
+
+In the sprite list and add/edit dialogs the location where the application will be installed is shown as \<Obey$Dir\>.
+
+In most circumstances the location of all the sprites will be the same (\<Obey$Dir\>.!Sprites).
+
+The sprite file identified by the pathname should be one that is suitable for use as an argument to the IconSprites command.
+
+If higher-resolution versions of this file are present then they will be recognised automatically by the package manager, provided that the conventional suffixes are used. For example, if a package provides sprite files called !Sprites, !Sprites22 and !Sprites11 then declarations should refer to the first of these only, but one of the others will be used if it is a better match to the screen mode.
+
+#Line; Wrap off
+#Table Lines 1
+<Contents=>!Root>
+<Main>
+<Description>
+<Files>
+<Copyright=>CopyTab>
+<Dependencies=>Depends>
+<System variables=>SysVars>
+{RGB 255,0,0; *}Sprites{*; RGB}
+#EndTable

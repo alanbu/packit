@@ -1,0 +1,41 @@
+PackIt - Main Tab
+#Parent !Root
+#fH2:Main Tab
+
+The fields on this tab update parts of the main Control record.
+
+{fH4}Field{f}	{fH4}Description{f}
+#Line
+{*}Package{*}		The name of the binary package. This is required. The name, version and Package version are combined to make the file name for the package.
+
+{*}Version{*}		The version of the item being packaged. This is required.
+
+{*}Package version{*}		An incrementing number to specify the package version for this version of the item being packaged. It should start at one for each new version of the item being packaged and increased if the package is changed, but the underlying item is not.
+
+{*}Section{*}		A label for classifying the package. This is required. The menu button beside this control shows a list of all the sections currently specified at this time. Please try to use one of these entries. If you need to use your own then it is recommended you discuss it on the riscpkg list first
+
+{*}Priority{*}	Classify the applications importance. This is required. Normally this would be "Optional".
+
+	{/}Required{/}	Packages which are needed for the system to function correctly.
+	{/}Important{/}	Packages which a user could reasonably expect to be present on any RISC OS system.
+	{/}Standard{/}	Default packages for a typical user to provide a reasonably small but not too limited RISC OS system.
+	{/}Optional{/}	Default packages for a user who wants to install almost everything, without regard for disc space or installation time.
+	{/}Extra{/}	Packages which have a very narrow audience, or which conflict with other packages of higher priority.
+
+	A consensus should be reached before choosing a priority higher than optional.
+
+{*}Maintainer{*}	The name and e-mail address of the maintainer. This is required and should be formatted as name '\<' email address '\>'. e.g. Alan Buckley \<alan_baa@hotmail.com\>
+
+{*}Standards-Version{*}	The version of this policy manual to which the package conforms. This is required. PackIt defaults to "0.4.0", which is the minimum required if you set any component flags on the Files tab.
+
+#Line; Wrap off
+#Table Lines 1
+<Contents=>!Root>
+{RGB 255,0,0; *}Main{*; RGB}
+<Description>
+<Files>
+<Copyright=>CopyTab>
+<Dependencies=>Depends>
+<System variables=>SysVars>
+<Sprites>
+#EndTable
