@@ -32,6 +32,7 @@
 #include "tbx/autocreate.h"
 #include "tbx/showhelp.h"
 #include "tbx/deferdelete.h"
+#include "tbx/ext/oleclient.h"
 #include "MainWindow.h"
 #include "SavePackage.h"
 #include "QuitPrompt.h"
@@ -93,6 +94,8 @@ int main(int argc, char *argv[])
 
 	iconbar.show();
 	packit_app.run();
+
+	tbx::ext::OleClient::client_closed();
 
 	return 0;
 }
