@@ -454,7 +454,7 @@ window_object {
   toolbar_itl:""
   toolbar_ebl:""
   toolbar_etl:""
-  window.visible:240,1072,1176,1720
+  window.visible:-20,164,916,812
   window.xscroll:20
   window.yscroll:0
   window.next:wimp_TOP
@@ -500,6 +500,17 @@ window_object {
     text:""
     foreground:os_COLOUR_BLACK
     background:os_COLOUR_WHITE
+  }
+  actionbutton_object {
+    cmp:&3
+    bbox:556,-168,908,-116
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"OLE Edit..."
+    text_limit:22
+    click_show:""
+    action:&0
   }
   label_object {
     cmp:&14
@@ -646,7 +657,7 @@ window_object {
   toolbar_itl:""
   toolbar_ebl:""
   toolbar_etl:""
-  window.visible:268,916,1208,1560
+  window.visible:376,384,1316,1028
   window.xscroll:20
   window.yscroll:0
   window.next:wimp_TOP
@@ -694,6 +705,17 @@ window_object {
     text:""
     foreground:os_COLOUR_BLACK
     background:os_COLOUR_WHITE
+  }
+  actionbutton_object {
+    cmp:&3
+    bbox:592,-148,944,-96
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"OLE Edit..."
+    text_limit:22
+    click_show:""
+    action:&0
   }
   label_object {
     cmp:&c

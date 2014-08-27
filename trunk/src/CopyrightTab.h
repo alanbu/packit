@@ -27,8 +27,10 @@
 
 #include "tbx/Window.h"
 #include "tbx/textarea.h"
+#include "tbx/actionbutton.h"
 #include "tbx/caretlistener.h"
 #include "tbx/command.h"
+#include "tbx/ext/oleclient.h"
 #include "ITab.h"
 #include "Packager.h"
 
@@ -38,11 +40,15 @@ class MainWindow;
 class CopyrightTab : public ITab,
 	public tbx::GainCaretListener,
 	public tbx::LoseCaretListener,
-	public tbx::Command
+	public tbx::Command,
+	public tbx::ext::OleClientHandler
 {
     Packager &_packager;
     tbx::TextArea _copyright;
     bool _copyright_empty;
+    tbx::ActionButton _ole_edit_button;
+    tbx::ext::OleClient *_ole_client;
+    tbx::CommandMethod<CopyrightTab> _ole_edit_command;
 
     public:
        CopyrightTab(MainWindow *main, tbx::Window window, Packager &packager);
@@ -56,11 +62,20 @@ class CopyrightTab : public ITab,
 
        virtual void execute();
 
+       void ole_edit();
+
        /**
         * Return leaf name of file with help for this tab
         */
        virtual std::string help_name() const {return "copytab";}
 
+    private:
+       void reset_ole_edit_button();
+
+       // OleClientHandler callbacks
+       void failed_to_start_server(tbx::ext::OleClient &client);
+       virtual void edit_closed(tbx::ext::OleClient &client);
+       virtual void edit_text_changed(tbx::ext::OleClient &client, const std::string &text);
 };
 
 #endif

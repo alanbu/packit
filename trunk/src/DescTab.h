@@ -30,6 +30,8 @@
 #include "tbx/writablefield.h"
 #include "tbx/caretlistener.h"
 #include "tbx/command.h"
+#include "tbx/actionbutton.h"
+#include "tbx/ext/oleclient.h"
 
 #include "ITab.h"
 #include "Packager.h"
@@ -42,12 +44,16 @@ class MainWindow;
 class DescTab : public ITab,
 	public tbx::GainCaretListener,
 	public tbx::LoseCaretListener,
-	public tbx::Command
+	public tbx::Command,
+	public tbx::ext::OleClientHandler
 {
     Packager &_packager;
     tbx::WritableField _summary;
     tbx::TextArea _description;
+    tbx::ActionButton _ole_edit_button;
     bool _has_caret;
+    tbx::CommandMethod<DescTab> _ole_edit_command;
+    tbx::ext::OleClient *_ole_client;
 
     public:
        DescTab(MainWindow *main, tbx::Window window, Packager &packager);
@@ -63,10 +69,20 @@ class DescTab : public ITab,
 
        virtual void execute();
 
+       void ole_edit();
+
        /**
         * Return leaf name of file with help for this tab
         */
        virtual std::string help_name() const {return "description";}
+
+    private:
+       void reset_ole_edit_button();
+
+       // OleClientHandler callbacks
+       void failed_to_start_server(tbx::ext::OleClient &client);
+       virtual void edit_closed(tbx::ext::OleClient &client);
+       virtual void edit_text_changed(tbx::ext::OleClient &client, const std::string &text);
 
 };
 

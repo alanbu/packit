@@ -29,9 +29,12 @@
 #include "MainWindow.h"
 #include "tbx/stringset.h"
 #include "tbx/application.h"
+#include "tbx/messagewindow.h"
 
 CopyrightTab::CopyrightTab(MainWindow *main, tbx::Window window, Packager &packager) :
-	_packager(packager)
+	_packager(packager),
+	_ole_client(0),
+	_ole_edit_command(this, &CopyrightTab::ole_edit)
 {
 	tbx::StringSet licence = window.gadget(1);
 	main->set_binding(LICENCE, licence);
@@ -46,6 +49,9 @@ CopyrightTab::CopyrightTab(MainWindow *main, tbx::Window window, Packager &packa
 
 	_copyright_empty = true;
 
+	_ole_edit_button = window.gadget(3);
+	_ole_edit_button.add_select_command(&_ole_edit_command);
+
 	window.add_gain_caret_listener(this);
 	window.add_lose_caret_listener(this);
 }
@@ -54,6 +60,8 @@ CopyrightTab::~CopyrightTab()
 {
 	// Ensure idle command is always removed
 	tbx::app()->remove_idle_command(this);
+	if (_ole_client) _ole_client->closed_in_client();
+	delete _ole_client;
 }
 
 void CopyrightTab::package_loaded()
@@ -120,3 +128,76 @@ void CopyrightTab::execute()
 		}
 	}
 }
+
+/**
+ * Attempt to use the OLE edit protocol to edit the descripton
+ */
+void CopyrightTab::ole_edit()
+{
+	if (_ole_client != 0)
+	{
+		tbx::show_message("Already editing this document");
+		return;
+	}
+	_ole_client = new tbx::ext::OleClient(0xFFF); // Text OLE client
+	if (_ole_client->find_server())
+	{
+		_ole_edit_button.text("OLE Edit in progress");
+		_ole_edit_button.fade(true);
+		_ole_client->edit_text(_copyright.text(), _copyright.window(),0,0,this);
+	} else
+	{
+		tbx::show_message("Unable to find a Text OLE editor");
+	}
+}
+
+/**
+ * Ole client failed to start
+ */
+void CopyrightTab::failed_to_start_server(tbx::ext::OleClient &client)
+{
+	tbx::show_message("Unable to start OLE edit session");
+	reset_ole_edit_button();
+	delete _ole_client;
+	_ole_client = 0;
+}
+
+/**
+ * OLE editor has been closed
+ */
+void CopyrightTab::edit_closed(tbx::ext::OleClient &client)
+{
+	reset_ole_edit_button();
+	delete _ole_client;
+	_ole_client = 0;
+}
+
+/**
+ * Text has been changed by the OLE editor
+ */
+void CopyrightTab::edit_text_changed(tbx::ext::OleClient &client, const std::string &text)
+{
+	try
+	{
+		// Needed to ensure re-display works correctly on RISC OS 4.02
+		_copyright.set_selection(0,0);
+	} catch(...) {} // Ignore error if not implemented in used TextArea
+
+	_copyright.text(text);
+	if (text != _packager.copyright())
+	{
+		_packager.copyright(text);
+		_copyright_empty = text.empty();
+	}
+}
+
+/**
+ * Reset the OLE Edit button after an OLE session
+ * has been closed
+ */
+void CopyrightTab::reset_ole_edit_button()
+{
+	_ole_edit_button.text("OLE Edit...");
+	_ole_edit_button.fade(false);
+}
+
