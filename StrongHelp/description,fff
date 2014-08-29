@@ -10,7 +10,7 @@ This tab is used to enter the description into the control record.
 
 {*}Description{*}	This is the full description of the package.
 
-{*}OLE edit{*} This button will open the description for editing using the OLE edit protocol. This allows you to edit the text in the current OLE text edit server. e.g. StrongHelp or Zap. If no OLE Server has been seen by the filer and the OLESupport module has been installed on your machine the file will be opened in Edit. Saving the file in the other editor updates the description.
+{*}OLE edit{*}	This button will open the description for editing using the OLE edit protocol. This allows you to edit the text in the current OLE text edit server. e.g. StrongHelp or Zap. If no OLE Server has been seen by the filer and the OLESupport module has been installed on your machine the file will be opened in Edit. Saving the file in the other editor updates the description.
 
 #Line; Wrap off
 #Table Lines 1

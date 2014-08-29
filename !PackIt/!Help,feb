@@ -1,3 +1,3 @@
 | Help file for PackIt
 
-If "<Alias$@RunType_FAF>" <> "" then Filer_Run <Obey$Dir>.html.index/htm else Filer_Run <Obey$Dir>.HelpText
+If "<Alias$@RunType_3D6>" <> "" then Filer_Run <Obey$Dir>.PackItHelp else Filer_Run <Obey$Dir>.HelpText

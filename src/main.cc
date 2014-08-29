@@ -33,6 +33,7 @@
 #include "tbx/showhelp.h"
 #include "tbx/deferdelete.h"
 #include "tbx/ext/oleclient.h"
+#include "tbx/ext/stronghelp.h"
 #include "MainWindow.h"
 #include "SavePackage.h"
 #include "QuitPrompt.h"
@@ -76,6 +77,8 @@ int main(int argc, char *argv[])
 	tbx::Iconbar iconbar("IconbarIcon");
 	QuitPrompt quit_prompt;
 	tbx::ShowHelp show_help;
+	tbx::ext::StrongHelp help;
+	help.default_path("<PackIt$Dir>.PackItHelp");
 
 	packit_app.add_prequit_listener(&quit_prompt);
 	packit_app.add_command(EID_HELP, &show_help);
