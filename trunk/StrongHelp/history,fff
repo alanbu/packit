@@ -11,6 +11,7 @@ PackIt - History
   Fixed bug where changing description did not mark that package as modified.
   Fixed bug where blank lines in descriptions were not saved.
   Added OLE Edit buttons to description and copyright to allow editing of their text in an external editor.
+  Change to use StrongHelp instead of HTML help.
 #indent
 
 {*}0.5 Beta Release - December 2013{*}

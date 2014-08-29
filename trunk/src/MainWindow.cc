@@ -37,6 +37,7 @@
 #include "tbx/reporterror.h"
 #include "tbx/deleteonhidden.h"
 #include "tbx/hourglass.h"
+#include "tbx/ext/stronghelp.h"
 
 #include <sstream>
 
@@ -358,13 +359,11 @@ void MainWindow::tab_selected(int old_index, int new_index)
  */
 void MainWindow::show_tab_help()
 {
-	std::string cmd("Filer_Run <PackIt$Dir>.html.");
     Tabs tabs = _window.gadget(1);
     int index = tabs.selected();
     if (index != -1)
     {
-    	cmd += _tabs[index]->help_name();
-    	cmd += "/htm";
-    	_kernel_oscli(cmd.c_str());
+    	tbx::ext::StrongHelp help;
+    	help.lookup(_tabs[index]->help_name());
     }
 }
