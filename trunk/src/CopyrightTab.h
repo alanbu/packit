@@ -25,7 +25,7 @@
 #ifndef COPYRIGHTTAB_H
 #define COPYRIGHTTAB_H
 
-#include "tbx/Window.h"
+#include "tbx/window.h"
 #include "tbx/textarea.h"
 #include "tbx/actionbutton.h"
 #include "tbx/caretlistener.h"

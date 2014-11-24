@@ -31,7 +31,7 @@
 #include "tbx/menu.h"
 #include "tbx/autocreatelistener.h"
 #include "tbx/abouttobeshownlistener.h"
-#include "tbx/UserEventListener.h"
+#include "tbx/usereventlistener.h"
 
 /**
  * Class to create a popup menu of the Packages in the Package

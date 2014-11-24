@@ -1,22 +1,50 @@
 # Makefile for Packit
 
-include FixDeps:Rules/make
-CXXFLAGS = -O0 -Wall -mpoke-function-name -mthrowback -ITBX: -IZipArchive:
+# Detect host
+HOST := $(shell uname -s)
+ifeq ($(HOST),)
+  # Assume RISC OS
+  HOST := riscos
+else
+  ifeq ($(HOST),RISC OS)
+    HOST := riscos
+  endif
+endif
+
+ifeq ($(HOST),riscos)
+  INCLUDE_DIR = -ITBX: -IZipArchive:
+  LIB_DIR = -LTBX: - LZipArchive:
+  RESASTEXT=src.ResAsText
+
+  BINDHELP = bindhelp
+  CCRES=ccres
+
+  TARGET=!PackIt.!RunImage
+  HELPTARGET=!PackIt.PackItHelp
+  RESTARGET=!PackIt.Res
+else
+  INCLUDE_DIR = -I$(GCCSDK_INSTALL_ENV)/include
+  LIB_DIR = -L$(GCCSDK_INSTALL_ENV)/lib
+  RESASTEXT=src/ResAsText
+
+  BINDHELP = $(GCCSDK_INSTALL_ENV)/bin/bindhelp
+  CCRES=$(GCCSDK_INSTALL_ENV)/bin/ccres
+
+  TARGET=!PackIt/!RunImage,ff8
+  HELPTARGET=!PackIt/PackItHelp,3d6
+  RESTARGET=!PackIt/Res,fae
+endif
+
+CXXFLAGS = -O0 -Wall -mpoke-function-name -mthrowback $(INCLUDE_DIR)
+CPPFLAGS = -MD -MP
 
 LD = g++
-LDFLAGS = -LTBX: -ltbx -LZipArchive: -lziparch -lstdc++ -static
+LDFLAGS = $(LIB_DIR) -ltbx -lziparch -lstdc++ -static
 
-BINDHELP = bindhelp
-CCRES=ccres
-
-TARGET=!PackIt.!RunImage
-HELPTARGET=!PackIt.PackItHelp
-RESTARGET=!PackIt.Res
 
 CCSRC = $(wildcard src/*.cc)
 OBJECTS = $(CCSRC:.cc=.o)
 HELPFILES = $(wildcard StrongHelp/[^.]*)
-RESASTEXT=src.ResAsText
 
 all:	$(TARGET) $(RESTARGET) $(HELPTARGET)
 
@@ -30,9 +58,10 @@ $(RESTARGET):	$(RESASTEXT)
 	$(CCRES) $(RESASTEXT) $(RESTARGET)
 	
 $(HELPTARGET):		$(HELPFILES)
-	$(BINDHELP) bindhelp £(HELPTARGET) -r -f
+	$(BINDHELP) StrongHelp $(HELPTARGET) -r -f
 
 clean:
 	rm $(OBJECTS) packit
 
-#include $(CCSRC:.cc=.d)
+-include $(CCSRC:.cc=.d)
+

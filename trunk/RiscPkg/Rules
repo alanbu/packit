@@ -1,8 +1,35 @@
 # Makefile to package PackIt
 
-VERSION=0.5-1
+VERSION=0.6-1
 PACKAGES=PackIt_$(VERSION)
 INSTALL_TO=Temp/Apps/Development
+
+# Detect host
+HOST := $(shell uname -s)
+ifeq ($(HOST),)
+  # Assume RISC OS
+  HOST := riscos
+else
+  ifeq ($(HOST),RISC OS)
+    HOST := riscos
+  endif
+endif
+
+ifeq ($(HOST),riscos)
+CC_PATTERN=cc
+TOOL_PATH=""
+ZIP=zip
+APP=!RunImage
+HELP=PackItHelp
+RES=Res
+else
+CC_PATTERN=*.cc
+TOOL_PATH=$(GCCSDK_INSTALL_ENV)/bin/
+ZIP=$(GCCSDK_INSTALL_ENV)/ro-path ../unix-zip
+APP=!RunImage,ff8
+HELP=PackItHelp,3d6
+RES=Res,fae
+endif
 
 all: build pkg
 
@@ -12,16 +39,19 @@ pkg:
 	mkdir -p $(INSTALL_TO)
 	cp RiscPkg/Copyright Temp/RiscPkg
 	svn export !PackIt $(INSTALL_TO)/!PackIt
-	cp !PackIt/!RunImage $(INSTALL_TO)/!PackIt
+	cp !PackIt/$(APP) $(INSTALL_TO)/!PackIt
+	cp !PackIt/$(HELP) $(INSTALL_TO)/!PackIt
+	cp !PackIt/$(RES) $(INSTALL_TO)/!PackIt
+	# Temporarily delete HTML pages - will remove from SVN with next release
+	rm -rf $(INSTALL_TO)/!PackIt/html
 	make -C Temp -f ../RiscPkg/Rules $(PACKAGES)
 	rm -rf Temp
 
 .PHONY: $(PACKAGES)
 $(PACKAGES): %:
-	riscpkg-gencontrol $(firstword $(subst _, ,$@)) < ../RiscPkg/Control > RiscPkg/Control
+	$(TOOL_PATH)riscpkg-gencontrol $(firstword $(subst _, ,$@)) < ../RiscPkg/Control > RiscPkg/Control
 	rm -f ../RiscPkg/$@
-	zip -r ../RiscPkg/$@ * -i@../RiscPkg/$(firstword $(subst _, ,$@)).inc
-
+	$(ZIP) -r ^.RiscPkg.$@ * -i@^.RiscPkg.$(firstword $(subst _, ,$@))/inc
 
 build:
 	make

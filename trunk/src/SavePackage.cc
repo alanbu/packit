@@ -27,7 +27,7 @@
 
 #include "SavePackage.h"
 #include "MainWindow.h"
-#include "tbx/ObjectDelete.h"
+#include "tbx/objectdelete.h"
 
 tbx::SaveAs SavePackage::_saveas;
 

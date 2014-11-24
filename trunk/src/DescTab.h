@@ -25,7 +25,7 @@
 #ifndef DESCTAB_H
 #define DESCTAB_H
 
-#include "tbx/Window.h"
+#include "tbx/window.h"
 #include "tbx/textarea.h"
 #include "tbx/writablefield.h"
 #include "tbx/caretlistener.h"

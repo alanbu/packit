@@ -2,7 +2,7 @@ PackIt - History
 #Parent !Root
 #fH2:History
 
-{*}0.6 Beta Release - ???{*}
+{*}0.6 Beta Release - November 2014{*}
 #indent +1
 
   Fixed bug where it would fail to resave a package that contained only a single file.

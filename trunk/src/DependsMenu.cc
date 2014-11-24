@@ -29,7 +29,7 @@
 #include "eventids.h"
 #include "MainWindow.h"
 #include "DependsTab.h"
-#include "tbx/Application.h"
+#include "tbx/application.h"
 #include "tbx/window.h"
 #include "tbx/writablefield.h"
 #include "tbx/res/resmenu.h"

@@ -1,4 +1,2 @@
-RiscPkg/*
-SysVars/*
-Sprites/*
-Apps/Development/!PackIt/*
+RiscPkg.*
+Apps.Development.!PackIt.*
