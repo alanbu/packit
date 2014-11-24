@@ -25,7 +25,7 @@
 #ifndef DEPENDSTAB_H
 #define DEPENDSTAB_H
 
-#include "tbx/Window.h"
+#include "tbx/window.h"
 #include "ITab.h"
 #include "Packager.h"
 

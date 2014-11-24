@@ -23,6 +23,7 @@
 
 #include "tbx/swixcheck.h"
 
+#include <memory>
 #include "kernel.h"
 
 using namespace tbx;

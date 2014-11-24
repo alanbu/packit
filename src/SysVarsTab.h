@@ -25,7 +25,7 @@
 #ifndef SYSVARSTAB_H
 #define SYSVARSTAB_H
 
-#include "tbx/Window.h"
+#include "tbx/window.h"
 #include "tbx/command.h"
 #include "tbx/scrolllist.h"
 #include "ITab.h"

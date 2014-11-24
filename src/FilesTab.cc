@@ -26,7 +26,7 @@
 #include "MainWindow.h"
 #include "FilesTab.h"
 #include "Packager.h"
-#include "tbx/stringSet.h"
+#include "tbx/stringset.h"
 
 
 FilesTab::FilesTab(MainWindow *main,

@@ -1517,7 +1517,7 @@ void Packager::write_text_file(CZipArchive &zip, const char *filename, std::stri
 {
 	CZipFileHeader fhead;
 	fhead.SetFileName(filename);
-	fhead.SetTime(time(NULL));
+	fhead.SetModificationTime(time(NULL));
 
 	RISCOSZipExtra textextra(0xFFF);
 
@@ -1628,10 +1628,10 @@ void Packager::copy_file(CZipArchive &zip, const tbx::Path &filename, tbx::PathI
 		secs_between *= 24 * 60 * 60; // seconds
 		time_t secs_since_1970 = (time_t)(csecs_since_1900/100 - secs_between);
 
-		fhead.SetTime(secs_since_1970);
+		fhead.SetModificationTime(secs_since_1970);
 	} else
 	{
-	    fhead.SetTime(time(NULL));
+	    fhead.SetModificationTime(time(NULL));
 	}
 
 	RISCOSZipExtra extra(entry);

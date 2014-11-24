@@ -23,7 +23,7 @@
 #include "tbx/displayfield.h"
 #include "tbx/writablefield.h"
 #include "tbx/numberrange.h"
-#include "tbx/StringSet.h"
+#include "tbx/stringset.h"
 #include "tbx/command.h"
 #include "tbx/closewindowlistener.h"
 

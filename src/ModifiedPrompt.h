@@ -28,7 +28,7 @@
 #ifndef MODIFIEDPROMPT_H_
 #define MODIFIEDPROMPT_H_
 
-#include "tbx/DCS.h"
+#include "tbx/dcs.h"
 
 class MainWindow;
 

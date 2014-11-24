@@ -25,7 +25,7 @@
 #ifndef SPRITESTAB_H
 #define SPRITESTAB_H
 
-#include "tbx/Window.h"
+#include "tbx/window.h"
 #include "tbx/command.h"
 #include "tbx/scrolllist.h"
 #include "ITab.h"

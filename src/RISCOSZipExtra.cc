@@ -19,7 +19,7 @@
 *****************************************************************************/
 
 
-#include "riscoszipextra.h"
+#include "RISCOSZipExtra.h"
 #include "tbx/path.h"
 
 

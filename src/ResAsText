@@ -80,9 +80,9 @@ proginfo_object {
   title:""
   title_limit:*
   purpose:"Create and Maintain binary Packages"
-  author:"© 2010-2013 Alan Buckley"
+  author:"© 2010-2014 Alan Buckley"
   licence_type:None
-  prog_version:"0.5 (15-December-2013)"
+  prog_version:"0.6 (24-November-2014)"
   alternative_window_name:""
   visit_url:""
   visit_url_event:&82b42
@@ -136,7 +136,7 @@ window_object {
     flags:tabs_ALLOW_SCROLL_ARROWS
     foreground:wimp_COLOUR_BLACK
     background:wimp_COLOUR_VERY_LIGHT_GREY
-    text:"t"
+    text:"Main,Desc,Files,Copyright,Depends,SysVars,Sprites"
   }
   label_object {
     cmp:&2

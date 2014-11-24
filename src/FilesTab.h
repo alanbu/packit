@@ -27,7 +27,7 @@
 #define FILESTAB_H
 
 #include "tbx/window.h"
-#include "tbx/writableField.h"
+#include "tbx/writablefield.h"
 #include "tbx/loader.h"
 #include "ITab.h"
 #include "Packager.h"
