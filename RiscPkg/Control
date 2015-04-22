@@ -12,5 +12,5 @@ Description: Utility to help create Packages
  more complicated binary packages or source code packages.
 
 Package: PackIt
-Depends: SharedUnixLibrary (>= 1.11), Tabs
+Depends: SharedUnixLibrary (>= 1.11), Tabs, StrongHelp
 Components: Apps.Development.!PackIt (Movable)
