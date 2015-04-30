@@ -35,7 +35,7 @@ This screen contains the licence field from the control record and the text of t
 	è a verbatim copy of the copyright notice and distribution licence
 #Indent
 
-{*}OLE edit{*}	This button will open the copyright text for editing using the OLE edit protocol. This allows you to edit the text in the current OLE text edit server. e.g. StrongHelp or Zap. If no OLE Server has been seen by the filer and the OLESupport module has been installed on your machine the file will be opened in Edit. Saving the file in the other editor updates the copyright text.
+{*}OLE edit{*}	This button will open the copyright text for editing using the OLE edit protocol. This allows you to edit the text in the current OLE text edit server. e.g. StrongED or Zap. If no OLE Server has been seen by the filer and the OLESupport module has been installed on your machine the file will be opened in Edit. Saving the file in the other editor updates the copyright text.
 
 #Line; Wrap off
 #Table Lines 1
