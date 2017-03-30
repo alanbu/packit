@@ -1,6 +1,6 @@
 # Makefile to package PackIt
 
-VERSION=0.6-1
+VERSION=0.6.1-1
 PACKAGES=PackIt_$(VERSION)
 INSTALL_TO=Temp/Apps/Development
 
@@ -19,16 +19,10 @@ ifeq ($(HOST),riscos)
 CC_PATTERN=cc
 TOOL_PATH=""
 ZIP=zip
-APP=!RunImage
-HELP=PackItHelp
-RES=Res
 else
 CC_PATTERN=*.cc
 TOOL_PATH=$(GCCSDK_INSTALL_ENV)/bin/
 ZIP=$(GCCSDK_INSTALL_ENV)/ro-path ../unix-zip
-APP=!RunImage,ff8
-HELP=PackItHelp,3d6
-RES=Res,fae
 endif
 
 all: build pkg
@@ -38,10 +32,8 @@ pkg:
 	mkdir -p Temp/RiscPkg
 	mkdir -p $(INSTALL_TO)
 	cp RiscPkg/Copyright Temp/RiscPkg
-	svn export !PackIt $(INSTALL_TO)/!PackIt
-	cp !PackIt/$(APP) $(INSTALL_TO)/!PackIt
-	cp !PackIt/$(HELP) $(INSTALL_TO)/!PackIt
-	cp !PackIt/$(RES) $(INSTALL_TO)/!PackIt
+	cp -r !PackIt $(INSTALL_TO)
+	svn export !PackIt $(INSTAL
 	# Temporarily delete HTML pages - will remove from SVN with next release
 	rm -rf $(INSTALL_TO)/!PackIt/html
 	make -C Temp -f ../RiscPkg/Rules $(PACKAGES)

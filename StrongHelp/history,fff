@@ -2,8 +2,10 @@ PackIt - History
 #Parent !Root
 #fH2:History
 
-{*}0.7 Beta Release - ??? 2015{*}
+{*}0.6.1 Beta Release - April 2017{*}
 #indent +1
+  Recompiled with latest GCCSDK for Raspberry Pi 3 compatibility
+  Moved package to ROOL package distribution (via autobuilder website)
   Fixed typo which claimed StrongHelp was an OLE editor instead of StrongED
 #indent
 

@@ -1,14 +1,16 @@
 PackIt Package creation helper new version released
 
-PackIt version 0.6 has now been released.
+PackIt version 0.6.1 has now been released.
 
-This release allows editing of the Copyright and description
-with an external program via OLE (i.e. You could use StrongED
-or Zap to edit this text).
+This release is a rebuild with the latest version of the GCCSDK
+for Raspberry Pi 3 compatibility.
 
-The Help is now provided in StrongHelp format.
-
-A few other minor bug fixes have been made.
+Versions of PackIt from 0.6.1 are now distributed via the ROOL
+packaging sites. RiscPkg and older version of PackMan may not have
+these sources in the list of sources. If this version of PackIt
+doesn't appear as an update you probably need to add the following
+url to the PackMan sources.
+http://packages.riscosopen.org/packages/pkg/programs-armv5
 
 
 PackIt is a tool to help create RISC OS Packaging Project packages.
