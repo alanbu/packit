@@ -33,7 +33,6 @@ pkg:
 	mkdir -p $(INSTALL_TO)
 	cp RiscPkg/Copyright Temp/RiscPkg
 	cp -r !PackIt $(INSTALL_TO)
-	svn export !PackIt $(INSTAL
 	# Temporarily delete HTML pages - will remove from SVN with next release
 	rm -rf $(INSTALL_TO)/!PackIt/html
 	make -C Temp -f ../RiscPkg/Rules $(PACKAGES)
