@@ -80,9 +80,9 @@ proginfo_object {
   title:""
   title_limit:*
   purpose:"Create and Maintain binary Packages"
-  author:"© 2010-2014 Alan Buckley"
+  author:"© 2010-2017 Alan Buckley"
   licence_type:None
-  prog_version:"0.6 (24-November-2014)"
+  prog_version:"0.6.1 (01-April-2017)"
   alternative_window_name:""
   visit_url:""
   visit_url_event:&82b42
