@@ -49,6 +49,8 @@ const char *Packager::_item_names[NUM_ITEMS] = {
   "Priority",
   "Maintainer",
   "Standards version",
+  "Environment",
+  "Install priority",
   "Summary",
   "Description",
   "Licence",
@@ -59,6 +61,7 @@ const char *Packager::_item_names[NUM_ITEMS] = {
   "Recommends",
   "Suggests",
   "Conflicts",
+  "OSDepends",
   "Components"
 };
 
@@ -109,7 +112,9 @@ Packager::Packager() :
     section("");
     priority("Optional");
     maintainer("");
+    environment("any");
     standards_version("0.4.0");
+    install_priority("0");
     summary("");
     licence("");
     copyright("");
@@ -149,6 +154,8 @@ PackagerTextEndPoint *Packager::get_binding(PackageItem item)
 	   case PRIORITY: return new PackagerTextEndPoint(this, &Packager::priority, &Packager::priority);
        case MAINTAINER: return new PackagerTextEndPoint(this, &Packager::maintainer, &Packager::maintainer);
        case STANDARDS_VERSION: return new PackagerTextEndPoint(this, &Packager::standards_version, &Packager::standards_version);
+       case ENVIRONMENT: return new PackagerTextEndPoint(this, &Packager::environment, &Packager::environment);
+       case INSTALL_PRIORITY: return new PackagerTextEndPoint(this, &Packager::install_priority, &Packager::install_priority);
        case SUMMARY: return new PackagerTextEndPoint(this, &Packager::summary, &Packager::summary);
        case DESCRIPTION: return new PackagerTextEndPoint(this, &Packager::description, &Packager::description);
        case LICENCE: return new PackagerTextEndPoint(this, &Packager::licence, &Packager::licence);
@@ -161,6 +168,7 @@ PackagerTextEndPoint *Packager::get_binding(PackageItem item)
        case RECOMMENDS: return new PackagerTextEndPoint(this, &Packager::recommends, &Packager::recommends);
        case SUGGESTS: return new PackagerTextEndPoint(this, &Packager::suggests, &Packager::suggests);
        case CONFLICTS: return new PackagerTextEndPoint(this, &Packager::conflicts, &Packager::conflicts);
+       case OSDEPENDS: return new PackagerTextEndPoint(this, &Packager::osdepends, &Packager::osdepends);
 
        case COMPONENT_FLAGS: return new PackagerTextEndPoint(this, &Packager::component_flags, &Packager::component_flags);
 
@@ -301,6 +309,8 @@ void Packager::standards_version(std::string value)
 		   set_error(STANDARDS_VERSION, "must contain at least 3 components separated by dots ('.')");
 	   else if (!format_ok)
 		   set_error(STANDARDS_VERSION, "must be up to 4 numbers separated by dots ('.')");
+	   else if (_environment != "any" && _environment != "arm" && standards_version_lt("0.6.0"))
+		   set_error(STANDARDS_VERSION, "must be at least 0.6.0 if environment isn't 'any' or 'arm'");
 	   else if (_component_flags != "None" && standards_version_lt("0.4.0"))
 		   set_error(STANDARDS_VERSION, "must be at least 0.4.0 if component flags are set");
 	   else
@@ -352,6 +362,32 @@ bool Packager::standards_version_lt(std::string value)
 	// Got to end so its equal
 	return false;
 }
+
+void Packager::environment(std::string value)
+{
+   _environment = value;
+   if (value.empty())
+   {
+      set_error(ENVIRONMENT, "must be entered");
+   } else
+   {
+	 if (_environment != "any" && _environment != "arm" && standards_version_lt("0.6.0"))
+	 {
+		 set_error(STANDARDS_VERSION, "must be at least 0.6.0 if the environment is not all or arm");
+	 }
+
+     clear_error(MAINTAINER);
+   }
+
+   modified(true);
+}
+
+void Packager::install_priority(std::string value)
+{
+	_install_priority = value;
+	modified(true);
+}
+
 
 void Packager::summary(std::string value)
 {
@@ -503,6 +539,13 @@ void Packager::conflicts(std::string value)
 {
    _conflicts = value;
    check_depends(CONFLICTS, value);
+   modified(true);
+}
+
+void Packager::osdepends(std::string value)
+{
+   _osdepends = value;
+   check_depends(OSDEPENDS, value);
    modified(true);
 }
 
@@ -1094,6 +1137,15 @@ void Packager::set_control_field(std::string name, std::string value)
 				component_flags(ui_value);
 			}
 		}
+	} else if (name.compare("Environment") == 0)
+	{
+	   environment(value);
+	} else if (name.compare("InstallPriority") == 0)
+	{
+	   install_priority(value);
+	} else if (name.compare("OSDepends") == 0)
+	{
+	   osdepends(value);
 	} else
 	{
 		throw PackageFormatException("Unable to process field '" + name + "' in RiscPkg/Control");
@@ -1397,6 +1449,11 @@ void Packager::write_control(CZipArchive &zip) const
 	   os << "Maintainer: " << _maintainer << std::endl;
 	if (!_standards_version.empty())
 	   os << "Standards-Version: " << _standards_version << std::endl;
+	if (!_environment.empty())
+		   os << "Environment: " << _environment << std::endl;
+	if (!_install_priority.empty() && _install_priority != "0")
+		   os << "InstallPriority: " << _install_priority << std::endl;
+
 	if (!_licence.empty())
 	   os << "Licence: " << _licence << std::endl;
 	if (!_summary.empty())
@@ -1442,6 +1499,8 @@ void Packager::write_control(CZipArchive &zip) const
       os << "Suggests: " << _suggests << std::endl;
     if (!_conflicts.empty())
       os << "Conflicts: " << _conflicts << std::endl;
+    if (!_osdepends.empty())
+      os << "OSDepends: " << _osdepends << std::endl;
 
 	write_text_file(zip, "RiscPkg/Control", os.str());
 }

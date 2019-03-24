@@ -28,6 +28,19 @@ The fields on this tab update parts of the main Control record.
 
 {*}Standards-Version{*}	The version of this policy manual to which the package conforms. This is required. PackIt defaults to "0.4.0", which is the minimum required if you set any component flags on the Files tab.
 
+{*}Environment{*} 	Select the environment that this package will run upon. You can create multiple versions of the same package to run in different environments.
+
+	{/}any{/}	Should run on any system. e.g. BASIC programs that don't use assembler or OS specific features, documents.
+	{/}arm{/}	32 bit code. ARM (or C/C++ or other compiled languages) applications that will run on anything from the Risc PC with RISC OS 4 to the latest machines capable of running RISC OS (as of November 2018). 
+	{/}arm26{/}	26 bit code
+	{/}vfp{/}	Application requires the Vector floating point unit.
+	{/}arm, swp{/}	Application requires the ARM SWP/SWPB instruction to be available
+
+
+{*}Install Priority{*} 	This contains a number from 0 upwards that specifies which package should be chosen when the same package exists for multiple environments/OSDepends combinations. If 0, the default priority for the environment modified by the number of OSDepends modules is used.
+
+		The default install priority order from highest to lowest is: vfp, swp, arm, arm26, any. If any OSDepends modules are specified they are a higher priority than any environment settings.
+
 #Line; Wrap off
 #Table Lines 1
 <Contents=>!Root>

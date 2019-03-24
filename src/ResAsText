@@ -259,7 +259,7 @@ window_object {
   toolbar_itl:""
   toolbar_ebl:""
   toolbar_etl:""
-  window.visible:252,600,1176,1160
+  window.visible:252,476,1144,1160
   window.xscroll:0
   window.yscroll:0
   window.next:wimp_TOP
@@ -291,7 +291,7 @@ window_object {
   }
   writablefield_object {
     cmp:&3
-    bbox:356,-56,804,-4
+    bbox:356,-68,804,-16
     help_message:"The name of the binary package"
     help_limit:*
     flags:writablefield_GENERATE_USER_VALUE_CHANGED
@@ -394,7 +394,7 @@ window_object {
   }
   label_object {
     cmp:&e
-    bbox:132,-436,324,-384
+    bbox:132,-424,324,-372
     help_message:""
     help_limit:*
     flags:label_NO_BOX | label_RJUSTIFIED
@@ -402,7 +402,7 @@ window_object {
   }
   writablefield_object {
     cmp:&f
-    bbox:356,-436,844,-384
+    bbox:356,-424,844,-372
     help_message:"The name and email address of the maintainer. The email address should be enclosed between < and >"
     help_limit:*
     flags:writablefield_GENERATE_USER_VALUE_CHANGED
@@ -415,7 +415,7 @@ window_object {
   }
   label_object {
     cmp:&10
-    bbox:8,-508,324,-456
+    bbox:8,-496,324,-444
     help_message:""
     help_limit:*
     flags:label_NO_BOX | label_RJUSTIFIED
@@ -423,7 +423,7 @@ window_object {
   }
   writablefield_object {
     cmp:&11
-    bbox:356,-508,648,-456
+    bbox:356,-496,648,-444
     help_message:"Packaging standards version used by this package."
     help_limit:*
     flags:writablefield_GENERATE_USER_VALUE_CHANGED
@@ -433,6 +433,52 @@ window_object {
     allowable_limit:*
     prev:&f
     next:&13
+  }
+  label_object {
+    cmp:&12
+    bbox:136,-572,324,-520
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Environment:"
+  }
+  stringset_object {
+    cmp:&13
+    bbox:356,-568,688,-516
+    help_message:""
+    help_limit:*
+    flags:stringset_JUSTIFICATION_CENTRED
+    string_set:"any,arm,vfp,arm\, swp,arm26"
+    title:"Environment"
+    initial_selected_string:"any"
+    selected_string_limit:16
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  label_object {
+    cmp:&14
+    bbox:56,-640,324,-588
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Install Priority:"
+  }
+  numberrange_object {
+    cmp:&15
+    bbox:356,-640,616,-588
+    help_message:""
+    help_limit:*
+    flags:numberrange_WRITABLE | numberrange_ADJUSTERS | numberrange_RJUSTIFIED | numberrange_KNOB_COLOUR_MID_DARK_GREY
+    lower_bound:0
+    upper_bound:10000
+    step_size:1
+    initial_value:0
+    precision:0
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+    display_length:116
   }
 }
 
@@ -746,15 +792,15 @@ window_object {
   pointer_limit:0
   hotspot:0,0
   menu_name:"Menu"
-  default_focus:toolbox_NULL_COMPONENT
+  default_focus:&2
   show_action:
   hide_action:
   toolbar_ibl:""
   toolbar_itl:""
   toolbar_ebl:""
   toolbar_etl:""
-  window.visible:208,448,1132,1008
-  window.xscroll:20
+  window.visible:208,340,1156,1008
+  window.xscroll:0
   window.yscroll:0
   window.next:wimp_TOP
   window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_BACK_ICON | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_TOGGLE_ICON | wimp_WINDOW_SIZE_ICON | wimp_WINDOW_NEW_FORMAT
@@ -859,6 +905,19 @@ window_object {
     prev:toolbox_NULL_COMPONENT
     next:toolbox_NULL_COMPONENT
   }
+  writablefield_object {
+    cmp:&a
+    bbox:48,-628,876,-576
+    help_message:""
+    help_limit:*
+    flags:
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
   popup_object {
     cmp:&12
     bbox:884,-132,928,-88
@@ -890,6 +949,22 @@ window_object {
     help_limit:*
     flags:
     menu_name:"DependsMenu"
+  }
+  label_object {
+    cmp:&19
+    bbox:48,-576,320,-524
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"OSDepends:"
+  }
+  popup_object {
+    cmp:&1a
+    bbox:884,-624,928,-580
+    help_message:"Add Modules which must be available in RISC OS"
+    help_limit:*
+    flags:
+    menu_name:"OSDepsMenu"
   }
 }
 
@@ -1516,5 +1591,31 @@ window_object {
     value_limit:8
     validation:""
     validation_limit:*
+  }
+}
+
+menu_object {
+  header_flags:
+  version:102
+  object_name:"OSDepsMenu"
+  menu_flags:menu_GENERATE_ABOUT_TO_BE_SHOWN
+  title:"Add OS Dependencies"
+  title_limit:*
+  help:""
+  help_limit:*
+  show_action:&0
+  hide_action:
+  Entry {
+    cmp:0
+    flags:
+    cmp:&0
+    text:"No modules found"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:""
+    sub_menu_action:&0
+    click_action:&c9
+    help:""
+    help_limit:*
   }
 }

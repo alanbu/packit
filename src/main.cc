@@ -38,6 +38,7 @@
 #include "SavePackage.h"
 #include "QuitPrompt.h"
 #include "DependsMenu.h"
+#include "OSDependsMenu.h"
 #include "eventids.h"
 
 #include "unixlib/local.h"
@@ -89,6 +90,8 @@ int main(int argc, char *argv[])
     // Menu for list of dependencies
     DependsMenu depends_menu;
     packit_app.set_autocreate_listener("DependsMenu", &depends_menu);
+    OSDependsMenu osdepends_menu;
+    packit_app.set_autocreate_listener("OSDepsMenu", &osdepends_menu);
 
 	iconbar.add_loader(new PackItLoader());
 

@@ -38,12 +38,14 @@ DependsTab::DependsTab(MainWindow *main, tbx::Window window, Packager &packager)
    tbx::WritableField recommends = window.gadget(4);
    tbx::WritableField suggests = window.gadget(6);
    tbx::WritableField conflicts = window.gadget(8);
+   tbx::WritableField osdepends = window.gadget(10);
 
    // Set bindings
    main->set_binding(DEPENDS, depends);
    main->set_binding(RECOMMENDS, recommends);
    main->set_binding(SUGGESTS, suggests);
    main->set_binding(CONFLICTS, conflicts);
+   main->set_binding(OSDEPENDS, osdepends);
 }
 
 /**
@@ -59,6 +61,7 @@ PackageItem DependsTab::item_from_gadget(tbx::ComponentId id)
 	case 4: return RECOMMENDS; break;
 	case 6: return SUGGESTS; break;
 	case 8: return CONFLICTS; break;
+	case 10: return OSDEPENDS; break;
 	}
 
 	throw std::runtime_error("Invalid gadget id passed to DependsTab::item_from_gadget");

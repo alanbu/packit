@@ -22,6 +22,11 @@ e.g. LibPkg, RTK (>=0.5.0), ZLib
 
 Beside each of these fields is a popup menu button that will allow you to add a package from the current list of packages known to the Package manager. Selecting an option from this menu will add it to the relevant field or replace the existing version if it is already in the field. The menu will add an entry for the current version of the package. Edit the writeable field after adding the package if you want a different version dependency.
 
+{*}OSDepends{*}		Modules that are always loaded as part of the version of RISC OS at startup and must exists on the machine for this package to be relevant. Non-OS modules should be packaged separately and included in the Depends field above. {/}Note: The version of the module cannot be specified.{/}
+
+Beside this field is a popup menu button that will allow you to choose an OS Module from a list of those currently available on your system. Selecting an option from this menu will add it to the OSDepends field. Multiple Modules can be added. Edit the writeable field to include modules that are on the target machine, but not the machine PackIt is running on.
+
+
 #Line; Wrap off
 #Table Lines 1
 <Contents=>!Root>

@@ -43,6 +43,8 @@ MainTab::MainTab(MainWindow *main, tbx::Window window, Packager &packager) :
    tbx::StringSet priority = window.gadget(11);
    tbx::WritableField maintainer = window.gadget(15);
    tbx::WritableField standards_version = window.gadget(17);
+   tbx::StringSet environment = window.gadget(19);
+   tbx::NumberRange inst_priority = window.gadget(21);
 
    // Set bindings
    main->set_binding(PACKAGE_NAME, package);
@@ -52,6 +54,8 @@ MainTab::MainTab(MainWindow *main, tbx::Window window, Packager &packager) :
    main->set_binding(PRIORITY, priority);
    main->set_binding(MAINTAINER, maintainer);
    main->set_binding(STANDARDS_VERSION, standards_version);
+   main->set_binding(ENVIRONMENT, environment);
+   main->set_binding(INSTALL_PRIORITY, inst_priority);
 
    // Keep window title in line with name and version fields
    package.add_text_changed_listener(&_name_changed);

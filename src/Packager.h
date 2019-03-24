@@ -35,6 +35,8 @@ enum PackageItem {
   PRIORITY,
   MAINTAINER,
   STANDARDS_VERSION,
+  ENVIRONMENT,
+  INSTALL_PRIORITY,
   SUMMARY,
   DESCRIPTION,
   LICENCE,
@@ -45,6 +47,7 @@ enum PackageItem {
   RECOMMENDS,
   SUGGESTS,
   CONFLICTS,
+  OSDEPENDS,
   COMPONENT_FLAGS,
   NUM_ITEMS // Dummy value to give number of items
   };
@@ -112,6 +115,8 @@ public:
        std::string _priority;
        std::string _maintainer;
        std::string _standards_version;
+       std::string _environment;
+       std::string _install_priority;
        std::string _item_to_package;
        std::string _install_to;
        std::string _summary;
@@ -121,6 +126,7 @@ public:
        std::string _recommends;
        std::string _suggests;
        std::string _conflicts;
+       std::string _osdepends;
        std::string _component_flags;
        std::string _copyright;
        SysVarsMap _sysvars;
@@ -173,6 +179,8 @@ public:
        void priority(std::string value);
        void maintainer (std::string value);
        void standards_version(std::string value);
+       void environment(std::string value);
+       void install_priority(std::string value);
 
        std::string package_name() const  {return _package_name;}
        std::string version() const  {return _version;}
@@ -181,6 +189,8 @@ public:
        std::string priority() const  {return _priority; }
        std::string maintainer() const  {return _maintainer;}
        std::string standards_version() const  {return _standards_version;}
+       std::string environment() const {return _environment;}
+       std::string install_priority() const {return _install_priority;}
 
        std::string item_to_package() const {return _item_to_package;};
        void item_to_package(std::string item);
@@ -206,6 +216,9 @@ public:
        void suggests(std::string value);
        std::string conflicts() const {return _conflicts;}
        void conflicts(std::string value);
+       std::string osdepends() const {return _osdepends;}
+       void osdepends(std::string value);
+
        std::string component_flags() const {return _component_flags;}
        void component_flags(std::string value);
 
