@@ -1,0 +1,1621 @@
+RESF:1.01
+
+iconbar_object {
+  header_flags:toolbox_OBJECT_SHOW_ON_CREATE
+  version:100
+  object_name:"IconbarIcon"
+  iconbar_flags:iconbar_GENERATE_SELECT_CLICKED | iconbar_GENERATE_ADJUST_CLICKED
+  position:wimp_ICON_BAR_RIGHT
+  priority:0
+  sprite_name:"!packit"
+  sprite_limit:*
+  text:""
+  text_limit:*
+  menu:"IconbarMenu"
+  select_action:&0
+  adjust_action:&0
+  select_show:""
+  adjust_show:""
+  help_message:""
+  help_limit:*
+}
+
+menu_object {
+  header_flags:
+  version:102
+  object_name:"IconbarMenu"
+  menu_flags:
+  title:"Pack It"
+  title_limit:*
+  help:""
+  help_limit:*
+  show_action:
+  hide_action:
+  Entry {
+    cmp:1
+    flags:menu_ENTRY_SUB_MENU
+    cmp:&1
+    text:"Info"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:"ProgInfo"
+    sub_menu_action:&0
+    click_action:&0
+    help:""
+    help_limit:*
+  }
+  Entry {
+    cmp:2
+    flags:
+    cmp:&2
+    text:"Help..."
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:""
+    sub_menu_action:&0
+    click_action:&62
+    help:"Shows the main application help page"
+    help_limit:*
+  }
+  Entry {
+    cmp:0
+    flags:
+    cmp:&0
+    text:"Quit"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:""
+    sub_menu_action:&0
+    click_action:&63
+    help:""
+    help_limit:*
+  }
+}
+
+proginfo_object {
+  header_flags:
+  version:101
+  object_name:"ProgInfo"
+  proginfo_flags:
+  title:""
+  title_limit:*
+  purpose:"Create and Maintain binary Packages"
+  author:"© 2010-2017 Alan Buckley"
+  licence_type:None
+  prog_version:"0.6.1 (01-April-2017)"
+  alternative_window_name:""
+  visit_url:""
+  visit_url_event:&82b42
+}
+
+window_object {
+  header_flags:toolbox_OBJECT_ANCESTOR
+  version:102
+  object_name:"PackIt"
+  window_flags:
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:"Menu"
+  default_focus:&1
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:136,184,1192,1068
+  window.xscroll:0
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_BACK_ICON | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-884,1056,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&0
+  window.xmin:4
+  window.ymin:4
+  window.title_text:"PackIt"
+  window.title_text_limit:256
+  window.title_valid:""
+  tabs_object {
+    cmp:&1
+    bbox:24,-732,1036,-16
+    help_message:""
+    help_limit:*
+    flags:tabs_ALLOW_SCROLL_ARROWS
+    foreground:wimp_COLOUR_BLACK
+    background:wimp_COLOUR_VERY_LIGHT_GREY
+    text:"Main,Desc,Files,Copyright,Depends,SysVars,Sprites"
+  }
+  label_object {
+    cmp:&2
+    bbox:4,-808,148,-756
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Errors:"
+  }
+  displayfield_object {
+    cmp:&3
+    bbox:156,-808,344,-756
+    help_message:""
+    help_limit:*
+    flags:displayfield_HCENTRED
+    text:"0"
+    text_limit:9
+  }
+  actionbutton_object {
+    cmp:&4
+    bbox:368,-808,556,-756
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Next"
+    text_limit:*
+    click_show:""
+    action:&1
+  }
+  displayfield_object {
+    cmp:&5
+    bbox:16,-876,1040,-824
+    help_message:""
+    help_limit:*
+    flags:
+    text:""
+    text_limit:256
+  }
+}
+
+menu_object {
+  header_flags:toolbox_OBJECT_SHARED
+  version:102
+  object_name:"Menu"
+  menu_flags:
+  title:"Pack It"
+  title_limit:*
+  help:""
+  help_limit:*
+  show_action:
+  hide_action:
+  Entry {
+    cmp:0
+    flags:menu_ENTRY_SUB_MENU
+    cmp:&0
+    text:"Save"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:"SaveAs"
+    sub_menu_action:&0
+    click_action:&2
+    help:""
+    help_limit:*
+  }
+  Entry {
+    cmp:1
+    flags:
+    cmp:&1
+    text:"Help..."
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:""
+    sub_menu_action:&0
+    click_action:&62
+    help:"Shows main help page"
+    help_limit:*
+  }
+  Entry {
+    cmp:2
+    flags:
+    cmp:&2
+    text:"Help on this Tab..."
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:""
+    sub_menu_action:&0
+    click_action:&3
+    help:"Shows the help page for the current tab"
+    help_limit:*
+  }
+}
+
+saveas_object {
+  header_flags:toolbox_OBJECT_SHARED
+  version:100
+  object_name:"SaveAs"
+  saveas_flags:saveas_GENERATE_ABOUT_TO_BE_SHOWN | saveas_NO_SELECTION_BUTTON
+  file_name:""
+  file_type:&ddc
+  title:""
+  title_limit:*
+  alternative_window_name:""
+}
+
+window_object {
+  header_flags:
+  version:102
+  object_name:"Main"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:"Menu"
+  default_focus:toolbox_NULL_COMPONENT
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:252,476,1144,1160
+  window.xscroll:0
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_BACK_ICON | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_TOGGLE_ICON | wimp_WINDOW_SIZE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-1024,1280,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"Main"
+  window.title_text_limit:*
+  window.title_valid:""
+  label_object {
+    cmp:&2
+    bbox:104,-68,324,-16
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Package:"
+  }
+  writablefield_object {
+    cmp:&3
+    bbox:356,-68,804,-16
+    help_message:"The name of the binary package"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:64
+    allowable:"~.:*#$*@^%\\ "
+    allowable_limit:*
+    prev:&17
+    next:&5
+  }
+  label_object {
+    cmp:&4
+    bbox:132,-132,324,-80
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Version:"
+  }
+  writablefield_object {
+    cmp:&5
+    bbox:356,-132,808,-80
+    help_message:"The item to be packaged version number"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:32
+    allowable:"~:*#$&@^%\\ "
+    allowable_limit:*
+    prev:&3
+    next:&7
+  }
+  label_object {
+    cmp:&6
+    bbox:56,-196,324,-144
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Package Version:"
+  }
+  numberrange_object {
+    cmp:&7
+    bbox:356,-200,548,-148
+    help_message:"The package version for this version of the packaged item"
+    help_limit:*
+    flags:numberrange_GENERATE_VALUE_CHANGED | numberrange_ADJUSTERS | numberrange_RJUSTIFIED | numberrange_KNOB_COLOUR_MID_DARK_GREY
+    lower_bound:0
+    upper_bound:10000
+    step_size:1
+    initial_value:0
+    precision:0
+    prev:&5
+    next:&9
+    display_length:116
+  }
+  label_object {
+    cmp:&8
+    bbox:132,-272,324,-220
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Section:"
+  }
+  stringset_object {
+    cmp:&9
+    bbox:356,-272,676,-220
+    help_message:"A Label for classifying the package by purpose"
+    help_limit:*
+    flags:stringset_GENERATE_USER_VALUE_CHANGED | stringset_WRITABLE | stringset_JUSTIFICATION_CENTRED
+    string_set:"Administration,Archive,Audio,Chat,Communications,Database,Demo,Desktop,Development,Device,Disc,Document,Education,Emulation,File,Font,Games,Graphics,Library,Mail,Mathematics,Miscellaneous,Network,Presentation,Printing,Spreadsheet,System,Text,Video,Web"
+    title:"Section"
+    initial_selected_string:"Misc"
+    selected_string_limit:15
+    allowable:"~ "
+    allowable_limit:*
+    prev:&7
+    next:&b
+  }
+  label_object {
+    cmp:&a
+    bbox:132,-348,324,-296
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Priority:"
+  }
+  stringset_object {
+    cmp:&b
+    bbox:356,-348,672,-296
+    help_message:"The importance of the package"
+    help_limit:*
+    flags:stringset_GENERATE_USER_VALUE_CHANGED | stringset_JUSTIFICATION_CENTRED
+    string_set:"Required,Important,Standard,Optional,Extra"
+    title:"Priority"
+    initial_selected_string:"Optional"
+    selected_string_limit:10
+    allowable:""
+    allowable_limit:*
+    prev:&9
+    next:&d
+  }
+  label_object {
+    cmp:&e
+    bbox:132,-424,324,-372
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Maintainer:"
+  }
+  writablefield_object {
+    cmp:&f
+    bbox:356,-424,844,-372
+    help_message:"The name and email address of the maintainer. The email address should be enclosed between < and >"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:&d
+    next:&11
+  }
+  label_object {
+    cmp:&10
+    bbox:8,-496,324,-444
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Standards Version:"
+  }
+  writablefield_object {
+    cmp:&11
+    bbox:356,-496,648,-444
+    help_message:"Packaging standards version used by this package."
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:"0.0.0"
+    text_limit:16
+    allowable:"0-9."
+    allowable_limit:*
+    prev:&f
+    next:&13
+  }
+  label_object {
+    cmp:&12
+    bbox:136,-572,324,-520
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Environment:"
+  }
+  stringset_object {
+    cmp:&13
+    bbox:356,-568,688,-516
+    help_message:""
+    help_limit:*
+    flags:stringset_GENERATE_USER_VALUE_CHANGED | stringset_JUSTIFICATION_CENTRED
+    string_set:"any,arm,vfp,arm\, swp,arm26"
+    title:"Environment"
+    initial_selected_string:"any"
+    selected_string_limit:16
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  label_object {
+    cmp:&14
+    bbox:56,-640,324,-588
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Install Priority:"
+  }
+  numberrange_object {
+    cmp:&15
+    bbox:356,-640,616,-588
+    help_message:""
+    help_limit:*
+    flags:numberrange_WRITABLE | numberrange_ADJUSTERS | numberrange_RJUSTIFIED | numberrange_KNOB_COLOUR_MID_DARK_GREY
+    lower_bound:0
+    upper_bound:10000
+    step_size:1
+    initial_value:0
+    precision:0
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+    display_length:116
+  }
+}
+
+window_object {
+  header_flags:
+  version:102
+  object_name:"Desc"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:"Menu"
+  default_focus:toolbox_NULL_COMPONENT
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:-20,164,916,812
+  window.xscroll:20
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_BACK_ICON | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_TOGGLE_ICON | wimp_WINDOW_SIZE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-1024,1280,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"Description"
+  window.title_text_limit:*
+  window.title_valid:""
+  writablefield_object {
+    cmp:&1
+    bbox:60,-108,908,-56
+    help_message:"Enter a single line summary of the package"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:80
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:&2
+  }
+  textarea_object {
+    cmp:&2
+    bbox:60,-624,908,-172
+    help_message:"Enter a description of the package"
+    help_limit:*
+    flags:textarea_STATE_HAS_VERTICAL_SCROLLBAR | textarea_STATE_WORDWRAPPING_ENABLED
+    type:0
+    event:0
+    text:""
+    foreground:os_COLOUR_BLACK
+    background:os_COLOUR_WHITE
+  }
+  actionbutton_object {
+    cmp:&3
+    bbox:556,-168,908,-116
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"OLE Edit..."
+    text_limit:22
+    click_show:""
+    action:&0
+  }
+  label_object {
+    cmp:&14
+    bbox:20,-60,208,-8
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Summary:"
+  }
+  label_object {
+    cmp:&16
+    bbox:32,-160,220,-124
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX | label_RJUSTIFIED
+    label:"Description:"
+  }
+}
+
+window_object {
+  header_flags:
+  version:102
+  object_name:"Files"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:"Menu"
+  default_focus:toolbox_NULL_COMPONENT
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:472,388,1396,948
+  window.xscroll:0
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_BACK_ICON | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_TOGGLE_ICON | wimp_WINDOW_SIZE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-1024,1280,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"Files"
+  window.title_text_limit:*
+  window.title_valid:""
+  label_object {
+    cmp:&0
+    bbox:16,-72,204,-20
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Install:"
+  }
+  writablefield_object {
+    cmp:&1
+    bbox:20,-124,896,-72
+    help_message:"File, directory or application to install"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED | writablefield_RJUSTIFIED
+    text:""
+    text_limit:532
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  label_object {
+    cmp:&2
+    bbox:20,-228,208,-176
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"to:"
+  }
+  stringset_object {
+    cmp:&3
+    bbox:28,-288,788,-236
+    help_message:"Location to install this package to"
+    help_limit:*
+    flags:stringset_GENERATE_USER_VALUE_CHANGED | stringset_WRITABLE
+    string_set:"Apps,Manuals,Resources,System,Apps.Admin,Apps.Archive,Apps.Audio,Apps.Chat,Apps.Comms,Apps.Database,Apps.Demo,Apps.Desktop,Apps.Development,Apps.Device,Apps.Disc,Apps.Document,Apps.Education,Apps.Emulation,Apps.File,Apps.Font,Apps.Games,Apps.Graphics,Apps.Library,Apps.Mail,Apps.Mathematics,Apps.Misc,Apps.Presentation,Apps.Printing,Apps.Spreadsheet,Apps.System,Apps.Text,Apps.Video,Apps.Web"
+    title:"Common Locations"
+    initial_selected_string:""
+    selected_string_limit:32
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  label_object {
+    cmp:&4
+    bbox:24,-384,272,-332
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Component flags:"
+  }
+  stringset_object {
+    cmp:&5
+    bbox:308,-384,624,-332
+    help_message:""
+    help_limit:*
+    flags:stringset_GENERATE_USER_VALUE_CHANGED | stringset_JUSTIFICATION_CENTRED
+    string_set:"None,Movable,Movable LookAt"
+    title:"Component flags"
+    initial_selected_string:"None"
+    selected_string_limit:15
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+}
+
+window_object {
+  header_flags:
+  version:102
+  object_name:"Copyright"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:"Menu"
+  default_focus:toolbox_NULL_COMPONENT
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:376,384,1316,1028
+  window.xscroll:20
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_BACK_ICON | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_TOGGLE_ICON | wimp_WINDOW_SIZE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-1024,1280,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"Copyright"
+  window.title_text_limit:*
+  window.title_valid:""
+  stringset_object {
+    cmp:&1
+    bbox:228,-76,472,-24
+    help_message:"Select the licence type"
+    help_limit:*
+    flags:stringset_GENERATE_USER_VALUE_CHANGED | stringset_JUSTIFICATION_CENTRED
+    string_set:"Free,Non-free"
+    title:"Licence"
+    initial_selected_string:"Non-free"
+    selected_string_limit:*
+    allowable:""
+    allowable_limit:*
+    prev:&b
+    next:&f
+  }
+  textarea_object {
+    cmp:&2
+    bbox:48,-612,944,-156
+    help_message:"Enter details on the copyright of this package"
+    help_limit:*
+    flags:textarea_STATE_HAS_VERTICAL_SCROLLBAR | textarea_STATE_WORDWRAPPING_ENABLED
+    type:0
+    event:0
+    text:""
+    foreground:os_COLOUR_BLACK
+    background:os_COLOUR_WHITE
+  }
+  actionbutton_object {
+    cmp:&3
+    bbox:592,-148,944,-96
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"OLE Edit..."
+    text_limit:22
+    click_show:""
+    action:&0
+  }
+  label_object {
+    cmp:&c
+    bbox:48,-80,208,-28
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Licence:"
+  }
+  label_object {
+    cmp:&16
+    bbox:48,-140,208,-104
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Copyright"
+  }
+}
+
+window_object {
+  header_flags:
+  version:102
+  object_name:"Depends"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:"Menu"
+  default_focus:&2
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:208,340,1156,1008
+  window.xscroll:0
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_BACK_ICON | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_TOGGLE_ICON | wimp_WINDOW_SIZE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-1024,1280,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"Depends"
+  window.title_text_limit:*
+  window.title_valid:""
+  label_object {
+    cmp:&1
+    bbox:52,-76,212,-24
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Required:"
+  }
+  writablefield_object {
+    cmp:&2
+    bbox:52,-136,868,-84
+    help_message:"Enter list of packages that need to be installed for this package to run"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  label_object {
+    cmp:&3
+    bbox:52,-204,264,-152
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Recommends:"
+  }
+  writablefield_object {
+    cmp:&4
+    bbox:52,-256,876,-204
+    help_message:"Set packages that are recommended to be installed with this one"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  label_object {
+    cmp:&5
+    bbox:52,-324,212,-272
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Suggests:"
+  }
+  writablefield_object {
+    cmp:&6
+    bbox:48,-372,876,-320
+    help_message:"Comma separated list of packages that may complement this package"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  label_object {
+    cmp:&7
+    bbox:48,-452,208,-400
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Conflicts:"
+  }
+  writablefield_object {
+    cmp:&8
+    bbox:48,-500,876,-448
+    help_message:"Comma separated list of packages that conflict with this package"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  writablefield_object {
+    cmp:&a
+    bbox:48,-628,876,-576
+    help_message:""
+    help_limit:*
+    flags:
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  popup_object {
+    cmp:&12
+    bbox:884,-132,928,-88
+    help_message:"Add requried packages"
+    help_limit:*
+    flags:
+    menu_name:"DependsMenu"
+  }
+  popup_object {
+    cmp:&14
+    bbox:884,-252,928,-208
+    help_message:"Add packages to recommends"
+    help_limit:*
+    flags:
+    menu_name:"DependsMenu"
+  }
+  popup_object {
+    cmp:&16
+    bbox:884,-368,928,-324
+    help_message:"Add packages to suggests"
+    help_limit:*
+    flags:
+    menu_name:"DependsMenu"
+  }
+  popup_object {
+    cmp:&18
+    bbox:884,-496,928,-452
+    help_message:"Add packages to conflicts"
+    help_limit:*
+    flags:
+    menu_name:"DependsMenu"
+  }
+  label_object {
+    cmp:&19
+    bbox:48,-576,320,-524
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"OSDepends:"
+  }
+  popup_object {
+    cmp:&1a
+    bbox:884,-624,928,-580
+    help_message:"Add Modules which must be available in RISC OS"
+    help_limit:*
+    flags:
+    menu_name:"OSDepsMenu"
+  }
+}
+
+window_object {
+  header_flags:
+  version:102
+  object_name:"SysVars"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:"Menu"
+  default_focus:toolbox_NULL_COMPONENT
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:584,292,1516,936
+  window.xscroll:20
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_BACK_ICON | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_TOGGLE_ICON | wimp_WINDOW_SIZE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-1024,1280,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"SysVars"
+  window.title_text_limit:*
+  window.title_valid:""
+  scrolllist_object {
+    cmp:&0
+    bbox:40,-412,900,-8
+    help_message:"List of system variable for the package manager to load"
+    help_limit:*
+    flags:
+    event:0
+    foreground:os_COLOUR_BLACK
+    background:os_COLOUR_WHITE
+  }
+  actionbutton_object {
+    cmp:&1
+    bbox:48,-480,236,-428
+    help_message:"Add a system variable"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Add..."
+    text_limit:*
+    click_show:""
+    action:&65
+  }
+  actionbutton_object {
+    cmp:&2
+    bbox:336,-480,524,-428
+    help_message:"Edit the selected system variable"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Edit..."
+    text_limit:*
+    click_show:""
+    action:&66
+  }
+  actionbutton_object {
+    cmp:&3
+    bbox:604,-480,792,-428
+    help_message:"Delete the selected system variable"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Delete"
+    text_limit:*
+    click_show:""
+    action:&67
+  }
+  actionbutton_object {
+    cmp:&4
+    bbox:48,-536,236,-484
+    help_message:"Clear all the system variables"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Clear"
+    text_limit:*
+    click_show:""
+    action:&68
+  }
+  actionbutton_object {
+    cmp:&5
+    bbox:336,-536,524,-484
+    help_message:"Scan the !Boot file for a list of variables"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Scan !Boot"
+    text_limit:*
+    click_show:""
+    action:&69
+  }
+  button_object {
+    cmp:&6
+    bbox:52,-632,908,-540
+    help_message:""
+    help_limit:*
+    flags:
+    button_flags:wimp_ICON_TEXT | wimp_ICON_BORDER | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_FILLED | wimp_ICON_INDIRECTED
+    button_esg:0
+    button_fg:wimp_COLOUR_WHITE
+    button_bg:wimp_COLOUR_RED
+    value:"SysVars are no longer used for packages. Clear them and set the component flags on the Files page instead."
+    value_limit:129
+    validation:"L;R2"
+    validation_limit:*
+  }
+}
+
+dcs_object {
+  header_flags:toolbox_OBJECT_SHARED
+  version:100
+  object_name:"DCS"
+  dcs_flags:
+  title:""
+  title_limit:*
+  message:""
+  message_limit:*
+  alternative_window_name:""
+}
+
+window_object {
+  header_flags:
+  version:102
+  object_name:"EdSysVar"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:""
+  default_focus:&2
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:308,428,1220,808
+  window.xscroll:0
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-380,912,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"Add/Edit System variable"
+  window.title_text_limit:*
+  window.title_valid:""
+  actionbutton_object {
+    cmp:&0
+    bbox:680,-300,884,-232
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_DEFAULT
+    text:"Update"
+    text_limit:*
+    click_show:""
+    action:&0
+  }
+  actionbutton_object {
+    cmp:&1
+    bbox:460,-288,648,-236
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_CANCEL
+    text:"Cancel"
+    text_limit:*
+    click_show:""
+    action:&0
+  }
+  writablefield_object {
+    cmp:&2
+    bbox:24,-116,468,-64
+    help_message:"Enter or Edit the name of the system variable"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:64
+    allowable:"a-zA-Z0-9_@$\-"
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:&3
+  }
+  writablefield_object {
+    cmp:&3
+    bbox:24,-224,892,-172
+    help_message:"Enter the value of the system variable"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:&2
+    next:toolbox_NULL_COMPONENT
+  }
+  displayfield_object {
+    cmp:&4
+    bbox:16,-368,896,-316
+    help_message:""
+    help_limit:*
+    flags:displayfield_HCENTRED
+    text:"Display"
+    text_limit:128
+  }
+  label_object {
+    cmp:&10
+    bbox:24,-64,212,-12
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Name:"
+  }
+  label_object {
+    cmp:&11
+    bbox:24,-172,212,-120
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Value:"
+  }
+}
+
+window_object {
+  header_flags:
+  version:102
+  object_name:"Sprites"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:"Menu"
+  default_focus:toolbox_NULL_COMPONENT
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:76,288,1012,932
+  window.xscroll:20
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_BACK_ICON | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_TOGGLE_ICON | wimp_WINDOW_SIZE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-1024,1280,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"Sprites"
+  window.title_text_limit:*
+  window.title_valid:""
+  scrolllist_object {
+    cmp:&0
+    bbox:56,-416,916,-4
+    help_message:"List of sprites to be set up by the package manager"
+    help_limit:*
+    flags:
+    event:0
+    foreground:os_COLOUR_BLACK
+    background:os_COLOUR_WHITE
+  }
+  actionbutton_object {
+    cmp:&1
+    bbox:44,-476,232,-424
+    help_message:"Add a sprite"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Add..."
+    text_limit:*
+    click_show:""
+    action:&65
+  }
+  actionbutton_object {
+    cmp:&2
+    bbox:332,-476,520,-424
+    help_message:"Edit the selected sprite"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Edit..."
+    text_limit:*
+    click_show:""
+    action:&66
+  }
+  actionbutton_object {
+    cmp:&3
+    bbox:600,-476,788,-424
+    help_message:"Delete the selected sprite"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Delete"
+    text_limit:*
+    click_show:""
+    action:&67
+  }
+  actionbutton_object {
+    cmp:&4
+    bbox:44,-536,232,-484
+    help_message:"Clear all sprites from list"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Clear"
+    text_limit:*
+    click_show:""
+    action:&68
+  }
+  actionbutton_object {
+    cmp:&5
+    bbox:332,-536,560,-484
+    help_message:"Scan !Sprites file for list of sprites for this package"
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Scan !Sprites"
+    text_limit:*
+    click_show:""
+    action:&69
+  }
+  button_object {
+    cmp:&6
+    bbox:48,-636,904,-544
+    help_message:""
+    help_limit:*
+    flags:
+    button_flags:wimp_ICON_TEXT | wimp_ICON_BORDER | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_FILLED | wimp_ICON_INDIRECTED
+    button_esg:0
+    button_fg:wimp_COLOUR_WHITE
+    button_bg:wimp_COLOUR_RED
+    value:"Sprites are no longer used for packages. Clear them and set the component flags on the Files page instead."
+    value_limit:129
+    validation:"L;R2"
+    validation_limit:*
+  }
+}
+
+window_object {
+  header_flags:
+  version:102
+  object_name:"EdSprite"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:""
+  default_focus:&2
+  show_action:
+  hide_action:
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:308,428,1220,808
+  window.xscroll:0
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:wimp_WINDOW_NEVER3D | wimp_WINDOW_ALWAYS3D
+  window.extent:0,-380,912,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"Add/Edit Sprite"
+  window.title_text_limit:*
+  window.title_valid:""
+  actionbutton_object {
+    cmp:&0
+    bbox:680,-300,884,-232
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_DEFAULT
+    text:"Update"
+    text_limit:*
+    click_show:""
+    action:&0
+  }
+  actionbutton_object {
+    cmp:&1
+    bbox:460,-288,648,-236
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_CANCEL
+    text:"Cancel"
+    text_limit:*
+    click_show:""
+    action:&0
+  }
+  writablefield_object {
+    cmp:&2
+    bbox:24,-116,468,-64
+    help_message:"Enter or edit the name of the sprite"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:13
+    allowable:"a-zA-Z0-9_!$"
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:&3
+  }
+  writablefield_object {
+    cmp:&3
+    bbox:24,-224,892,-172
+    help_message:"Enter the location."
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:&2
+    next:toolbox_NULL_COMPONENT
+  }
+  displayfield_object {
+    cmp:&4
+    bbox:16,-368,896,-316
+    help_message:""
+    help_limit:*
+    flags:displayfield_HCENTRED
+    text:"Display"
+    text_limit:128
+  }
+  label_object {
+    cmp:&10
+    bbox:24,-64,212,-12
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Name:"
+  }
+  label_object {
+    cmp:&11
+    bbox:24,-172,212,-120
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Location:"
+  }
+}
+
+quit_object {
+  header_flags:
+  version:100
+  object_name:"Quit"
+  quit_flags:
+  title:""
+  title_limit:*
+  message:"NNNNN Packages Modified"
+  message_limit:*
+  alternative_window_name:""
+}
+
+menu_object {
+  header_flags:toolbox_OBJECT_SHARED
+  version:102
+  object_name:"DependsMenu"
+  menu_flags:menu_GENERATE_ABOUT_TO_BE_SHOWN
+  title:"Add Dependency menu"
+  title_limit:*
+  help:""
+  help_limit:*
+  show_action:&0
+  hide_action:
+  Entry {
+    cmp:0
+    flags:
+    cmp:&0
+    text:"Unable to find current packages"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:""
+    sub_menu_action:&0
+    click_action:&c9
+    help:""
+    help_limit:*
+  }
+}
+
+window_object {
+  header_flags:toolbox_OBJECT_SHARED
+  version:102
+  object_name:"LoadFailed"
+  window_flags:window_AUTO_OPEN | window_AUTO_CLOSE | window_GENERATE_DIALOGUE_COMPLETED
+  help_message:""
+  help_limit:*
+  sprite_name:""
+  pointer_limit:0
+  hotspot:0,0
+  menu_name:""
+  default_focus:toolbox_NULL_COMPONENT
+  show_action:
+  hide_action:&0
+  toolbar_ibl:""
+  toolbar_itl:""
+  toolbar_ebl:""
+  toolbar_etl:""
+  window.visible:360,168,1460,500
+  window.xscroll:0
+  window.yscroll:0
+  window.next:wimp_TOP
+  window.flags:wimp_WINDOW_MOVEABLE | wimp_WINDOW_AUTO_REDRAW | wimp_WINDOW_CLOSE_ICON | wimp_WINDOW_TITLE_ICON | wimp_WINDOW_SIZE_ICON | wimp_WINDOW_NEW_FORMAT
+  window.title_fg:wimp_COLOUR_BLACK
+  window.title_bg:wimp_COLOUR_LIGHT_GREY
+  window.work_fg:wimp_COLOUR_BLACK
+  window.work_bg:wimp_COLOUR_VERY_LIGHT_GREY
+  window.scroll_outer:wimp_COLOUR_MID_LIGHT_GREY
+  window.scroll_inner:wimp_COLOUR_VERY_LIGHT_GREY
+  window.highlight_bg:wimp_COLOUR_CREAM
+  window.extra_flags:
+  window.extent:0,-1024,1280,0
+  window.title_flags:wimp_ICON_TEXT | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+  window.work_flags:
+  window.sprite_area:&ffffffff
+  window.xmin:100
+  window.ymin:100
+  window.title_text:"PackIt - Unable to load file"
+  window.title_text_limit:*
+  window.title_valid:""
+  label_object {
+    cmp:&0
+    bbox:160,-76,916,-24
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Unable to load file"
+  }
+  displayfield_object {
+    cmp:&1
+    bbox:160,-124,1084,-72
+    help_message:""
+    help_limit:*
+    flags:
+    text:""
+    text_limit:256
+  }
+  label_object {
+    cmp:&2
+    bbox:160,-176,348,-124
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Error:"
+  }
+  displayfield_object {
+    cmp:&3
+    bbox:160,-224,1080,-172
+    help_message:""
+    help_limit:*
+    flags:
+    text:""
+    text_limit:256
+  }
+  actionbutton_object {
+    cmp:&4
+    bbox:476,-308,680,-240
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_DEFAULT | actionbutton_IS_CANCEL
+    text:"Close"
+    text_limit:*
+    click_show:""
+    action:&0
+  }
+  button_object {
+    cmp:&5
+    bbox:16,-148,132,-44
+    help_message:""
+    help_limit:*
+    flags:
+    button_flags:wimp_ICON_SPRITE | wimp_ICON_HCENTRED | wimp_ICON_VCENTRED | wimp_ICON_INDIRECTED
+    button_esg:0
+    button_fg:wimp_COLOUR_BLACK
+    button_bg:wimp_COLOUR_WHITE
+    value:"error"
+    value_limit:8
+    validation:""
+    validation_limit:*
+  }
+}
+
+menu_object {
+  header_flags:
+  version:102
+  object_name:"OSDepsMenu"
+  menu_flags:menu_GENERATE_ABOUT_TO_BE_SHOWN
+  title:"Add OS Dependencies"
+  title_limit:*
+  help:""
+  help_limit:*
+  show_action:&0
+  hide_action:
+  Entry {
+    cmp:0
+    flags:
+    cmp:&0
+    text:"No modules found"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:""
+    sub_menu_action:&0
+    click_action:&c9
+    help:""
+    help_limit:*
+  }
+}
