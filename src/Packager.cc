@@ -311,6 +311,8 @@ void Packager::standards_version(std::string value)
 		   set_error(STANDARDS_VERSION, "must be up to 4 numbers separated by dots ('.')");
 	   else if (_environment != "any" && _environment != "arm" && standards_version_lt("0.6.0"))
 		   set_error(STANDARDS_VERSION, "must be at least 0.6.0 if environment isn't 'any' or 'arm'");
+	   else if (!_osdepends.empty() && standards_version_lt("0.6.0"))
+		   set_error(STANDARDS_VERSION, "must be at least 0.6.0 if OSDepends is set");
 	   else if (_component_flags != "None" && standards_version_lt("0.4.0"))
 		   set_error(STANDARDS_VERSION, "must be at least 0.4.0 if component flags are set");
 	   else
@@ -376,7 +378,7 @@ void Packager::environment(std::string value)
 		 set_error(STANDARDS_VERSION, "must be at least 0.6.0 if the environment is not all or arm");
 	 }
 
-     clear_error(MAINTAINER);
+   	 clear_error(ENVIRONMENT);
    }
 
    modified(true);
@@ -546,6 +548,11 @@ void Packager::osdepends(std::string value)
 {
    _osdepends = value;
    check_depends(OSDEPENDS, value);
+   if (!_osdepends.empty() && standards_version_lt("0.6.0"))
+   {
+		 set_error(STANDARDS_VERSION, "must be at least 0.6.0 if OSDepends is set");
+   }
+
    modified(true);
 }
 

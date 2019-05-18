@@ -447,7 +447,7 @@ window_object {
     bbox:356,-568,688,-516
     help_message:""
     help_limit:*
-    flags:stringset_JUSTIFICATION_CENTRED
+    flags:stringset_GENERATE_USER_VALUE_CHANGED | stringset_JUSTIFICATION_CENTRED
     string_set:"any,arm,vfp,arm\, swp,arm26"
     title:"Environment"
     initial_selected_string:"any"
@@ -908,9 +908,9 @@ window_object {
   writablefield_object {
     cmp:&a
     bbox:48,-628,876,-576
-    help_message:""
+    help_message:"Enter modules that must be in the RISC OS ROMs"
     help_limit:*
-    flags:
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
     text:""
     text_limit:256
     allowable:""
