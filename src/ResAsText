@@ -470,7 +470,7 @@ window_object {
     bbox:356,-640,616,-588
     help_message:""
     help_limit:*
-    flags:numberrange_WRITABLE | numberrange_ADJUSTERS | numberrange_RJUSTIFIED | numberrange_KNOB_COLOUR_MID_DARK_GREY
+    flags:numberrange_GENERATE_VALUE_CHANGED | numberrange_WRITABLE | numberrange_ADJUSTERS | numberrange_RJUSTIFIED | numberrange_KNOB_COLOUR_MID_DARK_GREY
     lower_bound:0
     upper_bound:10000
     step_size:1
