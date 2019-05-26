@@ -10,11 +10,18 @@ To create a new package, just drag the application, directory or file to the Pac
 
 When all the necessary fields have been filled in for the package, use the Save option from the menu to create the binary package.
 
-The package can be tested on your own machine, by dragging the created package to a recent version of the !RiscPkg or !PackMan applications
+The package can be tested on your own machine, by dragging the created package to a recent version of !PackMan application.
 
-Once the package is ready it will need to be uploaded to the package repository. Instructions on how to do this can be found on the RiscPkg site at <http://www.riscpkg.org=>#URL http://www.riscpkg.org>.
+Once the package is ready it will need to be uploaded to the package repository
 
-To summarise you will need to contact Graham Shaw at his email address on this page to get yourself and the package name registered. Then it is just a matter of uploading the package and upgrading the distribution (currently only Unstable) from the forms on the RiscPkg site.
+The main current packaging server is hosted by RISC OS Open. Instructions on how to do this can be found on the RISC OS Open site at <https://www.riscosopen.org/wiki/documentation/show/RISC%20OS%20Packaging%20Guide=>#URL https://www.riscosopen.org/wiki/documentation/show/RISC%20OS%20Packaging%20Guide> in the Uploading section.
+
+To summarise you will need to:
+* Upload them on a website and note the URL for each one.
+* Create a pointer file, which is the URLs without the domain part (in other words, in Unix filename format). also upload this to the website
+* Email packages [at] riscosopen.org with the URL of the pointer file.
+
+Packages will be checked and, once any issues with the packages are fixed, they will be downloaded on a nightly basis to the ROOL server and added to the repository.
 
 #fH4:Filling in the fields
 
