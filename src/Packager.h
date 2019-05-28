@@ -39,6 +39,7 @@ enum PackageItem {
   INSTALL_PRIORITY,
   SUMMARY,
   DESCRIPTION,
+  HOMEPAGE,
   LICENCE,
   COPYRIGHT,
   ITEM_TO_PACKAGE,
@@ -121,6 +122,7 @@ public:
        std::string _install_to;
        std::string _summary;
        std::string _description;
+       std::string _homepage;
        std::string _licence;
        std::string _depends;
        std::string _recommends;
@@ -201,6 +203,8 @@ public:
        void summary(std::string value);
        std::string description() const { return _description; }
        void description(std::string description);
+       std::string homepage() const {return _homepage;}
+       void homepage(std::string homepage);
 
        std::string licence() const { return _licence;}
        void licence(std::string licence);
@@ -252,6 +256,7 @@ public:
        void set_error(PackageItem where, std::string message);
        void clear_error(PackageItem where);
 
+       void check_standards_version();
        bool standards_version_lt(std::string value);
 
        void check_depends(PackageItem where, std::string depends);

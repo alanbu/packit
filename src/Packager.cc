@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009-2014 Alan Buckley
+* Copyright 2009-2019 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -53,6 +53,7 @@ const char *Packager::_item_names[NUM_ITEMS] = {
   "Install priority",
   "Summary",
   "Description",
+  "Homepage",
   "Licence",
   "Copyright",
   "Item to install",
@@ -158,6 +159,7 @@ PackagerTextEndPoint *Packager::get_binding(PackageItem item)
        case INSTALL_PRIORITY: return new PackagerTextEndPoint(this, &Packager::install_priority, &Packager::install_priority);
        case SUMMARY: return new PackagerTextEndPoint(this, &Packager::summary, &Packager::summary);
        case DESCRIPTION: return new PackagerTextEndPoint(this, &Packager::description, &Packager::description);
+	   case HOMEPAGE: return new PackagerTextEndPoint(this, &Packager::homepage, &Packager::homepage); break;
        case LICENCE: return new PackagerTextEndPoint(this, &Packager::licence, &Packager::licence);
        case COPYRIGHT: return new PackagerTextEndPoint(this, &Packager::copyright, &Packager::copyright);
 
@@ -309,17 +311,51 @@ void Packager::standards_version(std::string value)
 		   set_error(STANDARDS_VERSION, "must contain at least 3 components separated by dots ('.')");
 	   else if (!format_ok)
 		   set_error(STANDARDS_VERSION, "must be up to 4 numbers separated by dots ('.')");
-	   else if (_environment != "any" && _environment != "arm" && standards_version_lt("0.6.0"))
-		   set_error(STANDARDS_VERSION, "must be at least 0.6.0 if environment isn't 'any' or 'arm'");
-	   else if (!_osdepends.empty() && standards_version_lt("0.6.0"))
-		   set_error(STANDARDS_VERSION, "must be at least 0.6.0 if OSDepends is set");
-	   else if (_component_flags != "None" && standards_version_lt("0.4.0"))
-		   set_error(STANDARDS_VERSION, "must be at least 0.4.0 if component flags are set");
 	   else
-		   clear_error(STANDARDS_VERSION);
+	   {
+		   check_standards_version();
+	   }
    }
 
    modified(true);
+}
+
+
+/**
+ * Check the given field so see if that it's appropriate
+ * for the current standards version
+ */
+void Packager::check_standards_version()
+{
+	if (standards_version_lt("0.4.0"))
+	{
+		if (_component_flags != "None" )
+		{
+		   set_error(STANDARDS_VERSION, "must be at least 0.4.0 if component flags are set");
+		} else
+		{
+			clear_error(STANDARDS_VERSION);
+		}		
+	}
+	else if (standards_version_lt("0.6.0"))
+	{
+		if (_environment != "any" && _environment != "arm")
+		{
+	        set_error(STANDARDS_VERSION, "must be at least 0.6.0 if environment isn't 'any' or 'arm'");
+		} else if (!_osdepends.empty())
+		{
+	   		set_error(STANDARDS_VERSION, "must be at least 0.6.0 if OSDepends is set");
+		} else if (!_homepage.empty())
+		{
+	   		set_error(STANDARDS_VERSION, "must be at least 0.6.0 if Homepage is set");
+		} else
+		{
+			clear_error(STANDARDS_VERSION);
+		}		
+	} else
+	{
+		clear_error(STANDARDS_VERSION);
+	}	
 }
 
 /**
@@ -368,16 +404,12 @@ bool Packager::standards_version_lt(std::string value)
 void Packager::environment(std::string value)
 {
    _environment = value;
+   check_standards_version();
    if (value.empty())
    {
       set_error(ENVIRONMENT, "must be entered");
    } else
    {
-	 if (_environment != "any" && _environment != "arm" && standards_version_lt("0.6.0"))
-	 {
-		 set_error(STANDARDS_VERSION, "must be at least 0.6.0 if the environment is not all or arm");
-	 }
-
    	 clear_error(ENVIRONMENT);
    }
 
@@ -405,6 +437,30 @@ void Packager::summary(std::string value)
 void Packager::description(std::string description)
 {
 	_description = description;
+	modified(true);
+}
+
+void Packager::homepage(std::string homepage)
+{
+	_homepage = homepage;
+	check_standards_version();
+	if (_homepage.empty())
+	{
+		clear_error(HOMEPAGE);
+	} else
+	{
+		std::string::size_type pos = _homepage.find(':');
+		std::string proto;
+		if (pos != std::string::npos) proto = tbx::to_lower(_homepage.substr(0, pos));
+		if (proto == "http" ||  proto == "https")
+		{
+			clear_error(HOMEPAGE);
+		} else
+		{
+			set_error(HOMEPAGE, "Protocol 'http' or 'https' must be specified.");
+		}
+	}
+
 	modified(true);
 }
 
@@ -511,8 +567,7 @@ void Packager::install_to(std::string where)
 void Packager::component_flags(std::string value)
 {
 	_component_flags = value;
-	 if (_component_flags != "None" && standards_version_lt("0.4.0"))
-	 set_error(STANDARDS_VERSION, "must be at least 0.4.0 if component flags are set");
+	check_standards_version();
 	 modified(true);
 }
 
@@ -547,11 +602,8 @@ void Packager::conflicts(std::string value)
 void Packager::osdepends(std::string value)
 {
    _osdepends = value;
+   check_standards_version();
    check_depends(OSDEPENDS, value);
-   if (!_osdepends.empty() && standards_version_lt("0.6.0"))
-   {
-		 set_error(STANDARDS_VERSION, "must be at least 0.6.0 if OSDepends is set");
-   }
 
    modified(true);
 }
@@ -1109,6 +1161,9 @@ void Packager::set_control_field(std::string name, std::string value)
 			summary(value.substr(0, eolpos));
 			description(value.substr(eolpos+1));
 		}
+	} else if (name.compare("Homepage") == 0)
+	{
+		homepage(value);
 	} else if (name.compare("Licence") == 0)
 	{
 		licence(value);
@@ -1490,6 +1545,8 @@ void Packager::write_control(CZipArchive &zip) const
 			os << " "  << _description.substr(solpos) << std::endl;
 		}
 	}
+	if (!_homepage.empty())
+		os << "Homepage: " << _homepage << std::endl;
 
 	if (_component_flags != "None")
 	{

@@ -32,6 +32,7 @@
 #include "tbx/command.h"
 #include "tbx/actionbutton.h"
 #include "tbx/ext/oleclient.h"
+#include "tbx/uri.h"
 
 #include "ITab.h"
 #include "Packager.h"
@@ -45,15 +46,19 @@ class DescTab : public ITab,
 	public tbx::GainCaretListener,
 	public tbx::LoseCaretListener,
 	public tbx::Command,
-	public tbx::ext::OleClientHandler
+	public tbx::ext::OleClientHandler,
+   public tbx::URIResultHandler
 {
     Packager &_packager;
     tbx::WritableField _summary;
     tbx::TextArea _description;
     tbx::ActionButton _ole_edit_button;
     bool _has_caret;
-    tbx::CommandMethod<DescTab> _ole_edit_command;
+    tbx::CommandMethod<DescTab> _ole_edit_command;    
     tbx::ext::OleClient *_ole_client;
+    tbx::WritableField _homepage;
+    tbx::CommandMethod<DescTab> _try_command;
+    tbx::URI _uri;
 
     public:
        DescTab(MainWindow *main, tbx::Window window, Packager &packager);
@@ -70,6 +75,7 @@ class DescTab : public ITab,
        virtual void execute();
 
        void ole_edit();
+       void try_homepage();
 
        /**
         * Return leaf name of file with help for this tab
@@ -78,14 +84,15 @@ class DescTab : public ITab,
 
     private:
        void reset_ole_edit_button();
-
+ 
        // OleClientHandler callbacks
        void failed_to_start_server(tbx::ext::OleClient &client);
        virtual void edit_closed(tbx::ext::OleClient &client);
        virtual void edit_text_changed(tbx::ext::OleClient &client, const std::string &text);
 
+       // URIResultHandler callback
+      virtual void uri_result(tbx::URI &uri, bool claimed);
 };
-
 
 #endif
 

@@ -24,6 +24,12 @@
             "type": "shell",
             "command": "~/gccsdk/env/bin/ccres '/home/alan/rpcemu/rpcemu-0.9.1/hostfs/Apps/Development/!PackIt/Res,fae' src/ResAsText",
             "problemMatcher": []
+        },
+        {
+            "label": "Copy to Help to RPCEMU",
+            "type": "shell",
+            "command": "cp -f '!PackIt/PackItHelp,3d6' '/home/alan/rpcemu/rpcemu-0.9.1/hostfs/Apps/Development/!PackIt'",
+            "problemMatcher": []
         }
     ]
 }

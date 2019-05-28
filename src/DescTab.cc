@@ -29,13 +29,16 @@
 #include "MainWindow.h"
 #include "tbx/application.h"
 #include "tbx/messagewindow.h"
+#include "tbx/uri.h"
 
 #include <iostream>
 
 DescTab::DescTab(MainWindow *main, tbx::Window window, Packager &packager) :
 	_packager(packager), _has_caret(false),
 	_ole_edit_command(this, &DescTab::ole_edit),
-	_ole_client(0)
+	_ole_client(0),
+	_try_command(this, &DescTab::try_homepage),
+	_uri("")
 {
 	_summary = window.gadget(1);
 	main->set_binding(SUMMARY, _summary);
@@ -57,6 +60,11 @@ DescTab::DescTab(MainWindow *main, tbx::Window window, Packager &packager) :
 	// modified flag can be updated
 	window.add_gain_caret_listener(this);
 	window.add_lose_caret_listener(this);
+
+	_homepage = window.gadget(0x18);
+	main->set_binding(HOMEPAGE, _homepage);
+	tbx::ActionButton try_button = window.gadget(0x19);
+	try_button.add_select_command(&_try_command);
 }
 
 DescTab::~DescTab()
@@ -195,4 +203,41 @@ void DescTab::reset_ole_edit_button()
 {
 	_ole_edit_button.text("OLE Edit...");
 	_ole_edit_button.fade(false);
+}
+
+/**
+ * Try the home page
+ */
+void DescTab::try_homepage()
+{
+	std::string homepage = _homepage.text();
+	if (homepage.empty())
+	{
+		tbx::show_message("A URL must be entered in the homepage to try it.");
+		return;
+	}
+	std::string err = _packager.error_text(HOMEPAGE);
+	if (!err.empty())
+	{
+		tbx::show_message("Home page cannot be launched: " + err,"","error");
+		return;
+	}
+	_uri.uri(homepage);
+	_uri.set_result_handler(this);
+	if (!tbx::URI::ensure_uri_handler() || !_uri.dispatch())
+	{
+		tbx::show_message("Unable to launch the homepage!\n\nHave you a browser installed.");
+	}
+}
+
+/**
+ * Show message if uri is not claimed
+ */  
+void DescTab::uri_result(tbx::URI &uri, bool claimed)
+{
+   if (!claimed)
+   {
+	   tbx::show_message("No application claimed the URI launch.\n"
+	      "Open your browser and try again","","info");
+   }
 }

@@ -500,7 +500,7 @@ window_object {
   toolbar_itl:""
   toolbar_ebl:""
   toolbar_etl:""
-  window.visible:-20,164,916,812
+  window.visible:232,436,1168,1084
   window.xscroll:20
   window.yscroll:0
   window.next:wimp_TOP
@@ -537,7 +537,7 @@ window_object {
   }
   textarea_object {
     cmp:&2
-    bbox:60,-624,908,-172
+    bbox:60,-564,908,-172
     help_message:"Enter a description of the package"
     help_limit:*
     flags:textarea_STATE_HAS_VERTICAL_SCROLLBAR | textarea_STATE_WORDWRAPPING_ENABLED
@@ -573,6 +573,38 @@ window_object {
     help_limit:*
     flags:label_NO_BOX | label_RJUSTIFIED
     label:"Description:"
+  }
+  label_object {
+    cmp:&17
+    bbox:52,-632,224,-580
+    help_message:""
+    help_limit:*
+    flags:label_NO_BOX
+    label:"Homepage:"
+  }
+  writablefield_object {
+    cmp:&18
+    bbox:236,-632,784,-580
+    help_message:"Web page where more information on the package can be found"
+    help_limit:*
+    flags:writablefield_GENERATE_USER_VALUE_CHANGED
+    text:""
+    text_limit:256
+    allowable:""
+    allowable_limit:*
+    prev:toolbox_NULL_COMPONENT
+    next:toolbox_NULL_COMPONENT
+  }
+  actionbutton_object {
+    cmp:&19
+    bbox:804,-632,912,-580
+    help_message:""
+    help_limit:*
+    flags:actionbutton_IS_LOCAL
+    text:"Try"
+    text_limit:*
+    click_show:""
+    action:&0
   }
 }
 

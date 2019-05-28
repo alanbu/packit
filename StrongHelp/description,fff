@@ -12,6 +12,10 @@ This tab is used to enter the description into the control record.
 
 {*}OLE edit{*}	This button will open the description for editing using the OLE edit protocol. This allows you to edit the text in the current OLE text edit server. e.g. StrongED or Zap. If no OLE Server has been seen by the filer and the OLESupport module has been installed on your machine the file will be opened in Edit. Saving the file in the other editor updates the description.
 
+{*}Homepage{*}	This is the address of a web page where more information on the package can be obtained. The homepage must start with the protocol "http:" or "https:".
+
+{*}Try{*}	This button will attempt to launch the Homepage in a browser.
+
 #Line; Wrap off
 #Table Lines 1
 <Contents=>!Root>
