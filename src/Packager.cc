@@ -1666,6 +1666,7 @@ void Packager::write_text_file(CZipArchive &zip, const char *filename, std::stri
 void Packager::get_file_list(const tbx::Path &dirname, std::vector<std::pair<tbx::Path, tbx::PathInfo> > &file_list) const
 {
 	std::vector<std::string> dirnames;
+	bool empty_dir = true;
 
 	for (tbx::PathInfo::Iterator i = tbx::PathInfo::begin(dirname, "*");
 	        i != tbx::PathInfo::end(); ++i)
@@ -1680,6 +1681,17 @@ void Packager::get_file_list(const tbx::Path &dirname, std::vector<std::pair<tbx
 		{
 			tbx::Path filename(dirname , entry.name());
 			file_list.push_back(std::pair<tbx::Path, tbx::PathInfo>(filename, entry));
+			empty_dir = false;
+		}
+	}
+
+	if (empty_dir)
+	{
+		tbx::Path dir(dirname);
+		tbx::PathInfo dir_info;
+		if (dir.path_info(dir_info))
+		{
+			file_list.push_back(std::make_pair(dir, dir_info));
 		}
 	}
 
@@ -1741,54 +1753,65 @@ void Packager::copy_file(CZipArchive &zip, const tbx::Path &filename, tbx::PathI
 	std::string nameinzip = _install_to + "." + filename.name().substr(_base_dir_size);
 	nameinzip = riscos_to_zip_name(nameinzip);
 
-	CZipFileHeader fhead;
-	fhead.SetFileName(nameinzip.c_str());
-
-	if (entry.has_file_type())
+	if (entry.directory())
 	{
-		long long csecs_since_1900 = entry.modified_time().centiseconds();
-		long long secs_between = 25567; // days
-		secs_between *= 24 * 60 * 60; // seconds
-		time_t secs_since_1970 = (time_t)(csecs_since_1900/100 - secs_between);
-
-		fhead.SetModificationTime(secs_since_1970);
+		CZipFileHeader dhead;
+		dhead.SetFileName(nameinzip.c_str());
+		dhead.SetSystemAttr(ZipPlatform::GetDefaultDirAttributes());
+		dhead.SetModificationTime(time(NULL));
+		zip.OpenNewFile(dhead, CZipCompressor::levelStore);
+		zip.CloseNewFile();  
 	} else
 	{
-	    fhead.SetModificationTime(time(NULL));
-	}
+		CZipFileHeader fhead;
+		fhead.SetFileName(nameinzip.c_str());
 
-	RISCOSZipExtra extra(entry);
-
-    // Local filetype extra data
-	CZipExtraData *extra_data = fhead.m_aLocalExtraData.CreateNew(extra.tag());
-    extra_data->m_data.Allocate(extra.size());
-	memcpy(extra_data->m_data, extra.buffer(), extra.size());
-	// Central Directory filetype extra data
-	extra_data = fhead.m_aCentralExtraData.CreateNew(extra.tag());
-    extra_data->m_data.Allocate(extra.size());
-	memcpy(extra_data->m_data, extra.buffer(), extra.size());
-
-	zip.OpenNewFile(fhead);
-
-	/* Copy file data */
-	int filesize = entry.length();
-	if (filesize > 0)
-	{
-		std::ifstream from_file(filename.name().c_str());
-		while (filesize > copy_buffer_size)
+		if (entry.has_file_type())
 		{
-			from_file.read(copy_buffer, copy_buffer_size);
-			zip.WriteNewFile(copy_buffer, copy_buffer_size);
-			filesize -= copy_buffer_size;
+			long long csecs_since_1900 = entry.modified_time().centiseconds();
+			long long secs_between = 25567; // days
+			secs_between *= 24 * 60 * 60; // seconds
+			time_t secs_since_1970 = (time_t)(csecs_since_1900/100 - secs_between);
+
+			fhead.SetModificationTime(secs_since_1970);
+		} else
+		{
+			fhead.SetModificationTime(time(NULL));
 		}
+
+		RISCOSZipExtra extra(entry);
+
+		// Local filetype extra data
+		CZipExtraData *extra_data = fhead.m_aLocalExtraData.CreateNew(extra.tag());
+		extra_data->m_data.Allocate(extra.size());
+		memcpy(extra_data->m_data, extra.buffer(), extra.size());
+		// Central Directory filetype extra data
+		extra_data = fhead.m_aCentralExtraData.CreateNew(extra.tag());
+		extra_data->m_data.Allocate(extra.size());
+		memcpy(extra_data->m_data, extra.buffer(), extra.size());
+
+		zip.OpenNewFile(fhead);
+
+		/* Copy file data */
+		int filesize = entry.length();
 		if (filesize > 0)
 		{
-			from_file.read(copy_buffer, filesize);
-			zip.WriteNewFile(copy_buffer, filesize);
+			std::ifstream from_file(filename.name().c_str());
+			while (filesize > copy_buffer_size)
+			{
+				from_file.read(copy_buffer, copy_buffer_size);
+				zip.WriteNewFile(copy_buffer, copy_buffer_size);
+				filesize -= copy_buffer_size;
+			}
+			if (filesize > 0)
+			{
+				from_file.read(copy_buffer, filesize);
+				zip.WriteNewFile(copy_buffer, filesize);
+			}
 		}
-	}
 
-	zip.CloseNewFile();
+		zip.CloseNewFile();
+	}
 }
 
 
