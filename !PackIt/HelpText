@@ -2,9 +2,9 @@ PackIt
 
 PackIt is a utility to create RISC OS Packaging Project binary packages.
 
-The full help for PackIt is in HTML files, please run a browser to see them.
+The full help for PackIt is in StrongHelp format.
 
-Selecting Help again once a browser is running will bring up the HTML.
+Install and run StrongHelp and selecting Help will show the full help.
 
 Alan Buckley
 

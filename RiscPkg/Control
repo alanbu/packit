@@ -1,5 +1,5 @@
 Source: PackIt
-Version: 0.6.1-1
+Version: 0.6.2-1
 Section: Development
 Priority: Optional
 Maintainer: Alan Buckley <alan_baa@hotmail.com>
@@ -14,3 +14,4 @@ Description: Utility to help create Packages
 Package: PackIt
 Depends: SharedUnixLibrary (>= 1.11), Tabs, StrongHelp
 Components: Apps.Development.!PackIt (Movable)
+Environment: arm

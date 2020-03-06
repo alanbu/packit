@@ -1,9 +1,9 @@
 PackIt Package creation helper new version released
 
-PackIt version 0.6.1 has now been released.
+PackIt version 0.6.2 has now been released.
 
-This release is a rebuild with the latest version of the GCCSDK
-for Raspberry Pi 3 compatibility.
+This release has added support for the new Environment fields,
+the new Homepage field and empty directories.
 
 Versions of PackIt from 0.6.1 are now distributed via the ROOL
 packaging sites. RiscPkg and older version of PackMan may not have
@@ -24,16 +24,19 @@ A Binary Package is a package that does not need to be built from
 source code. e.g. A program created in an interpreted language
 like BASIC or a Strong Help manual.
 
-It can also be used to create a package for a project where the source
-code is not provided. Though normally you would have options to create
-the package as part of your source in this case.
-
-PackIt will help you create the control records required for the
-package and create the final package file as well.
+If you build an application from your own source code you can
+either use PackIt on the final build or just use it as a convenient
+way to create the Control and Copyright files that can then
+be extracted from the package zip file and used as part of the
+build process.
 
 PackIt is provided as a RISC OS Packaging Project package in the main
-distribution. It can be installed using either:
+distribution. It can be installed using:
 
-!RiscPkg available from http://www.riscpkg.org
-or
 !PackMan available from https://sites.google.com/site/alansriscosstuff/packman
+
+The normal RISC OS Packaging project policy manual has not been
+updated with the new fields yet. The latest version can be downloaded
+using !PackMan or viewed at:
+http://www.riscos.info/~abuckley/policy.html
+
