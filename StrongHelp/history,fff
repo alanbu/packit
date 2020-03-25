@@ -2,6 +2,11 @@ PackIt - History
 #Parent !Root
 #fH2:History
 
+{*}0.6.3 Beta Release - March 2020{*}
+#indent +1
+  Added support for the arm32 environment field
+#indent
+
 {*}0.6.2 Beta Release - March 2020{*}
 #indent +1
   Added support for the new Environment fields
@@ -41,32 +46,32 @@ PackIt - History
 {*}0.4 Fourth Beta Release - February 2012{*}
 #indent +1
 
-è	Remove button on System variables tab did not update the package
+ÔøΩ	Remove button on System variables tab did not update the package
 #indent
 
 {*}0.3 Third Beta Release - September 2011{*}
 #indent +1
 
-è	Bugfix: Fields on the Depends tab were not being updated if they were selected from the menu
-è	Bugfix: Dependencies menus were left empty after the first package processed was closed
-è	Bugfix: System variables were not always redisplayed correctly when a package we reloaded
-è	Bugfix: It was impossible to add a system variable that included a hyphen
-è	Bugfix: Scanning boot files for system variables did not remove quotes if the variable value was quoted which stopped them being set correctly by the package manager
-è	Boot file scanning for system variables will now pick out variables from If statements if the If variable and the Set variable are the same
-è	Boot file scanning now replaces the argument substitution "%%*0" from variables with "%*0" so the immediate set of the variable by the package manager will work
+ÔøΩ	Bugfix: Fields on the Depends tab were not being updated if they were selected from the menu
+ÔøΩ	Bugfix: Dependencies menus were left empty after the first package processed was closed
+ÔøΩ	Bugfix: System variables were not always redisplayed correctly when a package we reloaded
+ÔøΩ	Bugfix: It was impossible to add a system variable that included a hyphen
+ÔøΩ	Bugfix: Scanning boot files for system variables did not remove quotes if the variable value was quoted which stopped them being set correctly by the package manager
+ÔøΩ	Boot file scanning for system variables will now pick out variables from If statements if the If variable and the Set variable are the same
+ÔøΩ	Boot file scanning now replaces the argument substitution "%%*0" from variables with "%*0" so the immediate set of the variable by the package manager will work
 #indent
 
 {*}0.2 Second Beta Release - February 2011{*}
 #Indent +1
 
-è	Added missing IconSprites line to !Run file
-è	Set file types for HTML help files
-è	Fixed typo in sysvars documentation
-è	Maximum length of sprite name in edit sprite dialogue increased from 11 to 12 characters
-è	Bugfix: File type was packaged as 000 for Image Filing System files
-è	Bugfix: After reloading, modifying and changing a package it could fail to save and would corrupt the package file
-è	Show nicer dialogue when the package load fails.
-è	Stop extra (harmless) error messages being shown when a load fails
+ÔøΩ	Added missing IconSprites line to !Run file
+ÔøΩ	Set file types for HTML help files
+ÔøΩ	Fixed typo in sysvars documentation
+ÔøΩ	Maximum length of sprite name in edit sprite dialogue increased from 11 to 12 characters
+ÔøΩ	Bugfix: File type was packaged as 000 for Image Filing System files
+ÔøΩ	Bugfix: After reloading, modifying and changing a package it could fail to save and would corrupt the package file
+ÔøΩ	Show nicer dialogue when the package load fails.
+ÔøΩ	Stop extra (harmless) error messages being shown when a load fails
 #indent
 
 {*}0.1 First Beta Release - July 2010{*}

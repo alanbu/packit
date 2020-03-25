@@ -31,8 +31,9 @@ The fields on this tab update parts of the main Control record.
 {*}Environment{*} 	Select the environment that this package will run upon. You can create multiple versions of the same package to run in different environments.
 
 	{/}any{/}	Should run on any system. e.g. BASIC programs that don't use assembler or OS specific features, documents.
-	{/}arm{/}	32 bit code. ARM (or C/C++ or other compiled languages) applications that will run on anything from the Risc PC with RISC OS 4 to the latest machines capable of running RISC OS (as of November 2018). 
+	{/}arm{/}	26/32 bit neutral code. ARM (or C/C++ or other compiled languages) applications that will run on anything from the Risc PC with RISC OS 4 to the latest machines capable of running RISC OS (as of March 2020). 
 	{/}arm26{/}	26 bit code
+	{/}arm32{/}	32 bit code
 	{/}vfp{/}	Application requires the Vector floating point unit.
 	{/}arm, swp{/}	Application requires the ARM SWP/SWPB instruction to be available
 
