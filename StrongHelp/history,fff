@@ -5,6 +5,7 @@ PackIt - History
 {*}0.6.3 Beta Release - March 2020{*}
 #indent +1
   Added support for the arm32 environment field
+  Fixed missing filetype error
 #indent
 
 {*}0.6.2 Beta Release - March 2020{*}

@@ -70,10 +70,7 @@ RISCOSZipExtra::RISCOSZipExtra(const tbx::PathInfo &entry)
   {
 	  // Ensure file type is in top of the load address
 	  loadaddress = 0xFFF00000
-//		   | (entry.file_type() << 8)
-// Use raw file type as we copy Image FS entries as they are
-// and don't go into them.
-		   | (entry.raw_file_type() << 8)
+		   | ((entry.image_file() ? entry.raw_file_type() : entry.file_type()) << 8)
 		   | (loadaddress & 0xFF);
   }
 }
