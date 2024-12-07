@@ -2,6 +2,11 @@ PackIt - History
 #Parent !Root
 #fH2:History
 
+{*}0.6.4 Beta Release - December 2024{*}
+#indent +1
+  Added support for the vfpv3 environment field
+#indent
+
 {*}0.6.3 Beta Release - March 2020{*}
 #indent +1
   Added support for the arm32 environment field

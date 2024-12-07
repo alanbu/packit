@@ -80,9 +80,9 @@ proginfo_object {
   title:""
   title_limit:*
   purpose:"Create and Maintain binary Packages"
-  author:"© 2010-2020 Alan Buckley"
+  author:"© 2010-2024 Alan Buckley"
   licence_type:None
-  prog_version:"0.6.3 (23-March-2020)"
+  prog_version:"0.6.4 (07-December-2024)"
   alternative_window_name:""
   visit_url:""
   visit_url_event:&82b42
@@ -448,7 +448,7 @@ window_object {
     help_message:""
     help_limit:*
     flags:stringset_GENERATE_USER_VALUE_CHANGED | stringset_JUSTIFICATION_CENTRED
-    string_set:"any,arm,vfp,arm\, swp,arm26,arm32"
+    string_set:"any,arm,vfp,vfpv3,arm\, swp,arm26,arm32"
     title:"Environment"
     initial_selected_string:"any"
     selected_string_limit:16

@@ -35,8 +35,8 @@ The fields on this tab update parts of the main Control record.
 	{/}arm26{/}	26 bit code
 	{/}arm32{/}	32 bit code
 	{/}vfp{/}	Application requires the Vector floating point unit.
+	{/}vfpv3{/}	Application requires the Vector floating point unit (version 3).
 	{/}arm, swp{/}	Application requires the ARM SWP/SWPB instruction to be available
-
 
 {*}Install Priority{*} 	This contains a number from 0 upwards that specifies which package should be chosen when the same package exists for multiple environments/OSDepends combinations. If 0, the default priority for the environment modified by the number of OSDepends modules is used.
 

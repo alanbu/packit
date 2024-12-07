@@ -1,9 +1,9 @@
 PackIt Package creation helper new version released
 
-PackIt version 0.6.2 has now been released.
+PackIt version 0.6.4 has now been released.
 
-This release has added support for the new Environment fields,
-the new Homepage field and empty directories.
+This release has added support for a new Environment field
+for VPF v3.
 
 Versions of PackIt from 0.6.1 are now distributed via the ROOL
 packaging sites. RiscPkg and older version of PackMan may not have

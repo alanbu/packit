@@ -16,19 +16,19 @@
         {
             "label": "Copy to RPCEMU",
             "type": "shell",
-            "command": "cp -f '!PackIt/!RunImage,ff8' '/home/alan/rpcemu/rpcemu-0.9.2/hostfs/Apps/Development/!PackIt'",
+            "command": "cp -f '!PackIt/!RunImage,ff8' '/mnt/c/RPCEmu527/hostfs/Dev/!PackIt'",
             "problemMatcher": []
         },
         {
             "label": "Fetch Res from RPCEMU",
             "type": "shell",
-            "command": "~/gccsdk/env/bin/ccres '/home/alan/rpcemu/rpcemu-0.9.2/hostfs/Apps/Development/!PackIt/Res,fae' src/ResAsText",
+            "command": "~/gccsdk/env/bin/ccres '/mnt/c/RPCEmu527/hostfs/Dev/!PackIt/Res,fae' src/ResAsText",
             "problemMatcher": []
         },
         {
             "label": "Copy to Help to RPCEMU",
             "type": "shell",
-            "command": "cp -f '!PackIt/PackItHelp,3d6' '/home/alan/rpcemu/rpcemu-0.9.2/hostfs/Apps/Development/!PackIt'",
+            "command": "cp -f '!PackIt/PackItHelp,3d6' '/mnt/c/RPCEmu527/hostfs/Dev/!PackIt'",
             "problemMatcher": []
         }
     ]
