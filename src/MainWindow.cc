@@ -205,6 +205,20 @@ bool MainWindow::save_file(std::string filename)
 }
 
 /**
+ * Save control file
+ */
+bool MainWindow::save_control(const std::string &file_name)
+{
+	// Ensure any fields that are not updated in real time
+	// are updated
+	for (int j = 0; j < num_tabs; j++)
+	{
+		_tabs[j]->pre_save();
+	}
+    return _packager.save_control(file_name);
+}
+
+/**
  * Set binding between writable field and an item
  */
 void MainWindow::set_binding(PackageItem item, WritableField writeable)

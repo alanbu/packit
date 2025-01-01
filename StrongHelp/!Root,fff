@@ -2,20 +2,25 @@ PackIt - Help create RiscPkg packages
 #Parent StrongHelp:!Menu
 #fH2:PackIt
 
-A Utility program to help with the creation of
-packages for the <RISC OS Packaging project=>#URL http://www.riscpkg.org/>.
+A Utility program to help with the creation of packages
+for the <RISC OS Packaging project=>#URL https://sites.google.com/site/alansriscosstuff/risc-os-packaging/risc-os-packaging-project>.
 
 #Wrap off; Indent 1
-#Tab,f* align centre,,f* align centre
-	About the program	 	The different tabs	 
+#Tab,f* align centre,,f* align left
+	About the program	 	The different tabs
 #Tab
 #Indent 4
-#Tab,align centre RGB 0,0,255,,align centre RGB 255,0,0
-	<Introduction=>intro>		        	<Main=>main>			 
-	<Installing=>installing>	        	<Description=>description>		 
-	<How to use it=>usage>		        	<Files=>files>			 
-	<History=>history>		        	<Copyright=>copytab>		 
-	<Copyright=>copyright>		        	<Dependencies=>depends>		 
-	<Contact=>contact>		        	<System variables=>sysvars>		 
-	 				        	<Sprites=>sprites>			 
+#Tab,align centre RGB 0,0,255,,,align left RGB 255,0,0
+	<Introduction=>intro>	 	 	<Main=>main>
+	<Installing=>installing>	 	 	<Description=>description>
+	<How to use it=>usage>	 	 	<Files=>files>
+	<History=>history>	 	 	<Copyright=>copytab>
+	<Copyright=>copyright>	 	 	<Dependencies=>depends>
+	<Contact=>contact>	 	 	<System variables=>sysvars>
+	<Command line=>commandline>	 	 	<Sprites=>sprites>
 #Tab
+
+Menus
+#RGB 0,192,0
+    <Iconbar=>iconbarmenu>
+    <Window=>windowmenu>

@@ -1,0 +1,9 @@
+PackIt - IconbarMenu
+#fH2:The Iconbar Menu
+#Parent !Root
+
+The Iconbar menu consists of three options:
+
+*Info*	This leads to the About this program window
+*Help*	Opens the Main help page
+*Quit*	Closes PackIt

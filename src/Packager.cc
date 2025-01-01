@@ -1493,12 +1493,25 @@ bool Packager::save(std::string filename)
 }
 
 /**
+ * Save the control file
+ */
+bool Packager::save_control(const std::string &filename)
+{
+    std::ofstream control_file(filename.c_str());
+	if (!control_file)
+	{
+		return false;
+	}
+	write_control(control_file);
+	return control_file.good();
+}
+
+
+/**
  * Write control record to given stream
  */
-void Packager::write_control(CZipArchive &zip) const
+void Packager::write_control(std::ostream &os) const
 {
-	std::ostringstream os;
-
 	if (!_package_name.empty())
 	    os << "Package: " << _package_name << std::endl;
 	if (!_version.empty())
@@ -1565,7 +1578,15 @@ void Packager::write_control(CZipArchive &zip) const
       os << "Conflicts: " << _conflicts << std::endl;
     if (!_osdepends.empty())
       os << "OSDepends: " << _osdepends << std::endl;
+}
 
+/**
+ * Write control file to package zip
+ */
+void Packager::write_control(CZipArchive &zip) const
+{
+	std::ostringstream os;
+	write_control(os);
 	write_text_file(zip, "RiscPkg/Control", os.str());
 }
 

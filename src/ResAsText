@@ -202,6 +202,19 @@ menu_object {
     help_limit:*
   }
   Entry {
+    cmp:3
+    flags:menu_ENTRY_SUB_MENU
+    cmp:&3
+    text:"Export"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:"ExportMenu"
+    sub_menu_action:&0
+    click_action:&0
+    help:""
+    help_limit:*
+  }
+  Entry {
     cmp:1
     flags:
     cmp:&1
@@ -1650,4 +1663,92 @@ menu_object {
     help:""
     help_limit:*
   }
+}
+
+menu_object {
+  header_flags:
+  version:102
+  object_name:"ExportMenu"
+  menu_flags:
+  title:"Export"
+  title_limit:*
+  help:""
+  help_limit:*
+  show_action:
+  hide_action:
+  Entry {
+    cmp:0
+    flags:menu_ENTRY_SUB_MENU
+    cmp:&0
+    text:"Control"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:"SaveControl"
+    sub_menu_action:&0
+    click_action:&0
+    help:""
+    help_limit:*
+  }
+  Entry {
+    cmp:1
+    flags:menu_ENTRY_SUB_MENU
+    cmp:&1
+    text:"Copyright"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:"SaveCpyRght"
+    sub_menu_action:&0
+    click_action:&0
+    help:""
+    help_limit:*
+  }
+  Entry {
+    cmp:2
+    flags:menu_ENTRY_SUB_MENU
+    cmp:&2
+    text:"Sample command"
+    text_limit:*
+    click_object_name:""
+    sub_menu_object_name:"SaveCommand"
+    sub_menu_action:&0
+    click_action:&0
+    help:""
+    help_limit:*
+  }
+}
+
+saveas_object {
+  header_flags:
+  version:100
+  object_name:"SaveControl"
+  saveas_flags:saveas_GENERATE_ABOUT_TO_BE_SHOWN | saveas_NO_SELECTION_BUTTON
+  file_name:"Control"
+  file_type:&fff
+  title:"Save Control Record"
+  title_limit:*
+  alternative_window_name:""
+}
+
+saveas_object {
+  header_flags:
+  version:100
+  object_name:"SaveCpyRght"
+  saveas_flags:saveas_GENERATE_ABOUT_TO_BE_SHOWN | saveas_NO_SELECTION_BUTTON | saveas_GIVEN_DATA
+  file_name:"Copyright"
+  file_type:&fff
+  title:"Save Copyright text"
+  title_limit:*
+  alternative_window_name:""
+}
+
+saveas_object {
+  header_flags:
+  version:100
+  object_name:"SaveCommand"
+  saveas_flags:saveas_GENERATE_ABOUT_TO_BE_SHOWN | saveas_NO_SELECTION_BUTTON | saveas_GIVEN_DATA
+  file_name:"Control"
+  file_type:&feb
+  title:"Save Sample Command"
+  title_limit:*
+  alternative_window_name:""
 }

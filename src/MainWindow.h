@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009-2010 Alan Buckley
+* Copyright 2009-2024 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -75,6 +75,7 @@ class MainWindow :
 
        bool load_file(std::string file_name, int file_type);
        bool save_file(std::string file_name);
+       bool save_control(const std::string &file_name);
 
        void save();
        void show_save();

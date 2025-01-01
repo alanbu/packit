@@ -36,3 +36,6 @@ PackIt helps as much as it can by preventing the entry of invalid characters int
 PackIt will not stop you from saving an Invalid package file except to prevent a file being created it can not reload. Instead at the bottom of the Window it shows the number of errors that need to be resolved in the package before it will be valid. Once the count gets to zero, you should have a valid package.
 
 A display area at the bottom of the Window allows you to see the errors in the package, clicking on the Next button allows you to cycle through all the errors. If a field that has an error in becomes valid the display area will show that the field has become valid.
+
+Packit provides a command line utiltity packitcmd that can be run to create a package from anything that can
+run a RISC OS command line (e.g. Obey file, make file, most programming languages).

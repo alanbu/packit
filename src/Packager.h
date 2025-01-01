@@ -1,5 +1,5 @@
 /*********************************************************************
-* Copyright 2009 Alan Buckley
+* Copyright 2009-2024 Alan Buckley
 *
 * This file is part of PackIt.
 *
@@ -156,6 +156,7 @@ public:
 
        bool load(std::string filename);
        bool save(std::string filename);
+       bool save_control(const std::string &filename);
 
        bool modified() const {return _modified;}
        void modified(bool modified);
@@ -277,6 +278,8 @@ public:
 
        // Save package helpers
        void write_control(CZipArchive &zip) const;
+       void write_control(std::ostream &os) const;
+
        void write_copyright(CZipArchive &zip) const;
        void write_sysvars(CZipArchive &zip) const;
        void write_sprites(CZipArchive &zip) const;

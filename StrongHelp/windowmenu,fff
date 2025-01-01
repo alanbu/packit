@@ -1,0 +1,17 @@
+PackIt - WindowMenu
+#fH2:The Window Menu
+#Parent !Root
+
+The Window menu is shown from the main window:
+
+*Save*	This leads to the Save dialog to create the package. It will default to the recommended package name when first shown
+
+*Export*	This leads to a sub menu that allows parts of the package information to be exported. The Options are:
+
+	*Control*	export the package control file as text, suitable for using when building the package outside of PackIt.
+	*Copyright*	the text of the copyright tab
+	*Sample Command*	a sample Obey file showing how to run the packitcmd command line utility. This Obey file will need modifying before use.
+
+*Help*	Opens the Main help page
+
+*Help On this Tab*	Opens the help at the page describing the current tab.

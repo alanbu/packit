@@ -36,6 +36,9 @@
 #include "tbx/ext/stronghelp.h"
 #include "MainWindow.h"
 #include "SavePackage.h"
+#include "SaveControl.h"
+#include "SaveCopyright.h"
+#include "SaveSampleCommand.h"
 #include "QuitPrompt.h"
 #include "DependsMenu.h"
 #include "OSDependsMenu.h"
@@ -87,6 +90,9 @@ int main(int argc, char *argv[])
 	iconbar.add_command(EID_QUIT, &quit_prompt);
 
 	packit_app.set_autocreate_listener("SaveAs", new tbx::AutoCreateClass<SavePackage>());
+	packit_app.set_autocreate_listener("SaveControl", new tbx::AutoCreateClass<SaveControl>());
+	packit_app.set_autocreate_listener("SaveCpyRght", new tbx::AutoCreateClass<SaveCopyright>());
+    packit_app.set_autocreate_listener("SaveCommand", new tbx::AutoCreateClass<SaveSampleCommand>());
     // Menu for list of dependencies
     DependsMenu depends_menu;
     packit_app.set_autocreate_listener("DependsMenu", &depends_menu);
