@@ -22,6 +22,7 @@ ifeq ($(HOST),riscos)
   TARGET=!PackIt.!RunImage
   HELPTARGET=!PackIt.PackItHelp
   RESTARGET=!PackIt.Res
+  CMDTARGET=packitcmd
 else
   INCLUDE_DIR = -I$(GCCSDK_INSTALL_ENV)/include
   LIB_DIR = -L$(GCCSDK_INSTALL_ENV)/lib
@@ -33,6 +34,7 @@ else
   TARGET=!PackIt/!RunImage,ff8
   HELPTARGET=!PackIt/PackItHelp,3d6
   RESTARGET=!PackIt/Res,fae
+  CMDTARGET=packitcmd,ff8
 endif
 
 CXXFLAGS = -O0 -Wall -mpoke-function-name -mthrowback $(INCLUDE_DIR)
@@ -46,13 +48,16 @@ CCSRC = $(wildcard src/*.cc)
 OBJECTS = $(CCSRC:.cc=.o)
 HELPFILES = $(wildcard StrongHelp/[^.]*)
 
-all:	$(TARGET) $(RESTARGET) $(HELPTARGET)
+all:	$(TARGET) $(RESTARGET) $(HELPTARGET) $(CMDTARGET)
 
 $(TARGET): packit
 	elf2aif packit $(TARGET)
 
 packit:	$(OBJECTS)
 	$(LD) $(LDFLAGS) -o packit $(OBJECTS)
+
+$(CMDTARGET):
+	$(MAKE) -C packitcmdsrc 
 
 $(RESTARGET):	$(RESASTEXT)
 	$(CCRES) $(RESASTEXT) $(RESTARGET)
