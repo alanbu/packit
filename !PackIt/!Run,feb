@@ -1,6 +1,8 @@
 RMEnsure UtilityModule 3.10 Error PackIt needs RISC OS 3.10 or a later version
 Set PackIt$Dir <Obey$Dir>
 IconSprites <PackIt$Dir>.!Sprites
+Set Alias$packitcmd Run <PackIt$Dir>.packitcmd %%*0
+
 If "<System$Path>"="" Then Error System resources cannot be found; open a window containing the System application and try again
 WimpSlot -min 140k -max 140k
 RMEnsure Toolbox 1.36 /System:Modules.Toolbox.Toolbox
@@ -28,3 +30,4 @@ RMENSURE Tabs 0.05 ERROR PackIt needs Rik Griffins Tabs version 0.05 or later
 
 WimpSlot -min 2048k -max 2048k
 /<PackIt$Dir>.!RunImage %*0
+

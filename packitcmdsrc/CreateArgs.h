@@ -22,6 +22,7 @@ class CreateArgs
         std::string flags;
        };
        const std::vector<FileToPack> &files_to_pack() const {return _files_to_pack;}
+       const std::vector<std::string> &exclude() const {return _exclude;}
        const std::map<std::string,std::string> &field_overrides() const {return _field_overrides;}
 
        bool force() const {return _force;}
@@ -42,6 +43,7 @@ class CreateArgs
        std::string _copyright_file;
        std::vector<FileToPack> _files_to_pack;
        std::map<std::string,std::string> _field_overrides;
+       std::vector<std::string> _exclude;
        bool _force{false};
        bool _check{false};
 };

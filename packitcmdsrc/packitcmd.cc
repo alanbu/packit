@@ -78,6 +78,11 @@ int main(int argc, char *argv[])
         pkg.add_item_to_package(pack_file.filename, pack_file.pack_to, pack_file.flags);
     }
 
+    for(auto &exclude_item : opts.exclude())
+    {
+        pkg.exclude(exclude_item);
+    }
+
     const auto &field_overrides = opts.field_overrides();
     try
     {
@@ -152,8 +157,9 @@ int main(int argc, char *argv[])
 
 void usage()
 {
-    std::cout << "Usage: packit create <output_folder> <control_file> <copyright_file> {pack <file_or_dir> to <logical_dir> flags <flags>} [<fieldname>=<value>] [options]" << std::endl;    
+    std::cout << "Usage: packit create <output_dir> <control_file> <copyright_file> {pack <file_or_dir> to <logical_dir> flags <flags>} [<fieldname>=<value>] [options]" << std::endl;    
     std::cout << "  Options are:" << std::endl;
-    std::cout << "     --force -f    overwrite package file if it exists" << std::endl;
-    std::cout << "     --check -c    do not write the package file, just check the control file created" << std::endl;
+    std::cout << "     --force   (-f)  overwrite package file if it exists" << std::endl;
+    std::cout << "     --check   (-c)  do not write the package file, just check the control file created" << std::endl;
+    std::cout << "     --exclude (-x) <leafname>  Exclude file/directory with given leafname from package (can be repeated)" << std::endl;
 }

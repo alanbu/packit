@@ -1,2 +1,3 @@
 Set PackIt$Dir <Obey$Dir>
 IconSprites <PackIt$Dir>.!Sprites
+Set Alias$packitcmd Run <PackIt$Dir>.packitcmd %%*0

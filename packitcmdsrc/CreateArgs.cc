@@ -115,6 +115,15 @@ bool CreateArgs::parse_option(const std::string &option)
     } else if (option == "--check" || option == "-c")
     {
         _check = true;
+    } else if (option == "--exclude" || option == "-x")
+    {
+        std::string leafname;
+        if (!get_next(leafname))
+        {
+            std::cerr << "Leafname missing following exclude option" << std::endl;
+            return false;
+        }
+        _exclude.push_back(leafname);
     } else
     {
         std::cerr << "Invalid option " << option << std::endl;

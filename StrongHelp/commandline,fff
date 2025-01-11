@@ -9,7 +9,7 @@ PackIt ships with a command line utility to allow you to create packages from an
 Once PackIt has been seen by the filer run
 
 #fCode
-\<PackIt$Dir>.packitcmd create \<to_folder> \<control_file> \<copyright_file> pack \<file_or_folder>] to \<install_directory> [flags \<flags>] [--force] [--check] [\<control_field=value>]
+\<PackIt$Dir>.packitcmd create \<to_folder> \<control_file> \<copyright_file> pack \<file_or_folder>] to \<install_directory> [flags \<flags>] [--force] [--check] [--exclude \<exleafname>] [\<control_field=value>]
 #f
 Where
    \<to_folder> is the location to create the package
@@ -20,6 +20,7 @@ Where
    [flags \<flags>] optionally allows the component flags to be set on this item
    [--force or -f] optional flag to force overwriting of an existing package
    [--check or -c] check the control file, but don't write anything.
+   [--exclude or -x] A file or directory with the given leafname is excluded from the package.
    [\<control_field=value]> optionally override a field in the control file.
 
 The pack, to, flags arguments can be repeated multiple time to add files to the package.
@@ -36,4 +37,5 @@ A simple example
 #f
 
 *Note* The PackIt UI provides options to export the control file, copyright and a sample packitcmd command in an obey file.
+
 

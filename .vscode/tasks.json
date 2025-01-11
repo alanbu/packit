@@ -20,6 +20,12 @@
             "problemMatcher": []
         },
         {
+            "label": "Copy packitcmd to RPCEMU",
+            "type": "shell",
+            "command": "cp -f '!PackIt/packitcmd,ff8' '/mnt/c/RPCEmu527/hostfs/Dev/!PackIt'",
+            "problemMatcher": []
+        },
+        {
             "label": "Fetch Res from RPCEMU",
             "type": "shell",
             "command": "~/gccsdk/env/bin/ccres '/mnt/c/RPCEmu527/hostfs/Dev/!PackIt/Res,fae' src/ResAsText",

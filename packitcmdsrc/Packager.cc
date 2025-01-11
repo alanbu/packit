@@ -482,6 +482,7 @@ void Packager::copyright(std::string value)
  */
 void Packager::item_to_package(std::string item)
 {
+	std::cout << "item to package " << item << std::endl;
     if (item.empty())
     {
         set_error(ITEM_TO_PACKAGE, "must be entered");
@@ -495,8 +496,7 @@ void Packager::item_to_package(std::string item)
 
 	if (_items_to_package.empty())
 	{
-		std::cout << "** Adding new item" << std::endl;
-		_items_to_package.emplace_back(ItemToPackage());	
+		_items_to_package.emplace_back(ItemToPackage());
 	}
 	auto &item_to_package = _items_to_package.back();
     item_to_package.item = item;
@@ -559,6 +559,15 @@ void Packager::install_to(std::string where)
 				}
 				auto &item_to_package = _items_to_package.back();
 				item_to_package.install_to = where;
+				auto found = _component_flags_from_ctrl.find(where);
+				if (found != _component_flags_from_ctrl.end())
+				{
+					std::string comp_flags = found->second;
+					if (!item_to_package.component_flags.empty() && comp_flags != item_to_package.component_flags)
+					{
+						set_error(COMPONENT_FLAGS, "Control file and command line have different component flags");
+					}
+				}
     		    modified(true);
 			   if (_items_to_package.size() == 1)
 		       {
@@ -569,9 +578,7 @@ void Packager::install_to(std::string where)
     }
 }
 
-/// @brief Set component flags for the package
-/// @param value Component flags (currently not validated)
-void Packager::component_flags(std::string value)
+bool Packager::check_component_flags(const std::string &value)
 {
 	const std::set<std::string> c_valid_comp_flags(
 		{"","None","Movable","Movable LookAt"}		
@@ -585,15 +592,26 @@ void Packager::component_flags(std::string value)
 	 	  os << " \"" << flag << "\"";
 	    }
 		set_error(COMPONENT_FLAGS, os.str());
+		return false;
 	}
-	if (_items_to_package.empty())
+	return true;
+}
+
+/// @brief Set component flags for the package
+/// @param value Component flags (currently not validated)
+void Packager::component_flags(std::string value)
+{
+	if (check_component_flags(value))
 	{
-		_items_to_package.emplace_back(ItemToPackage());
+		if (_items_to_package.empty())
+		{
+			_items_to_package.emplace_back(ItemToPackage());
+		}
+		auto &item_to_package = _items_to_package.back();
+		item_to_package.component_flags = value;
+		check_standards_version();
+		modified(true);
 	}
-	auto &item_to_package = _items_to_package.back();
-	item_to_package.component_flags = value;
-	check_standards_version();
-	 modified(true);
 }
 
 /// @brief Add a new item to package
@@ -603,6 +621,7 @@ void Packager::component_flags(std::string value)
 void Packager::add_item_to_package(const std::string &item, const std::string &where, const std::string &flags)
 {
 	_items_to_package.emplace_back(ItemToPackage());
+	std::cout << "add_item_to_package " << item << " to " << where << " count " << _items_to_package.size() << std::endl;
 	item_to_package(item);
 	install_to(where);
 	if (!flags.empty()) component_flags(flags);
@@ -1126,22 +1145,37 @@ void Packager::set_control_field(std::string name, std::string value)
 	   conflicts(value);
 	} else if (name.compare("Components") == 0)
 	{
-		if (value.empty()) component_flags("None");
-		else
+		if (!value.empty())
 		{
-			// Ensure flags are in same order as needed in stringset
-			std::string::size_type bracket_pos = value.find('(');;
-			if (bracket_pos == std::string::npos) component_flags("None");
+			// Ensure flags are in same order as needed in stringset			
+			std::string::size_type bracket_pos = value.find('(');			
+			std::string install_loc;
+			std::string comp_flags;
+			if (bracket_pos == std::string::npos)
+			{
+				install_loc = value;
+				comp_flags = "None";
+			}
 			else
 			{
-				std::string ui_value;
-				if (value.find("Movable", bracket_pos) != std::string::npos) ui_value = "Movable";
-				if (value.find("LookAt", bracket_pos) != std::string::npos)
+				install_loc = value.substr(bracket_pos);
+				comp_flags = value.substr(bracket_pos+1);
+				auto rbracket_pos = comp_flags.find(')');
+				if (rbracket_pos != std::string::npos)
 				{
-					if (!ui_value.empty()) ui_value += " ";
-					ui_value += "LookAt";
+					comp_flags = comp_flags.substr(0, rbracket_pos);
 				}
-				component_flags(ui_value);
+				while(!comp_flags.empty() && comp_flags.front() == ' ') comp_flags.erase(0,1);
+				while(!comp_flags.empty() && comp_flags.back() == ' ') comp_flags.erase(comp_flags.size()-1,1);
+			}
+			while(!install_loc.empty() && install_loc.front() == ' ') install_loc.erase(0,1);
+			while(!install_loc.empty() && install_loc.back() == ' ') install_loc.erase(install_loc.size()-1,1);
+			if (install_loc.empty())
+			{
+				set_error(COMPONENT_FLAGS, "Missing install location in 'Components' field in control record");
+			} else if (check_component_flags(comp_flags))
+			{
+				_component_flags_from_ctrl[install_loc] = comp_flags;
 			}
 		}
 	} else if (name.compare("Environment") == 0)
@@ -1537,16 +1571,18 @@ void Packager::get_file_list(const tbx::Path &dirname, std::vector<std::pair<tbx
 	        i != tbx::PathInfo::end(); ++i)
 	{
 		tbx::PathInfo entry(*i);
-
-		if (entry.directory())
+		if (_exclude.count(entry.name()) == 0)
 		{
-			// Go down directories after processing all files
-			dirnames.push_back(entry.name());
-		} else
-		{
-			tbx::Path filename(dirname , entry.name());
-			file_list.push_back(std::pair<tbx::Path, tbx::PathInfo>(filename, entry));
-			empty_dir = false;
+			if (entry.directory())
+			{
+				// Go down directories after processing all files
+				dirnames.push_back(entry.name());
+			} else
+			{
+				tbx::Path filename(dirname , entry.name());
+				file_list.push_back(std::pair<tbx::Path, tbx::PathInfo>(filename, entry));
+				empty_dir = false;
+			}
 		}
 	}
 

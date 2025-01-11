@@ -24,10 +24,12 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <set>
 #include <ostream>
 #include <istream>
 
 #include "tbx/path.h"
+#include "tbx/stringutils.h"
 
 enum PackageItem {
   PACKAGE_NAME,
@@ -126,6 +128,14 @@ class Packager
        std::string _osdepends;
        std::string _copyright;
 
+      struct CompareNoCase { 
+         bool operator() (const std::string& s1, const std::string& s2) const {
+            return tbx::compare_ignore_case(s1.c_str(), s2.c_str()) < 0;
+         }
+      };
+       std::set<std::string, CompareNoCase> _exclude;
+       std::map<std::string, std::string, CompareNoCase> _component_flags_from_ctrl;
+
        bool _modified;
        PackageModifiedListener *_modified_listener;
 
@@ -221,12 +231,15 @@ class Packager
 
        bool read_zip_item(const std::string &zipfile, const std::string &zipitem, std::string &data);
 
+       void exclude(const std::string &leafname) {_exclude.insert(leafname);}
+
     private:
        void set_error(PackageItem where, std::string message);
        void clear_error(PackageItem where);
 
        void check_standards_version();
        bool standards_version_lt(std::string value);
+       bool check_component_flags(const std::string &value);
 
        void check_depends(PackageItem where, std::string depends);
        std::string check_one_dependency(std::string dep) const;
