@@ -5,6 +5,8 @@
 #include <string>
 #include <cstring>
 #include <algorithm>
+#include <fstream>
+#include <iterator>
 
 #include "CreateArgs.h"
 #include "Packager.h"
@@ -31,7 +33,8 @@ namespace MainResult
         TargetDirectory = -8,
         TargetExists = -9,
         PackageCreateFailed = -10,
-        SourceNotFound = -11
+        SourceNotFound = -11,
+        UnableToOpenAddToControlFile = -12
    };
 }
 
@@ -95,6 +98,25 @@ int main(int argc, char *argv[])
     {
         std::cerr << "Command line field error " << field_error.message() << std::endl;
         return MainResult::InvalidControlField;
+    }
+
+    if (!opts.add_to_copyright().empty())
+    {
+        std::string copyright = pkg.copyright();
+        for (auto &atc_file : opts.add_to_copyright())
+        {
+            tbx::Path atc(atc_file);
+            if (!atc.file())
+            {
+                std::cerr << "Unable to open file given with --add-to-copyright '" << atc_file << "'" << std::endl;
+                return MainResult::UnableToOpenAddToControlFile;
+            }
+            char *text_to_add = atc.load_file();
+            copyright += "\n";
+            copyright += text_to_add;
+            delete text_to_add;
+        }
+        pkg.copyright(copyright);
     }
     
     if (pkg.error_count())
@@ -162,4 +184,5 @@ void usage()
     std::cout << "     --force   (-f)  overwrite package file if it exists" << std::endl;
     std::cout << "     --check   (-c)  do not write the package file, just check the control file created" << std::endl;
     std::cout << "     --exclude (-x) <leafname>  Exclude file/directory with given leafname from package (can be repeated)" << std::endl;
+    std::cout << "     --add-to-copyright (-a) <filename> Add the contents of the given file to the copyright file" << std::endl;
 }

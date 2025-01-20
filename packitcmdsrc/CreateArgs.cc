@@ -124,6 +124,15 @@ bool CreateArgs::parse_option(const std::string &option)
             return false;
         }
         _exclude.push_back(leafname);
+    } else if (option == "--add-to-copyright" || option == "-a")
+    {
+        std::string filename;
+        if (!get_next(filename))
+        {
+            std::cerr << "Filename missing following add-to-copyright option" << std::endl;
+            return false;
+        }
+        _add_to_copyright.push_back(filename);
     } else
     {
         std::cerr << "Invalid option " << option << std::endl;
