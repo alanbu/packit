@@ -25,7 +25,7 @@ Where
    [\<control_field=value]> optionally override a field in the control file.
 
 The pack, to, flags arguments can be repeated multiple time to add files to the package.
-The control_field=value can be repeated each time with a different control_file name.
+The control_field=value can be repeated each time with a different control_field name.
 
 The command outputs a package file with the name:
     \<package_name>_\<version> in the \<to_folder> directory.

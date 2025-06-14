@@ -5,6 +5,10 @@ PackIt version 0.6.4 has now been released.
 This release has added support for a new Environment field
 for VPF v3.
 
+It also includes a new command line utility to make it easier
+to package a program as part of your build process, or from
+an Obey file. See the packit help file for details.
+
 Versions of PackIt from 0.6.1 are now distributed via the ROOL
 packaging sites. RiscPkg and older version of PackMan may not have
 these sources in the list of sources. If this version of PackIt

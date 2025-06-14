@@ -1,5 +1,5 @@
 Source: PackIt
-Version: 0.6.3-1
+Version: 0.6.4-1
 Section: Development
 Priority: Optional
 Maintainer: Alan Buckley <alan_baa@hotmail.com>
@@ -10,6 +10,7 @@ Description: Utility to help create Packages
  Binary packages are anything where the package is not built from source code or where the source code is not made available.
  It can also be used as a starting point to create the control files for
  more complicated binary packages or source code packages.
+ A command line utility is included to make packaging as part of the build process easier.
 
 Package: PackIt
 Depends: SharedUnixLibrary (>= 1.11), Tabs, StrongHelp
